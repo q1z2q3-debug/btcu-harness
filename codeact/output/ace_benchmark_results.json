@@ -1,0 +1,159 @@
+{
+  "E5eE3Zp1": {
+    "name": "alpha_021_d1_raw",
+    "expected": {
+      "name": "alpha_021_d1_raw",
+      "sharpe": 1.73,
+      "fitness": 1.22,
+      "turnover": 0.4034
+    },
+    "actual": {
+      "sharpe": 1.73,
+      "fitness": 1.22,
+      "turnover": 0.4034,
+      "is_checks_count": 8,
+      "self_corr": {
+        "value": 0.9534,
+        "result": "FAIL",
+        "limit": 0.7
+      },
+      "submit_checks": {
+        "LOW_SHARPE": "PASS",
+        "LOW_FITNESS": "PASS",
+        "LOW_TURNOVER": "PASS",
+        "HIGH_TURNOVER": "PASS",
+        "CONCENTRATED_WEIGHT": "PASS",
+        "LOW_SUB_UNIVERSE_SHARPE": "PASS",
+        "SELF_CORRELATION": "FAIL",
+        "MATCHES_COMPETITION": "PASS"
+      },
+      "submit_check_count": 8,
+      "prod_corr": {
+        "value": null,
+        "result": "NONE",
+        "limit": 0.7
+      }
+    },
+    "matches": {
+      "sharpe": true,
+      "fitness": true,
+      "turnover": true
+    }
+  },
+  "E5eEALEL": {
+    "name": "alpha_021_d3",
+    "expected": {
+      "name": "alpha_021_d3",
+      "sharpe": 1.69,
+      "fitness": 1.42,
+      "turnover": 0.2719
+    },
+    "actual": {
+      "sharpe": 1.69,
+      "fitness": 1.42,
+      "turnover": 0.2719,
+      "is_checks_count": 8,
+      "self_corr": {
+        "value": 0.9901,
+        "result": "FAIL",
+        "limit": 0.7
+      },
+      "submit_checks": {
+        "LOW_SHARPE": "PASS",
+        "LOW_FITNESS": "PASS",
+        "LOW_TURNOVER": "PASS",
+        "HIGH_TURNOVER": "PASS",
+        "CONCENTRATED_WEIGHT": "PASS",
+        "LOW_SUB_UNIVERSE_SHARPE": "PASS",
+        "SELF_CORRELATION": "FAIL",
+        "MATCHES_COMPETITION": "PASS"
+      },
+      "submit_check_count": 8,
+      "prod_corr": {
+        "value": null,
+        "result": "NONE",
+        "limit": 0.7
+      }
+    },
+    "matches": {
+      "sharpe": true,
+      "fitness": true,
+      "turnover": true
+    }
+  },
+  "O0xZv69J": {
+    "name": "alpha_021_d5",
+    "expected": {
+      "name": "alpha_021_d5",
+      "sharpe": 1.66,
+      "fitness": 1.5,
+      "turnover": 0.2261
+    },
+    "actual": {
+      "sharpe": 1.66,
+      "fitness": 1.5,
+      "turnover": 0.2261,
+      "is_checks_count": 7,
+      "self_corr": {
+        "value": 0.5838,
+        "result": "PASS",
+        "limit": 0.7
+      },
+      "submit_checks": {
+        "ALREADY_SUBMITTED": "FAIL"
+      },
+      "submit_check_count": 1,
+      "prod_corr": {
+        "value": null,
+        "result": "NONE",
+        "limit": 0.7
+      }
+    },
+    "matches": {
+      "sharpe": true,
+      "fitness": true,
+      "turnover": true
+    }
+  },
+  "pwKl0XoX": {
+    "name": "combo_d5_vol20_w9505",
+    "expected": {
+      "name": "combo_d5_vol20_w9505",
+      "sharpe": 1.58,
+      "fitness": 1.23,
+      "turnover": 0.1791
+    },
+    "actual": {
+      "sharpe": 1.58,
+      "fitness": 1.23,
+      "turnover": 0.1791,
+      "is_checks_count": 8,
+      "self_corr": {
+        "value": 0.8295,
+        "result": "FAIL",
+        "limit": 0.7
+      },
+      "submit_checks": {
+        "LOW_SHARPE": "PASS",
+        "LOW_FITNESS": "PASS",
+        "LOW_TURNOVER": "PASS",
+        "HIGH_TURNOVER": "PASS",
+        "CONCENTRATED_WEIGHT": "PASS",
+        "LOW_SUB_UNIVERSE_SHARPE": "PASS",
+        "SELF_CORRELATION": "FAIL",
+        "MATCHES_COMPETITION": "PASS"
+      },
+      "submit_check_count": 8,
+      "prod_corr": {
+        "value": null,
+        "result": "NONE",
+        "limit": 0.7
+      }
+    },
+    "matches": {
+      "sharpe": true,
+      "fitness": true,
+      "turnover": true
+    }
+  }
+}

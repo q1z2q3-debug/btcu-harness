@@ -1,0 +1,20 @@
+# Category C: Non-linear Combination (entanglement breakthrough)
+# C1: multiply entanglement - different window combinations
+rank(ts_delta(ts_rank(volume, 10), 3) * ts_delta(ts_rank(close, 5), 1))
+rank(ts_delta(ts_rank(volume, 20), 5) * ts_delta(ts_rank(close, 10), 3))
+rank(ts_delta(ts_rank(volume, 5), 1) * ts_delta(ts_rank(close, 5), 1))
+rank(ts_delta(ts_rank(volume, 60), 10) * ts_delta(ts_rank(close, 20), 5))
+# C2: additive/subtractive hybrid
+rank(ts_delta(ts_rank(volume, 10), 3) + ts_delta(ts_rank(close, 5), 1))
+rank(ts_delta(ts_rank(volume, 10), 3) - ts_delta(ts_rank(close, 5), 1))
+rank(ts_delta(ts_rank(volume, 10), 3) / ts_delta(ts_rank(close, 5), 1))
+# C3: volume delta combined with price MA
+rank(ts_delta(ts_rank(volume, 10), 3) * rank(close/ts_mean(close, 20)))
+rank(ts_delta(ts_rank(volume, 20), 5) * rank(close/ts_mean(close, 60)))
+# C4: delta-rank correlation (forward-looking)
+rank(ts_corr(ts_delta(ts_rank(volume, 10), 3), ts_delta(ts_rank(close, 5), 1), 10))
+rank(ts_corr(ts_delta(ts_rank(volume, 20), 5), ts_delta(ts_rank(close, 10), 3), 10))
+rank(ts_corr(ts_delta(ts_rank(volume, 5), 1), ts_delta(ts_rank(close, 5), 1), 10))
+# C5: volatility-based combinations
+rank(ts_std(close, 5)/ts_mean(close, 5) * ts_std(volume, 5)/ts_mean(volume, 5))
+rank(ts_std(close, 20)/ts_mean(close, 20) * ts_std(volume, 20)/ts_mean(volume, 20))

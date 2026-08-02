@@ -1,0 +1,202 @@
+[
+  {
+    "file_name": "project/wqb_15_new_direction_factor_exploration_202607.md",
+    "category": "project",
+    "summary": "WQB 15个全新跳出alpha_021反转家族的因子探索项目完成交付，两阶段限流适配脚本实测成功，10/15因子回测完成，2个候选因子表现优秀，脚本与全量报告已交付。",
+    "tags": ["WorldQuant", "九维认知", "因子创新", "非反转逻辑", "ACE库", "免费账号限流"],
+    "importance": 4,
+    "created_at": "2026-07-28T00:08:14Z",
+    "updated_at": "2026-07-29T00:00:00Z",
+    "expires_at": "2026-10-29T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_sc03_12factor_breakthrough_202607.md",
+    "category": "project",
+    "summary": "WQB SC03自相关<0.3突破回测项目，12个因子分两组设计，脚本已完成全量适配支持分组运行，待调整因子表达式重新回测",
+    "tags": ["WorldQuant", "SC<0.3", "自相关", "SUPER alpha转换", "ACE库", "因子回测"],
+    "importance": 4,
+    "created_at": "2026-07-28T00:00:00Z",
+    "updated_at": "2026-07-28T00:00:00Z",
+    "expires_at": "2026-10-28T00:00:00Z"
+  },
+  {
+    "file_name": "decision/九维三进制认知框架.md",
+    "category": "decision",
+    "summary": "小幂的底层思维操作系统：空间(内中外)×时间(过去现在未来)×逻辑(因缘果)九维，每维{-1,0,1}三态，共19683个认知格点，新增π周期回归和e自然生长的动力学规则。",
+    "tags": ["思维框架", "认知模型", "三进制", "九维", "核心设定"],
+    "importance": 5,
+    "created_at": "2026-07-14T00:00:00Z",
+    "updated_at": "2026-07-14T00:00:00Z",
+    "expires_at": null
+  },
+  {
+    "file_name": "project/WorldQuant量化因子研究.md",
+    "category": "project",
+    "summary": "WorldQuant平台量化因子研究项目，已完成官方API全量集成+本地化全链路回测框架，27个全类别Alpha因子100%本地验证通过，支持先本地筛选再提交平台。",
+    "tags": ["量化", "WorldQuant", "Alpha因子", "回测框架", "API集成"],
+    "importance": 4,
+    "created_at": "2026-07-15T00:00:00Z",
+    "updated_at": "2026-07-16T00:00:00Z",
+    "expires_at": null
+  },
+  {
+    "file_name": "project/wqb_factor_matrix_test_202607.md",
+    "category": "project",
+    "summary": "WorldQuant BRAIN Top5因子参数矩阵测试项目，新增--mode matrix运行模式，完成4套参数方案适配与状态库断点续跑优化，25组回测任务已部分提交待收结果。",
+    "tags": ["WorldQuant", "参数优化", "因子回测", "矩阵测试", "Python脚本"],
+    "importance": 4,
+    "created_at": "2026-07-17T00:22:57Z",
+    "updated_at": "2026-07-17T00:22:57Z",
+    "expires_at": null
+  },
+  {
+    "file_name": "project/wqb_v2_factor_expansion_20260717.md",
+    "category": "project",
+    "summary": "WQB v2因子扩展项目，脚本优化为批量提交模式，30秒间隔实测无429，首批6个波动率因子全部回测完成，累计有效因子16个，剩余18个新因子待提交。",
+    "tags": ["WorldQuant", "因子扩展", "批量提交", "回测结果", "WQB V2"],
+    "importance": 4,
+    "created_at": "2026-07-17T15:49:00Z",
+    "updated_at": "2026-07-17T15:49:00Z",
+    "expires_at": null
+  },
+  {
+    "file_name": "project/wqb_v3_factor_expansion_20260719.md",
+    "category": "project",
+    "summary": "WQB v3因子扩展项目，22个新因子（4组合+8情绪+10Alpha101）20个回测通过，Top新因子alpha_021 Sharpe达1.62，新增v3/combos运行模式与组合对比报告功能。",
+    "tags": ["WorldQuant", "因子扩展", "WQB V3", "Alpha101", "情绪因子", "FASTEXPR"],
+    "importance": 4,
+    "created_at": "2026-07-19T00:00:00Z",
+    "updated_at": "2026-07-19T00:00:00Z",
+    "expires_at": "2026-10-19T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_factor_combiner_20260719.md",
+    "category": "project",
+    "summary": "WQB多因子组合优化器交付完成，新增完整的4种组合实现能力，基于现有16个因子计算出最优跨类别组合，Sharpe较单因子提升13.4%，脚本已注册到index.json可直接运行。",
+    "tags": ["WorldQuant", "因子组合", "多因子优化", "现代投资组合理论", "Python脚本"],
+    "importance": 4,
+    "created_at": "2026-07-19T00:00:00Z",
+    "updated_at": "2026-07-19T00:00:00Z",
+    "expires_at": null
+  },
+  {
+    "file_name": "project/wqb_alpha021_full_optimization_20260720.md",
+    "category": "project",
+    "summary": "alpha_021全维度优化项目，完成参数矩阵/6变体/9原始信号组合/9交叉验证共40个因子回测，全局最优因子Sharpe达2.24，较基准1.62提升38.3%，完全满足发布标准。",
+    "tags": ["WorldQuant", "Alpha因子", "alpha_021", "参数优化", "原始信号加权", "交叉验证", "因子发布"],
+    "importance": 4,
+    "created_at": "2026-07-20T00:00:00Z",
+    "updated_at": "2026-07-20T00:00:00Z",
+    "expires_at": "2026-10-20T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_breakthrough_alpha_research_20260721.md",
+    "category": "project",
+    "summary": "WQB跃迁Alpha因子研究，59个全新底层逻辑创新因子全部回测完成，Top因子combo_5f_weighted Sharpe=1.43 Fitness=0.93，自相关0.65已达标，距离Fitness≥1.0阈值仅差0.07。",
+    "tags": ["WQB", "WorldQuant Brain", "Alpha因子", "跃迁因子", "oi_divergence", "多因子组合"],
+    "importance": 4,
+    "created_at": "2026-07-21T00:33:59Z",
+    "updated_at": "2026-07-21T00:33:59Z",
+    "expires_at": "2026-10-21T00:33:59Z"
+  },
+  {
+    "file_name": "project/wqb_acceleration_alpha_batch_20260722.md",
+    "category": "project",
+    "summary": "WQB变化率跃迁因子批量项目，28个全新逻辑创新的变化率类因子全部回测完成，无同时满足Sharpe≥1.25且Fitness≥1.0的达标因子，Top因子extreme_day_reversal Sharpe=1.33，Fitness=0.76，全量因子表现报告已生成。",
+    "tags": ["WorldQuant", "因子创新", "跃迁因子", "自相关性", "变化率", "因子发布"],
+    "importance": 4,
+    "created_at": "2026-07-22T00:00:00Z",
+    "updated_at": "2026-07-23T00:00:00Z",
+    "expires_at": "2026-10-23T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_self_correlation_reduction_20260722.md",
+    "category": "project",
+    "summary": "WQB因子自相关性优化项目，诊断确认vol120是高自相关核心来源，第一批10个vol20/vol60替换的优化因子回测完成，5个候选因子同时满足Sharpe≥1.25、Fitness≥1.0，待后续提交检查验证。",
+    "tags": ["WorldQuant", "因子优化", "自相关性", "波动率", "提交检查", "因子发布"],
+    "importance": 4,
+    "created_at": "2026-07-22T00:00:00Z",
+    "updated_at": "2026-07-22T00:00:00Z",
+    "expires_at": "2026-10-22T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_precision_breakthrough_20260724.md",
+    "category": "project",
+    "summary": "WQB精准突破因子回测项目，共12个因子分4组设计，用短衰减+少量vol20权重平衡自相关与Fitness，11个因子已完成回测，4个初步达标满足Sharpe≥1.25且Fitness≥1.0，待全部回测完成后执行8项提交检查与发布。",
+    "tags": ["WorldQuant", "Alpha因子", "自相关性优化", "Fitness达标", "精准突破", "因子发布"],
+    "importance": 4,
+    "created_at": "2026-07-24T10:00:00Z",
+    "updated_at": "2026-07-25T00:00:00Z",
+    "expires_at": "2026-10-25T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_candidate_factors_submit_check_20260724.md",
+    "category": "project",
+    "summary": "WQB 5个高表现候选因子提交检查完成，全部因子均因SELF_CORRELATION>0.7未达发布要求，最接近阈值的因子自相关为0.7697，已交付专属自动化提交检查脚本。",
+    "tags": ["WorldQuant", "因子提交", "自相关性", "8项检查", "因子发布", "Python脚本"],
+    "importance": 4,
+    "created_at": "2026-07-24T00:00:00Z",
+    "updated_at": "2026-07-24T00:00:00Z",
+    "expires_at": "2026-10-24T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_precision_4candidates_check_20260725.md",
+    "category": "project",
+    "summary": "WQB精准突破项目4个达标候选因子全部完成8项平台提交检查，均因SELF_CORRELATION>0.7未达发布阈值，1个因子已提前提交，全量脚本、报告、状态库结果已交付。",
+    "tags": ["WorldQuant", "精准突破", "因子提交检查", "自相关性", "8项检查", "Python脚本"],
+    "importance": 4,
+    "created_at": "2026-07-26T00:00:00Z",
+    "updated_at": "2026-07-26T00:00:00Z",
+    "expires_at": "2026-10-26T00:00:00Z"
+  },
+  {
+    "file_name": "project/ace_integration_202607.md",
+    "category": "project",
+    "summary": "WorldQuant官方ACE库集成项目完成，适配代理连接问题，全量7项功能验证通过，交付ace_batch_runner.py批量因子回测+提交检查统一脚本，4个基准因子结果和历史100%一致。",
+    "tags": ["WorldQuant", "ACE库", "Alpha Creation Engine", "批量回测", "因子提交检查", "Python脚本"],
+    "importance": 4,
+    "created_at": "2026-07-26T00:00:00Z",
+    "updated_at": "2026-07-26T00:00:00Z",
+    "expires_at": "2026-10-26T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_alpha021_d5_selfcorr_valley_discovery_20260726.md",
+    "category": "project",
+    "summary": "验证发现alpha_021_d5自相关值仅0.5838，形成以d5为中心的尖锐自相关低谷（d4/d6/d7自相关均>0.7），3个vol加权组合因子Sharpe≥1.85、Fitness≥1.0全部达标，全量报告与脚本已交付。",
+    "tags": ["WorldQuant", "alpha_021_d5", "自相关低谷", "因子优化", "Alpha因子", "提交检查"],
+    "importance": 4,
+    "created_at": "2026-07-26T00:00:00Z",
+    "updated_at": "2026-07-26T00:00:00Z",
+    "expires_at": "2026-10-26T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_d5_selfcorr_breakthrough_20260727.md",
+    "category": "project",
+    "summary": "d5自相关低谷突破项目全量完成，6个vol加权组合与协同信号因子全部回测校验，无同时满足SelfCorr≤0.7且Fitness≥1.0的发布达标因子，交付两阶段拆分回测脚本和结果报告。",
+    "tags": ["WorldQuant", "d5因子", "自相关优化", "ACE库", "因子回测", "提交检查"],
+    "importance": 4,
+    "created_at": "2026-07-27T00:00:00Z",
+    "updated_at": "2026-07-27T00:00:00Z",
+    "expires_at": "2026-10-27T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_sc03_low_sc_factor_research.md",
+    "category": "project",
+    "summary": "WQB SC03低自相关因子项目初代12因子全量回测完成，8个满足SC<0.3，当前推进兼顾低SC和高Sharpe的二代因子设计",
+    "tags": ["WQB", "因子研究", "SC03", "低自相关因子", "量化回测"],
+    "importance": 4,
+    "created_at": "2026-07-28T00:00:00Z",
+    "updated_at": "2026-07-28T00:00:00Z",
+    "expires_at": "2026-10-28T00:00:00Z"
+  },
+  {
+    "file_name": "project/wqb_nonlinear_entanglement_breakthrough_20260729.md",
+    "category": "project",
+    "summary": "6个非线性纠缠因子回测项目完成交付，实现6种反转+波动率信号正交组合结构，发现E4加权组合Sharpe=1.31过LOW_SHARPE、E1门控反转换手率0.69过HIGH_TURNOVER",
+    "tags": ["WorldQuant", "非线性纠缠因子", "ACE库", "自相关", "因子回测"],
+    "importance": 4,
+    "created_at": "2026-07-29T00:00:00Z",
+    "updated_at": "2026-07-29T00:00:00Z",
+    "expires_at": "2026-10-29T00:00:00Z"
+  }
+]

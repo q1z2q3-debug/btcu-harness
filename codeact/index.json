@@ -1,0 +1,273 @@
+[
+  {
+    "name": "run_backtest",
+    "path": "./codeact/scripts/run_backtest.py",
+    "description": "Alpha因子批量回测主入口 - 运行因子库中所有因子的回测，输出JSON结果和Markdown分析报告，包含Fitness、夏普比率、IC、Rank IC、最大回撤、换手率等8大核心指标，对标WorldQuant BRAIN平台范式",
+    "params": {
+      "result_mode": "display_only",
+      "n_stocks": "50",
+      "n_days": "500",
+      "categories": "",
+      "use_real_data": "false"
+    },
+    "status": "active"
+  },
+  {
+    "name": "factor_backtest",
+    "path": "./codeact/scripts/factor_backtest.py",
+    "description": "因子回测框架核心库 - 包含DataLoader(数据获取/模拟)、FactorEngine(因子计算与预处理)、BacktestEngine(向量化分层回测/多空组合)、PerformanceAnalyzer(8大绩效指标评估)",
+    "params": {},
+    "status": "active"
+  },
+  {
+    "name": "alpha_library",
+    "path": "./codeact/scripts/alpha_library.py",
+    "description": "Alpha因子库 - 27个经典因子，分5大类(量价因子、动量反转因子、波动率因子、基本面因子、情绪因子)，每个因子含名称、说明、公式、计算函数，支持表达式式注册",
+    "params": {},
+    "status": "active"
+  },
+  {
+    "name": "wqb_api_client",
+    "path": "./codeact/scripts/wqb_api_client.py",
+    "description": "WorldQuant BRAIN API 客户端封装 - 支持认证登录、Alpha模拟提交/查询、运算符/数据字段元数据、频率限制指数退避、FASTEXPR表达式转换、SQLite持久化去重。状态库: wqb_state.db (alphas表，按表达式+设置哈希去重)",
+    "params": {},
+    "status": "active"
+  },
+  {
+    "name": "wqb_factor_runner",
+    "path": "./codeact/scripts/wqb_factor_runner.py",
+    "description": "WorldQuant BRAIN 因子批量回测脚本 - 支持7种模式(all/new/v3/combos/rescan/scan_params/matrix)：从因子库读取FASTEXPR表达式，提交到平台真实回测，收集Sharpe/Fitness/年化收益/换手率/最大回撤等指标；组合因子模式支持rank标准化加权组合验证；参数矩阵模式可对Top因子做多套sim_settings配置对比测试；SQLite持久化避免重复提交，生成全因子排名报告和组合验证报告。状态库: wqb_state.db (alphas表，按表达式+完整设置哈希去重)",
+    "params": {
+      "result_mode": "display_only",
+      "mode": "v3",
+      "max_factors": "22"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_factor_combiner",
+    "path": "./codeact/scripts/wqb_factor_combiner.py",
+    "description": "WorldQuant BRAIN 多因子组合优化器 - 从状态库读取已完成回测的因子表现，基于因子分类估计相关性矩阵，构建4种组合方法(等权/风险平价/IC加权/最大夏普)，使用WQB真实数据+组合数学公式估算组合表现，生成对比分析报告与推荐组合。输出: wqb_portfolio_report.md",
+    "params": {
+      "result_mode": "display_only",
+      "min_sharpe": "0.3",
+      "min_fitness": "0.2",
+      "max_factors": "10",
+      "n_stocks": "50",
+      "n_days": "500"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_alpha021_optimizer",
+    "path": "./codeact/scripts/wqb_alpha021_optimizer.py",
+    "description": "Alpha_021 全方位优化脚本 - 对最强因子alpha_021(Sharpe=1.62)进行参数矩阵扫描(decay/neutralization/universe/truncation)、7种变体因子扩展、原始信号加权组合验证(先加权再rank)、交叉验证(参数×组合)，最终发现 combo_d10_vol120_w8020 (Sharpe=2.24, Fitness=1.34)，比基准提升38.3%。支持5种模式(params/variants/combos/cross/all)，严格40秒提交间隔限流，SQLite去重，生成优化对比报告和更新全因子排名。状态库: wqb_state.db (alphas表，按表达式+完整设置哈希去重)",
+    "params": {
+      "result_mode": "display_only",
+      "mode": "all"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_batch_submit",
+    "path": "./codeact/scripts/wqb_batch_submit.py",
+    "description": "WorldQuant BRAIN 批量因子提交与提交检查脚本 - 批量提交FASTEXPR因子到WQB平台回测，自动去重（按表达式+设置哈希），支持断点续跑，等待结果后筛选Sharpe≥1.25且Fitness≥1.0的因子，运行8项提交检查（LOW_SHARPE/LOW_FITNESS/LOW_TURNOVER/HIGH_TURNOVER/CONCENTRATED_WEIGHT/LOW_SUB_UNIVERSE_SHARPE/SELF_CORRELATION/MATCHES_COMPETITION），对通过全部检查的因子正式提交，生成跃迁因子报告与回测汇总。状态库: wqb_state.db (alphas表，按表达式+完整设置哈希去重)",
+    "params": {
+      "result_mode": "display_only",
+      "max_submit_per_run": "8",
+      "submit_interval": "55",
+      "wait_after_submit": "true"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_submission_check",
+    "path": "./codeact/scripts/wqb_submission_check.py",
+    "description": "WorldQuant BRAIN 因子提交检查与正式提交脚本 - 从状态库读取指定因子的alpha_id，逐个执行8项提交检查（含SELF_CORRELATION阈值验证），对通过全部检查的因子执行正式提交（PUT /alphas/{id}/submit），生成详细检查报告。支持自定义因子列表、提交间隔（默认50秒防限流）、指数退避重试。状态库: wqb_state.db (submit_checks表，按alpha_id+checked_at去重)",
+    "params": {
+      "result_mode": "display_only",
+      "factor_names": "combo_d10_vol20_w8020,combo_d10_vol20_w9010,combo_d10_vol120_w9010,combo_d10_vol60_w7525,combo_d10_vol120_w9505",
+      "email": "q1z2q3@126.com",
+      "submit_interval": "50"
+    },
+    "status": "active"
+  },
+  {
+    "name": "ace_batch_runner",
+    "path": "./codeact/scripts/ace_batch_runner.py",
+    "description": "ACE (Alpha Creation Engine) 批量因子回测+提交检查统一脚本 - 基于官方ACE库，支持两种模式：1)完整回测模式：输入因子表达式列表→批量回测(多模拟每批10个+3并发批次)→8项提交检查→自相关检查→生产相关性检查→结果表→自动提交通过因子；2)检查模式：对已有alpha_id运行提交检查（跳过回测）。写入wqb_state.db的alphas和submit_checks表，生成Markdown报告。ACE库已适配trust_env=False和代理环境变量清除。状态库: wqb_state.db (alphas表按表达式+设置哈希去重, submit_checks表按alpha_id去重)",
+    "params": {
+      "result_mode": "display_only",
+      "batch_size": "10",
+      "concurrency": "3",
+      "auto_submit": "false",
+      "region": "USA",
+      "universe": "TOP3000",
+      "delay": "1"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_4candidates_submit",
+    "path": "./codeact/scripts/wqb_4candidates_submit.py",
+    "description": "WorldQuant BRAIN 4候选因子提交检查与正式发布脚本 - 对指定的候选因子列表（alpha_id+因子名+指标）执行8项提交检查（含SELF_CORRELATION≤0.7验证），检查状态库避免重复调用API，对不完整结果自动重新检查并轮询等待完成，对通过全部检查的因子自动执行正式提交（PUT），生成包含每项检查数值与通过状态的详细报告。提交间隔≥50秒防限流，指数退避重试。状态库: wqb_state.db (submit_checks表，按alpha_id主键去重)",
+    "params": {
+      "result_mode": "display_only",
+      "candidates": "E5eE3Zp1:alpha_021_d1_raw:1.73:1.22:0.4034,E5eEALEL:alpha_021_d3:1.69:1.42:0.2719,O0xZv69J:alpha_021_d5:1.66:1.50:0.2261,pwKl0XoX:combo_d5_vol20_w9505:1.58:1.23:0.1791",
+      "email": "q1z2q3@126.com",
+      "submit_interval": "50"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_d5_selfcorr_breakthrough.py",
+    "path": "./codeact/scripts/wqb_d5_selfcorr_breakthrough.py",
+    "description": "alpha_021_d5自相关深度诊断脚本 - 获取8项检查结果、d1/d3/d5自相关对比、批量提交d5附近变体因子并执行提交检查",
+    "params": {
+      "result_mode": "display_only",
+      "email": "q1z2q3@126.com",
+      "password": "W2025zq0118",
+      "db_path": "./codeact/output/wqb_state.db",
+      "report_path": "./codeact/output/wqb_d5_selfcorr_breakthrough_report.md"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_d5_phase2_analysis.py",
+    "path": "./codeact/scripts/wqb_d5_phase2_analysis.py",
+    "description": "d5自相关诊断第二阶段 - 获取d4/d6/d7自相关验证低谷、对达标因子执行提交检查、提交高优先级剩余因子",
+    "params": {
+      "result_mode": "display_only",
+      "email": "q1z2q3@126.com",
+      "password": "W2025zq0118",
+      "db_path": "./codeact/output/wqb_state.db",
+      "report_path": "./codeact/output/wqb_d5_selfcorr_breakthrough_report.md"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_d5_phase3_variants.py",
+    "path": "./codeact/scripts/wqb_d5_phase3_variants.py",
+    "description": "d5自相关诊断第三阶段 - 测试原始d5的中性化变体和极小比例vol组合，寻找通过全部8项检查的因子",
+    "params": {
+      "result_mode": "display_only",
+      "email": "q1z2q3@126.com",
+      "password": "W2025zq0118",
+      "db_path": "./codeact/output/wqb_state.db",
+      "report_path": "./codeact/output/wqb_d5_selfcorr_breakthrough_report.md"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_d5_phase1_simulate",
+    "path": "./codeact/scripts/wqb_d5_phase1_simulate.py",
+    "description": "d5自相关突破 - 阶段1批量回测（仅模拟）。基于ACE库对d5+vol20权重组合和d5协同信号因子执行WQB平台回测，结果存入wqb_state.db。使用decay=0设置避免vol20信号被平滑。支持跳过已回测因子。状态表: alphas（按表达式+设置哈希去重）",
+    "params": {
+      "email": "q1z2q3@126.com",
+      "password": "W2025zq0118"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_d5_phase2_check",
+    "path": "./codeact/scripts/wqb_d5_phase2_check.py",
+    "description": "d5自相关突破 - 阶段2自相关检查+提交检查+正式提交。基于阶段1在wqb_state.db中存储的因子结果，执行自相关检查、8项提交检查（SELF_CORRELATION≤0.7等），对通过全部检查的因子正式提交。生成wqb_d5_breakthrough_submit_report.md报告。状态表: self_corr（按alpha_id+lag_period去重）, submit_checks（按alpha_id主键去重）",
+    "params": {
+      "email": "q1z2q3@126.com",
+      "password": "W2025zq0118"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_new_direction_breakthrough",
+    "path": "./codeact/scripts/wqb_new_direction_breakthrough.py",
+    "description": "WQB新方向突破因子探索 - 使用ACE库探索5个九维认知新方向(动量延续/量价协同/加速度/多模态交叉/正交组合)共15个全新因子，完全脱离alpha_021反转家族。先提交到队列再集中轮询，30秒间隔避免限流。执行回测→提交检查→自动提交通过因子→生成Markdown报告。状态库: wqb_state.db (alphas表按表达式+设置哈希去重, submit_checks表按alpha_id主键去重)",
+    "params": {
+      "result_mode": "display_only",
+      "auto_submit": "false"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_sc03_breakthrough",
+    "path": "./codeact/scripts/wqb_sc03_breakthrough.py",
+    "description": "WQB SC03突破回测 - 12因子设计与回测筛选脚本，以SC<0.3为首要设计目标。A组6个rank(ts_delta(ts_rank(X,20),1))排名变化因子(天然低SC)，B组6个SUPER→REGULAR表达式因子。使用ACE库提交WQB平台真实回测，结果入库并生成报告。回测设置: EQUITY/USA/TOP3000, delay=1, decay=0, neutralization=SUBINDUSTRY, truncation=0.08, pasteurization=ON, testPeriod=P1Y6M。支持--group A/B分组运行避免超时。状态库: wqb_state.db (alphas表按表达式+设置哈希去重, submit_checks表按alpha_id去重)",
+    "params": {
+      "result_mode": "display_only",
+      "group": "all",
+      "delay": "45"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_sc03_optimize",
+    "path": "./codeact/scripts/wqb_sc03_optimize.py",
+    "description": "WQB SC03优化回测 v1 - 12因子优化设计与回测脚本。基于首次结果(SC全部<0.3但Sharpe全负)的优化：A组延长ts_delta窗口至5/10日增强信号，B组引入ts_argmax/ts_corr/ts_delta(range)等低SC结构。发现A3_volume_rank_d5(Sharpe=0.25,SC=0.1629)和B11_corr_delta(Sharpe=0.05,SC=0.0889)为SC<0.3+Sharpe>0的双达标因子。回测设置: EQUITY/USA/TOP3000, SUBINDUSTRY, testPeriod=P1Y6M。状态库: wqb_state.db",
+    "params": {
+      "result_mode": "display_only",
+      "group": "all",
+      "delay": "45"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_sc03_optimize_v2",
+    "path": "./codeact/scripts/wqb_sc03_optimize_v2.py",
+    "description": "WQB SC03优化回测 v2 - 基于A3/B11成功因子的参数扫描。A组对volume rank delta进行参数扫描(delta窗口3/7/10/15, rank窗口20/40/60)，发现A3v_vol_rank_d3(3日delta)为最优(Sharpe=0.64,SC=0.1611)。B组对corr delta进行参数扫描(corr窗口5/15/20, delta窗口3/10)，发现长窗口corr更稳定但Sharpe为负。回测设置: EQUITY/USA/TOP3000, SUBINDUSTRY, testPeriod=P1Y6M。状态库: wqb_state.db",
+    "params": {
+      "result_mode": "display_only",
+      "group": "all"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_sc03_optimize_v3",
+    "path": "./codeact/scripts/wqb_sc03_optimize_v3.py",
+    "description": "WQB SC03优化回测 v3 - 聚焦d3窗口+volume ratio新结构。A组测试d3窗口在不同数据字段(close/open/high/low/volume)上的表现，发现volume d3结构在所有窗口(10/20/30)均取得Sharpe>0.5+SC<0.3。B组探索volume ratio因子(volume/ts_mean), 发现B13v_vol_ratio_rank_d3(Sharpe=0.68,SC=0.1600)和B13v_vol_ratio_d3(Sharpe=0.56,SC=0.1497)等4个SC<0.3+Sharpe>0.5的因子。回测设置: EQUITY/USA/TOP3000, SUBINDUSTRY, testPeriod=P1Y6M。状态库: wqb_state.db",
+    "params": {
+      "result_mode": "display_only",
+      "group": "all"
+    },
+    "status": "active"
+  },
+  {
+    "name": "wqb_entanglement_breakthrough",
+    "path": "./codeact/scripts/wqb_entanglement_breakthrough.py",
+    "description": "6个非线性纠缠因子设计与回测 - 将alpha_021反转信号(高Sharpe)与volume_delta变化信号(低SC)正交组合，实现6种非线性纠缠结构(门控反转/调制反转/方向调制/加权组合/非对称门控/双变化量乘积)。回测设置: EQUITY/USA/TOP3000, SUBINDUSTRY, P1Y6M。使用ACE库逐因子提交，429重试，结果入库并生成Markdown报告。发现E4加权组合(Sharpe=1.31, LOW_SHARPE通过)和E1门控反转(Turnover=0.69, HIGH_TURNOVER通过)。状态库: wqb_state.db (alphas表按表达式+设置哈希去重, submit_checks表按alpha_id去重)",
+    "params": {
+      "result_mode": "display_only"
+    },
+    "status": "active"
+  },
+  {
+    "name": "ace_mass_scan",
+    "path": "./codeact/scripts/batch_scan/run_mass_scan.py",
+    "description": "ACE库大规模扫描 - 60+因子表达式跨4大类(Volume/Correlation/Nonlinear/Price)，批量回测后按Sharpe/SC排名，找出SC<0.3候选。使用ace_batch_runner.py的统一流水线(多模拟每批10个+3并发批次+8项提交检查+自相关检查)。",
+    "params": {
+      "result_mode": "display_only",
+      "region": "USA",
+      "universe": "TOP3000",
+      "delay": "1",
+      "decay": "0",
+      "neutralization": "INDUSTRY",
+      "batch_size": "10",
+      "concurrency": "3"
+    },
+    "status": "active"
+  },
+  {
+    "name": "breakthrough_sweep",
+    "path": "./codeact/scripts/batch_scan/run_breakthrough.py",
+    "description": "突破方向参数扫描 - 对18个最佳volume delta表达式做decay扫描(0/1/3/5/10/15)和neutralization扫描(SUBINDUSTRY/INDUSTRY/SECTOR/MARKET_EQUITY)，寻找能同时满足SC<0.3+Sharpe>1.6的参数组合。",
+    "params": {
+      "result_mode": "display_only",
+      "mode": "all",
+      "region": "USA",
+      "universe": "TOP3000",
+      "delay": "1",
+      "batch_size": "10",
+      "concurrency": "3"
+    },
+    "status": "active"
+  }
+]

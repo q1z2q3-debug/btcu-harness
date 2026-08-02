@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "total": 60,
+    "simulation_success": 0,
+    "simulation_failed": 60,
+    "checked": 0,
+    "check_pass": 0,
+    "check_fail": 0,
+    "check_pending": 0,
+    "submitted": 0
+  },
+  "ranked": [],
+  "low_sc_candidates": [],
+  "high_sharpe_candidates": []
+}

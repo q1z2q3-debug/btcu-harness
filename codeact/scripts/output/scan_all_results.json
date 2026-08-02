@@ -1,0 +1,106 @@
+[
+  {
+    "name": "A_1",
+    "train_sharpe": 0.19,
+    "test_sharpe": 0.19,
+    "train_fitness": 0.06,
+    "test_fitness": 0.06
+  },
+  {
+    "name": "A_2",
+    "train_sharpe": 0.12,
+    "test_sharpe": 0.12,
+    "train_fitness": 0.03,
+    "test_fitness": 0.03
+  },
+  {
+    "name": "A_3",
+    "train_sharpe": -0.09,
+    "test_sharpe": -0.09,
+    "train_fitness": -0.02,
+    "test_fitness": -0.02
+  },
+  {
+    "name": "A_4",
+    "train_sharpe": 0.69,
+    "test_sharpe": 0.69,
+    "train_fitness": 0.11,
+    "test_fitness": 0.11
+  },
+  {
+    "name": "A_5",
+    "train_sharpe": 1.25,
+    "test_sharpe": 1.25,
+    "train_fitness": 0.29,
+    "test_fitness": 0.29
+  },
+  {
+    "name": "A_6",
+    "train_sharpe": 0.61,
+    "test_sharpe": 0.61,
+    "train_fitness": 0.15,
+    "test_fitness": 0.15
+  },
+  {
+    "name": "A_7",
+    "train_sharpe": 1.1,
+    "test_sharpe": 1.1,
+    "train_fitness": 0.42,
+    "test_fitness": 0.42
+  },
+  {
+    "name": "A_8",
+    "train_sharpe": -1.23,
+    "test_sharpe": -1.23,
+    "train_fitness": -0.37,
+    "test_fitness": -0.37
+  },
+  {
+    "name": "A_9",
+    "train_sharpe": -0.15,
+    "test_sharpe": -0.15,
+    "train_fitness": -0.02,
+    "test_fitness": -0.02
+  },
+  {
+    "name": "A_10",
+    "train_sharpe": 2.05,
+    "test_sharpe": 2.05,
+    "train_fitness": 1.29,
+    "test_fitness": 1.29
+  },
+  {
+    "name": "A_11",
+    "train_sharpe": 1.33,
+    "test_sharpe": 1.33,
+    "train_fitness": 0.23,
+    "test_fitness": 0.23
+  },
+  {
+    "name": "A_12",
+    "train_sharpe": 0.13,
+    "test_sharpe": 0.13,
+    "train_fitness": 0.01,
+    "test_fitness": 0.01
+  },
+  {
+    "name": "A_13",
+    "train_sharpe": -0.61,
+    "test_sharpe": -0.61,
+    "train_fitness": -0.09,
+    "test_fitness": -0.09
+  },
+  {
+    "name": "A_14",
+    "train_sharpe": null,
+    "test_sharpe": null,
+    "train_fitness": null,
+    "test_fitness": null,
+    "status": "failed"
+  },
+  {
+    "name": "A_15",
+    "expression": "rank(ts_std(volume, 60))",
+    "status": "failed"
+  }
+]

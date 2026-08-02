@@ -1,0 +1,19 @@
+# Category D: Price/Return Patterns (high Sharpe potential)
+# D1: relative price patterns
+rank(close/ts_mean(close, 20))
+rank(close/ts_mean(close, 60))
+rank(ts_delta(close/ts_mean(close, 20), 5))
+rank(ts_delta(close/ts_mean(close, 60), 10))
+# D2: MA ratio patterns
+rank(ts_mean(close, 5)/ts_mean(close, 20))
+rank(ts_mean(close, 5)/ts_mean(close, 60))
+rank(ts_mean(close, 20)/ts_mean(close, 60))
+# D3: price volatility patterns
+rank(ts_std(close, 5)/ts_std(close, 20))
+rank(ts_std(close, 20)/ts_std(close, 60))
+rank(ts_std(close, 5))
+rank(ts_std(close, 20))
+# D4: price autocorrelation
+rank(ts_corr(close, ts_mean(close, 20), 10))
+rank(ts_corr(ts_delta(close, 1), ts_delta(close, 5), 10))
+rank(ts_corr(ts_delta(close, 1), ts_delta(close, 10), 20))

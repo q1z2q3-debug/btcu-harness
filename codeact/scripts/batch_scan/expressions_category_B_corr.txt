@@ -1,0 +1,21 @@
+# Category B: Price-Volume Correlation (SC<0.3 + Sharpe balance)
+# B1: price-volume correlation by window
+rank(ts_corr(close, volume, 5))
+rank(ts_corr(close, volume, 10))
+rank(ts_corr(close, volume, 20))
+rank(ts_corr(close, volume, 60))
+# B2: rank price-volume correlation
+rank(ts_corr(rank(close), rank(volume), 5))
+rank(ts_corr(rank(close), rank(volume), 10))
+rank(ts_corr(rank(close), rank(volume), 20))
+rank(ts_corr(rank(close), rank(volume), 60))
+# B3: price change vs volume
+rank(ts_corr(ts_delta(close, 1), volume, 10))
+rank(ts_corr(ts_delta(close, 5), volume, 10))
+rank(ts_corr(ts_delta(close, 1), ts_delta(volume, 1), 10))
+rank(ts_corr(ts_delta(close, 5), ts_delta(volume, 5), 10))
+# B4: open/high/low with volume
+rank(ts_corr(rank(open), rank(volume), 10))
+rank(ts_corr(rank(high), rank(volume), 10))
+rank(ts_corr(rank(low), rank(volume), 10))
+rank(ts_corr(rank(high-low), rank(volume), 10))

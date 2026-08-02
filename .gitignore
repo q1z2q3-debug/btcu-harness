@@ -1,0 +1,7 @@
+.tmp/
+SECRET.md
+.skills/
+*.log
+ace.log
+__pycache__/
+*.pyc

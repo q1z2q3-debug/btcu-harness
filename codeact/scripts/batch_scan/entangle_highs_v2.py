@@ -171,7 +171,8 @@ def backtest_one(s, name, expr, category="entanglement_v2"):
             if not progress_url:
                 print(f"    提交失败: {resp.status_code} {resp.text[:200]}", flush=True)
                 if resp.status_code == 429:
-                    time.sleep(60)
+                    print(f"    429限流，等70秒重试...", flush=True)
+                    time.sleep(70)
                     continue
                 if attempt < max_retries - 1:
                     time.sleep(30)
@@ -216,18 +217,34 @@ def backtest_one(s, name, expr, category="entanglement_v2"):
                 conn.close()
                 return {'name': name, 'alpha_id': alpha_id, 'status': 'COMPLETED'}
             
-            sharpe = result.get('sharpe')
-            fitness = result.get('fitness')
+            # 字段可能在不同层级，兼容多种格式
+            sharpe = result.get('sharpe') or result.get('is', {}).get('sharpe')
+            fitness = result.get('fitness') or result.get('is', {}).get('fitness')
             ic = result.get('ic')
             rank_ic = result.get('rank_ic')
             turnover = result.get('turnover')
-            annual_return = result.get('annual_return')
-            max_drawdown = result.get('max_drawdown')
+            annual_return = result.get('annual_return') or result.get('annualized_return')
+            max_drawdown = result.get('max_drawdown') or result.get('drawdown')
             grade = result.get('grade')
             
-            is_data = result.get('is') or {}
-            is_sharpe = is_data.get('sharpe')
-            is_fitness = is_data.get('fitness')
+            # IS期数据：可能在 is / inSample / 不同层级
+            is_data = result.get('is') or result.get('inSample') or {}
+            is_sharpe = is_data.get('sharpe') if isinstance(is_data, dict) else None
+            is_fitness = is_data.get('fitness') if isinstance(is_data, dict) else None
+            
+            # 如果top level没有sharpe但is有，说明top是OOS
+            if sharpe is None and is_sharpe is not None:
+                # 反向：top可能就是IS? 先记录原始结构
+                pass
+            
+            # 打印调试信息（第一个因子）
+            if name.endswith('v2') and 'w0990' in name:
+                keys = list(result.keys())[:30]
+                print(f"    [DEBUG] result keys: {keys}", flush=True)
+                if 'is' in result:
+                    print(f"    [DEBUG] is type: {type(result['is'])}", flush=True)
+                    if isinstance(result['is'], dict):
+                        print(f"    [DEBUG] is keys: {list(result['is'].keys())[:20]}", flush=True)
             
             is_summary = json.dumps({
                 'sharpe': is_sharpe,
@@ -245,7 +262,11 @@ def backtest_one(s, name, expr, category="entanglement_v2"):
                  is_summary, datetime.now().isoformat(), datetime.now().isoformat()))
             conn.commit()
             
-            print(f"    ✅ S={sharpe:.2f} F={fitness:.2f} IS_S={is_sharpe} IS_F={is_fitness} grade={grade}", flush=True)
+            s_str = f"{sharpe:.2f}" if sharpe is not None else "?"
+            f_str = f"{fitness:.2f}" if fitness is not None else "?"
+            is_s_str = f"{is_sharpe:.2f}" if is_sharpe is not None else "?"
+            is_f_str = f"{is_fitness:.2f}" if is_fitness is not None else "?"
+            print(f"    ✅ S={s_str} F={f_str} IS_S={is_s_str} IS_F={is_f_str} grade={grade}", flush=True)
             
             conn.close()
             return {

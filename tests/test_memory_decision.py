@@ -85,37 +85,62 @@ class TestThirdChoice:
     def test_no_conflict(self):
         gen = ThirdChoiceGenerator()
         s = CognitiveState.from_values([1, 0, -1, 1, 0, 0, -1, 1, -1])
-        tc = gen.generate(s, s)
-        assert not tc.analysis.has_conflict
+        analysis = gen.analyze_conflict(s, s)
+        assert not analysis.has_conflict
 
     def test_extreme_conflict(self):
         gen = ThirdChoiceGenerator()
         a = CognitiveState.all_yang()
         b = CognitiveState.all_yin()
-        tc = gen.generate(a, b)
-        assert tc.analysis.is_extreme_conflict
-        assert len(tc.voided_dims) == 9
-        assert len(tc.preserved_dims) == 0
-        # Third choice should be all void
-        assert tc.state.index == 9841
+        analysis = gen.analyze_conflict(a, b)
+        assert analysis.is_extreme_conflict
+        candidates = gen.generate_all(a, b)
+        void_c = [c for c in candidates if c.strategy == "void"][0]
+        assert void_c.state.index == 9841
+        assert len(void_c.voided_dims) == 9
+        assert len(void_c.preserved_dims) == 0
 
     def test_partial_conflict(self):
         gen = ThirdChoiceGenerator()
         a = CognitiveState.from_values([1, 1, 1, 1, 1, 1, 1, 1, 1])
         b = CognitiveState.from_values([1, 1, 1, -1, -1, -1, 1, 1, 1])
-        tc = gen.generate(a, b)
-        assert tc.analysis.has_conflict
-        assert len(tc.preserved_dims) == 6
-        assert len(tc.voided_dims) == 3
+        analysis = gen.analyze_conflict(a, b)
+        assert analysis.has_conflict
+        candidates = gen.generate_all(a, b)
+        void_c = [c for c in candidates if c.strategy == "void"][0]
+        assert len(void_c.preserved_dims) == 6
+        assert len(void_c.voided_dims) == 3
 
     def test_third_choice_not_average(self):
         """Third choice is not the arithmetic average - it voids conflicts."""
         gen = ThirdChoiceGenerator()
         a = CognitiveState.from_values([1, 1, -1, -1, 0, 0, 0, 0, 0])
         b = CognitiveState.from_values([-1, -1, 1, 1, 0, 0, 0, 0, 0])
-        tc = gen.generate(a, b)
-        # All 4 conflicting dims should be voided
-        assert all(tc.state[i].value == 0 for i in range(4))
+        candidates = gen.generate_all(a, b)
+        void_c = [c for c in candidates if c.strategy == "void"][0]
+        assert all(void_c.state[i].value == 0 for i in range(4))
+
+    def test_multiple_strategies(self):
+        """Enhanced generator should produce multiple strategy candidates."""
+        gen = ThirdChoiceGenerator()
+        a = CognitiveState.all_yang()
+        b = CognitiveState.all_yin()
+        candidates = gen.generate_all(a, b)
+        strategies = {c.strategy for c in candidates}
+        assert "void" in strategies
+        assert "dominance_a" in strategies
+        assert "dominance_b" in strategies
+
+    def test_candidate_scoring(self):
+        """Candidates should have scores."""
+        gen = ThirdChoiceGenerator()
+        a = CognitiveState.from_values([1, 0, -1, 1, 0, 0, -1, 1, -1])
+        b = CognitiveState.from_values([-1, 0, 1, -1, 0, 0, 1, -1, 1])
+        candidates = gen.generate_all(a, b)
+        for c in candidates:
+            assert c.total_score > 0
+            assert 0 <= c.equidistance_score <= 1
+            assert 0 <= c.void_ratio <= 1
 
 
 class TestDecisionPathfinder:

@@ -7,3 +7,7 @@ __pycache__/
 btcu_state.json
 dist/
 build/
+site/
+
+benchmark_results.json
+benchmark_report.md

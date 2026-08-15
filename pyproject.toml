@@ -8,7 +8,7 @@ version = "1.1.0"
 description = "Balanced Ternary Cognitive Unit Harness - A cognitive architecture for LLM-based agents"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = "MIT"
 authors = [{name = "BTCU Harness Contributors"}]
 keywords = [
     "ternary", "cognitive-architecture", "agent", "LLM",
@@ -19,7 +19,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",

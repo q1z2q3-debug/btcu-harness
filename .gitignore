@@ -5,3 +5,5 @@ __pycache__/
 .env
 .coverage
 btcu_state.json
+dist/
+build/

@@ -125,7 +125,7 @@ class TestToolsList:
         assert resp is not None
         assert "result" in resp
         tools = resp["result"]["tools"]
-        assert len(tools) == 4
+        assert len(tools) == 7
 
         names = {t["name"] for t in tools}
         assert names == {
@@ -133,6 +133,9 @@ class TestToolsList:
             "analyze_consistency",
             "suggest_tools",
             "cognitive_compare",
+            "cognitive_decide",
+            "cognitive_mode",
+            "cognitive_audit",
         }
 
         # Verify schemas exist
@@ -391,12 +394,15 @@ class TestResources:
         assert resp is not None
         assert "result" in resp
         resources = resp["result"]["resources"]
-        assert len(resources) == 3
+        assert len(resources) == 6
 
         uris = {r["uri"] for r in resources}
         assert "cognitive://dimensions" in uris
         assert any("trajectory" in uri for uri in uris)
         assert any("patterns" in uri for uri in uris)
+        assert any("efficiency" in uri for uri in uris)
+        assert any("blind_spots" in uri for uri in uris)
+        assert any("audit_report" in uri for uri in uris)
 
     def test_resources_read_dimensions(self, server):
         msg = {
@@ -472,7 +478,7 @@ class TestPrompts:
         assert resp is not None
         assert "result" in resp
         prompts = resp["result"]["prompts"]
-        assert len(prompts) == 1
+        assert len(prompts) == 2
         assert prompts[0]["name"] == "cognitive_context"
 
     def test_prompts_get_valid(self, server):
@@ -831,7 +837,7 @@ class TestSessionState:
 
 class TestServerMetadata:
     def test_server_version(self, server):
-        assert server.SERVER_VERSION == "1.1.0"
+        assert server.SERVER_VERSION == "1.2.0"
         assert server.SERVER_NAME == "btcu-harness-mcp"
         assert server.PROTOCOL_VERSION == "2024-11-05"
 

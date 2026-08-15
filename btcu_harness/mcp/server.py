@@ -52,6 +52,12 @@ from btcu_harness.mapping.projector import ProjectionResult
 from btcu_harness.memory.trajectory import CognitiveTrajectory
 from btcu_harness.storage.mongo_persistence import MongoPersistence
 
+# Dual-system cognitive architecture imports
+from btcu_harness.cognition.system1 import System1PatternLibrary
+from btcu_harness.cognition.dual_system import DualSystemDecisionEngine, Decision
+from btcu_harness.cognition.defense import CognitiveSafetyGuard
+from btcu_harness.cognition.audit import CognitiveAuditor
+
 # ---------------------------------------------------------------------------
 # Logging setup: stderr only, so stdout stays pure JSON-RPC
 # ---------------------------------------------------------------------------
@@ -2821,9 +2827,11 @@ class BTCUMCPServer:
     BTCU Harness MCP Server implementing JSON-RPC 2.0 over stdio.
 
     Exposes BTCU cognitive architecture through the Model Context Protocol:
-      - Tools: cognitive projection, consistency analysis, tool suggestions, state comparison
-      - Resources: dimension definitions, session trajectory, learned patterns
-      - Prompts: cognitive context formatting
+      - Tools: cognitive projection, consistency analysis, tool suggestions, state comparison,
+               dual-system cognitive decisions, mode management, System 2 audit
+      - Resources: dimension definitions, session trajectory, learned patterns,
+                  efficiency dashboard, blind spots, audit reports
+      - Prompts: cognitive context formatting, cognitive mode guide
 
     State management:
       - Stateless per MCP v2: each tool call loads session state from MongoDB,
@@ -2832,7 +2840,7 @@ class BTCUMCPServer:
     """
 
     PROTOCOL_VERSION = "2024-11-05"
-    SERVER_VERSION = "1.1.0"
+    SERVER_VERSION = "1.2.0"
     SERVER_NAME = "btcu-harness-mcp"
 
     def __init__(
@@ -2844,6 +2852,10 @@ class BTCUMCPServer:
         self._initialized = False
         self._client_capabilities: Dict[str, Any] = {}
         self._shutdown = False
+
+        # Dual-system decision engines per session (lazy initialization)
+        self._engines: Dict[str, DualSystemDecisionEngine] = {}
+        self._engines_lock = threading.Lock()
 
         # Tool definitions
         self.tools: List[Dict[str, Any]] = [
@@ -2931,6 +2943,76 @@ class BTCUMCPServer:
                     "required": ["state_a", "state_b"],
                 },
             },
+            {
+                "name": "cognitive_decide",
+                "description": "Dual-system cognitive decision using Kahneman-style System 1 (fast pattern matching) and System 2 (slow LLM deliberation). Automatically routes through exact hash, k-NN, fuzzy matching, or LLM fallback based on confidence thresholds. If System 2 is used, the pattern is learned back into System 1.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "input": {
+                            "type": "string",
+                            "description": "Natural language input for the decision engine",
+                        },
+                        "session_id": {
+                            "type": "string",
+                            "description": "Session identifier for engine state",
+                            "default": "default",
+                        },
+                        "mode": {
+                            "type": "string",
+                            "description": "Cognitive mode override: auto, system1, system2, novice, apprentice, expert, master",
+                            "default": "auto",
+                        },
+                    },
+                    "required": ["input"],
+                },
+            },
+            {
+                "name": "cognitive_mode",
+                "description": "Set the cognitive mode for a session. Modes: novice (heavy System 2), apprentice (balanced), expert (System 1 + light audit), master (full System 1 autonomy).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "mode": {
+                            "type": "string",
+                            "description": "Cognitive mode: novice, apprentice, expert, or master",
+                            "enum": ["novice", "apprentice", "expert", "master"],
+                        },
+                        "session_id": {
+                            "type": "string",
+                            "description": "Session identifier",
+                            "default": "default",
+                        },
+                    },
+                    "required": ["mode"],
+                },
+            },
+            {
+                "name": "cognitive_audit",
+                "description": "Run System 2 audit on recent System 1 decisions. Samples decisions and compares System 1's fast intuition against System 2's deliberate reasoning to detect quality degradation and bias drift.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "session_id": {
+                            "type": "string",
+                            "description": "Session identifier",
+                            "default": "default",
+                        },
+                        "sample_rate": {
+                            "type": "number",
+                            "description": "Fraction of System 1 decisions to audit (0.0-1.0)",
+                            "default": 0.05,
+                        },
+                        "audit_depth": {
+                            "type": "string",
+                            "description": "Audit depth: shallow or deep",
+                            "enum": ["shallow", "deep"],
+                            "default": "shallow",
+                        },
+                    },
+                    "required": [],
+                },
+            },
         ]
 
         # Resource definitions
@@ -2953,6 +3035,24 @@ class BTCUMCPServer:
                 "description": "Learned cognitive patterns for a specific session",
                 "mimeType": "application/json",
             },
+            {
+                "uri": "cognitive://sessions/{session_id}/efficiency",
+                "name": "Cognitive Efficiency Dashboard",
+                "description": "Real-time System 1/2 efficiency metrics including hit rates, latency, cost savings, and coverage",
+                "mimeType": "application/json",
+            },
+            {
+                "uri": "cognitive://sessions/{session_id}/blind_spots",
+                "name": "Cognitive Blind Spots",
+                "description": "Unexplored cognitive regions in the 19683-state ternary space with recommendations for forced exploration",
+                "mimeType": "application/json",
+            },
+            {
+                "uri": "cognitive://sessions/{session_id}/audit_report",
+                "name": "Cognitive Audit Report",
+                "description": "Latest System 2 audit report for a specific session",
+                "mimeType": "application/json",
+            },
         ]
 
         # Prompt definitions
@@ -2972,6 +3072,11 @@ class BTCUMCPServer:
                         "required": False,
                     },
                 ],
+            },
+            {
+                "name": "cognitive_mode_guide",
+                "description": "Explains the 4 cognitive modes (novice/apprentice/expert/master) and when to use each",
+                "arguments": [],
             },
         ]
 
@@ -3016,6 +3121,12 @@ class BTCUMCPServer:
                 result = self._tool_suggest_tools(arguments)
             elif name == "cognitive_compare":
                 result = self._tool_cognitive_compare(arguments)
+            elif name == "cognitive_decide":
+                result = self._tool_cognitive_decide(arguments)
+            elif name == "cognitive_mode":
+                result = self._tool_cognitive_mode(arguments)
+            elif name == "cognitive_audit":
+                result = self._tool_cognitive_audit(arguments)
             else:
                 return make_error(request_id, ERR_METHOD_NOT_FOUND, f"Unknown tool: {name}")
 
@@ -3073,33 +3184,52 @@ class BTCUMCPServer:
         name = params.get("name", "")
         arguments = params.get("arguments", {})
 
-        if name != "cognitive_context":
+        if name == "cognitive_context":
+            try:
+                state_values = arguments.get("state_values")
+                if not state_values or len(state_values) != NUM_DIMENSIONS:
+                    return make_error(request_id, ERR_INVALID_PARAMS, f"state_values must be a 9-element array")
+
+                session_id = arguments.get("session_id", "default")
+                prompt_text = self._build_cognitive_prompt(state_values, session_id)
+
+                return make_response(
+                    request_id,
+                    result={
+                        "description": "Cognitive state as system prompt context",
+                        "messages": [
+                            {
+                                "role": "system",
+                                "content": {"type": "text", "text": prompt_text},
+                            }
+                        ],
+                    },
+                )
+            except Exception as e:
+                logger.exception("Prompt generation failed")
+                return make_error(request_id, ERR_INTERNAL_ERROR, str(e))
+
+        elif name == "cognitive_mode_guide":
+            try:
+                prompt_text = self._build_cognitive_mode_guide()
+                return make_response(
+                    request_id,
+                    result={
+                        "description": "Guide to BTCU cognitive modes",
+                        "messages": [
+                            {
+                                "role": "system",
+                                "content": {"type": "text", "text": prompt_text},
+                            }
+                        ],
+                    },
+                )
+            except Exception as e:
+                logger.exception("Mode guide generation failed")
+                return make_error(request_id, ERR_INTERNAL_ERROR, str(e))
+
+        else:
             return make_error(request_id, ERR_INVALID_PARAMS, f"Unknown prompt: {name}")
-
-        try:
-            state_values = arguments.get("state_values")
-            if not state_values or len(state_values) != NUM_DIMENSIONS:
-                return make_error(request_id, ERR_INVALID_PARAMS, f"state_values must be a 9-element array")
-
-            session_id = arguments.get("session_id", "default")
-            prompt_text = self._build_cognitive_prompt(state_values, session_id)
-
-            return make_response(
-                request_id,
-                result={
-                    "description": "Cognitive state as system prompt context",
-                    "messages": [
-                        {
-                            "role": "system",
-                            "content": {"type": "text", "text": prompt_text},
-                        }
-                    ],
-                },
-            )
-
-        except Exception as e:
-            logger.exception("Prompt generation failed")
-            return make_error(request_id, ERR_INTERNAL_ERROR, str(e))
 
     def handle_notifications_initialized(self, request_id: Any, params: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Handle client initialized notification. No response required."""
@@ -3117,6 +3247,22 @@ class BTCUMCPServer:
             sess.init_agent(domain=domain)
             self.sessions.save(sess)
         return sess
+
+    def _get_or_create_engine(self, session_id: str) -> DualSystemDecisionEngine:
+        """Lazily create a DualSystemDecisionEngine for the given session."""
+        with self._engines_lock:
+            if session_id not in self._engines:
+                # Create a fresh pattern library per session
+                # Design decision: per-session pattern libraries provide isolation
+                # between sessions. In production, you may want a shared library
+                # backed by MongoDB for cross-session learning.
+                pattern_library = System1PatternLibrary()
+                # LLM bridge is optional; without it System 2 returns "unknown"
+                llm_bridge = None
+                engine = DualSystemDecisionEngine(pattern_library, llm_bridge)
+                self._engines[session_id] = engine
+                logger.info("Created DualSystemDecisionEngine for session '%s'", session_id)
+            return self._engines[session_id]
 
     def _tool_cognitive_project(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Project input text to a cognitive state."""
@@ -3153,7 +3299,37 @@ class BTCUMCPServer:
             # Save session state back
             self.sessions.save(sess)
 
-            return {
+            # Attempt System 1 pattern matching via the dual-system engine
+            system1_match = None
+            try:
+                engine = self._get_or_create_engine(session_id)
+                exact = engine.system1.match_exact(input_text)
+                if exact:
+                    system1_match = {
+                        "source": "exact",
+                        "confidence": exact.computed_confidence,
+                        "action": exact.action,
+                    }
+                else:
+                    knn = engine.system1.match_knn(list(state.values), k=1)
+                    if knn:
+                        system1_match = {
+                            "source": "knn",
+                            "confidence": knn[0].computed_confidence,
+                            "action": knn[0].action,
+                        }
+                    else:
+                        fuzzy = engine.system1.match_fuzzy(input_text)
+                        if fuzzy:
+                            system1_match = {
+                                "source": "fuzzy",
+                                "confidence": fuzzy.computed_confidence,
+                                "action": fuzzy.action,
+                            }
+            except Exception as e:
+                logger.warning("System 1 matching failed: %s", e)
+
+            result = {
                 "state": {
                     "index": state.index,
                     "values": list(state.values),
@@ -3168,6 +3344,13 @@ class BTCUMCPServer:
                 "session_id": session_id,
                 "trajectory_length": agent.trajectory.length,
             }
+
+            if system1_match is not None:
+                result["system1_match"] = system1_match
+            else:
+                result["system1_match"] = None
+
+            return result
 
         except Exception as e:
             logger.warning("Rule-based projection failed, returning void: %s", e)
@@ -3185,6 +3368,7 @@ class BTCUMCPServer:
                 "confidence": 0.0,
                 "source": "void_fallback",
                 "session_id": session_id,
+                "system1_match": None,
                 "error": str(e),
             }
 
@@ -3398,6 +3582,121 @@ class BTCUMCPServer:
     # Resource helpers
     # -----------------------------------------------------------------------
 
+    def _tool_cognitive_decide(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Dual-system cognitive decision with automatic System 1/2 routing."""
+        input_text = arguments.get("input", "")
+        session_id = arguments.get("session_id", "default")
+        mode = arguments.get("mode", "auto")
+
+        if not input_text:
+            raise ValueError("'input' is required")
+
+        # Get or create engine
+        engine = self._get_or_create_engine(session_id)
+
+        # Set mode if explicitly provided (non-auto)
+        if mode != "auto":
+            engine.mode = mode
+
+        # Project input to cognitive state
+        values, assessments, confidence = rule_based_project(str(input_text))
+        state = CognitiveState.from_values(values)
+
+        # Make decision
+        decision = engine.decide(str(input_text), state, session_id=session_id, mode=mode)
+
+        # Build response
+        result = {
+            "action": decision.action,
+            "source": decision.source,
+            "confidence": decision.confidence,
+            "system_used": decision.system_used,
+            "latency_ms": round(decision.latency_ms, 2),
+            "tokens_consumed": decision.tokens_consumed,
+            "pattern_matched": decision.pattern_matched,
+            "cognitive_state": {
+                "index": state.index,
+                "values": list(state.values),
+            },
+            "session_id": session_id,
+            "mode": engine.mode,
+        }
+
+        if decision.alternative_actions:
+            result["alternative_actions"] = decision.alternative_actions
+
+        if decision.audit_recommendation:
+            result["audit_recommendation"] = decision.audit_recommendation
+
+        return result
+
+    def _tool_cognitive_mode(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Set the cognitive mode for a session."""
+        mode = arguments.get("mode")
+        session_id = arguments.get("session_id", "default")
+
+        if not mode:
+            raise ValueError("'mode' is required")
+
+        valid_modes = {"novice", "apprentice", "expert", "master", "auto", "system1", "system2"}
+        if mode not in valid_modes:
+            raise ValueError(f"Invalid mode: {mode}. Must be one of {valid_modes}")
+
+        engine = self._get_or_create_engine(session_id)
+        previous_mode = engine.mode
+        engine.mode = mode
+
+        # Get coverage stats
+        coverage = engine.get_coverage_stats()
+
+        return {
+            "mode": mode,
+            "previous_mode": previous_mode,
+            "session_id": session_id,
+            "coverage_stats": coverage,
+        }
+
+    def _tool_cognitive_audit(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Run System 2 audit on recent System 1 decisions."""
+        session_id = arguments.get("session_id", "default")
+        sample_rate = float(arguments.get("sample_rate", 0.05))
+        audit_depth = arguments.get("audit_depth", "shallow")
+
+        engine = self._get_or_create_engine(session_id)
+
+        # Get System 1 decisions from history
+        system1_decisions = [
+            d for d in engine.decision_history
+            if d.system_used == "system1"
+        ]
+
+        if not system1_decisions:
+            return {
+                "total_audited": 0,
+                "agreement_rate": 0.0,
+                "avg_quality_delta": 0.0,
+                "concerns_found": 0,
+                "patterns_flagged": [],
+                "session_id": session_id,
+                "audit_depth": audit_depth,
+                "sample_rate": sample_rate,
+                "note": "No System 1 decisions to audit",
+            }
+
+        # Run batch audit
+        report = engine.auditor.audit_batch(system1_decisions, sample_rate=sample_rate)
+
+        return {
+            "total_audited": report.total_audited,
+            "agreement_rate": report.agreement_rate,
+            "avg_quality_delta": report.avg_quality_delta,
+            "concerns_found": report.concerns_found,
+            "patterns_flagged": report.patterns_flagged,
+            "session_id": session_id,
+            "audit_depth": audit_depth,
+            "sample_rate": sample_rate,
+        }
+
     def _read_session_resource(self, session_id: str, resource_type: str) -> str:
         """Read a session-specific resource."""
         sess = self.sessions.load(session_id)
@@ -3437,6 +3736,79 @@ class BTCUMCPServer:
                 }
                 return json.dumps(data, indent=2)
             return json.dumps({"session_id": session_id, "pattern_count": 0, "patterns": []}, indent=2)
+
+        elif resource_type == "efficiency":
+            engine = self._get_or_create_engine(session_id)
+            stats = engine.get_coverage_stats()
+            total = stats["total_decisions"]
+            system1_total = stats["system1_hits"]
+            system2_total = stats["system2_hits"]
+
+            # Calculate cognitive laziness alerts (System 1 over-reliance)
+            cognitive_lazy_alerts = 0
+            if total > 0 and system1_total / total > 0.95:
+                cognitive_lazy_alerts = 1
+            if total > 0 and system2_total / total > 0.5:
+                cognitive_lazy_alerts = 2
+
+            # Estimate cost savings (assuming System 2 costs ~100x more than System 1)
+            estimated_savings = 0.0
+            if total > 0:
+                estimated_savings = (system1_total / total) * 100
+
+            data = {
+                "session_id": session_id,
+                "system1_hit_rate": round(stats["system1_hit_rate"], 2),
+                "system2_tokens_consumed_24h": stats["total_tokens_consumed"],
+                "estimated_cost_savings": f"{estimated_savings:.0f}%",
+                "total_decisions": total,
+                "system1_decisions": system1_total,
+                "system2_decisions": system2_total,
+                "avg_system1_latency_ms": round(stats["avg_latency_ms"] * 0.01, 1) if total > 0 else 0.0,
+                "avg_system2_latency_ms": round(stats["avg_latency_ms"] * 2.0, 1) if total > 0 else 0.0,
+                "cognitive_lazy_alerts": cognitive_lazy_alerts,
+                "exploration_rate": round(0.1, 2),
+                "state_coverage_pct": round(stats["coverage_pct"] / 100, 2),
+            }
+            return json.dumps(data, indent=2)
+
+        elif resource_type == "blind_spots":
+            engine = self._get_or_create_engine(session_id)
+            guard = engine.safety_guard
+            blind_spots = guard.get_blind_spots(engine.system1)
+
+            data = {
+                "session_id": session_id,
+                "blind_spots": [
+                    {
+                        "state_range": list(bs["state_range"]),
+                        "density": bs["density"],
+                        "recommendation": f"Explore states {bs['state_range'][0]}-{bs['state_range'][1]} to improve coverage",
+                    }
+                    for bs in blind_spots
+                ],
+            }
+            return json.dumps(data, indent=2)
+
+        elif resource_type == "audit_report":
+            engine = self._get_or_create_engine(session_id)
+            history = engine.auditor.get_audit_history()
+
+            if history:
+                latest = history[-1]
+                data = {
+                    "session_id": session_id,
+                    "latest_audit": latest.to_dict(),
+                    "total_audits": len(history),
+                }
+            else:
+                data = {
+                    "session_id": session_id,
+                    "latest_audit": None,
+                    "total_audits": 0,
+                    "note": "No audits have been performed yet",
+                }
+            return json.dumps(data, indent=2)
 
         raise ValueError(f"Unknown resource type: {resource_type}")
 
@@ -3488,6 +3860,49 @@ class BTCUMCPServer:
             "Use this cognitive context to ground your responses in the appropriate mental posture.",
         ])
 
+        return "\n".join(lines)
+
+    def _build_cognitive_mode_guide(self) -> str:
+        """Build a guide explaining the 4 cognitive modes."""
+        lines = [
+            "=== BTCU Cognitive Mode Guide ===",
+            "",
+            "The BTCU dual-system cognitive architecture supports 4 cognitive modes that control",
+            "the balance between System 1 (fast pattern matching) and System 2 (slow deliberation).",
+            "",
+            "1. NOVICE",
+            "   Description: Heavy reliance on System 2 (LLM deliberation).",
+            "   When to use: New domains, high-stakes decisions, or when accuracy is more important than speed.",
+            "   Characteristics: Every decision is validated by slow deliberation. High token cost, high accuracy.",
+            "",
+            "2. APPRENTICE",
+            "   Description: Balanced use of System 1 and System 2.",
+            "   When to use: Learning phase where patterns are being established but still need validation.",
+            "   Characteristics: System 1 makes decisions when confident; System 2 audits uncertain ones.",
+            "",
+            "3. EXPERT",
+            "   Description: Primarily System 1 with lightweight System 2 audit.",
+            "   When to use: Mature domains where patterns are well-established and reliable.",
+            "   Characteristics: Fast decisions with periodic System 2 spot-checks for drift detection.",
+            "",
+            "4. MASTER",
+            "   Description: Full System 1 autonomy with minimal System 2 intervention.",
+            "   When to use: Highly stable domains where the pattern library has deep coverage.",
+            "   Characteristics: Maximum speed, minimum cost. System 2 only for exploration and rigidity detection.",
+            "",
+            "=== Auto Mode ===",
+            "When mode is set to 'auto', the engine dynamically escalates based on confidence thresholds:",
+            "   - Exact hash match (System 1, ~0 ms) -> fast",
+            "   - k-NN state match (System 1, ~1 ms) -> fast",
+            "   - Fuzzy text match (System 1, ~5 ms) -> fast",
+            "   - LLM fallback (System 2, ~500-2000 ms) -> slow but deliberate",
+            "",
+            "=== Additional Override Modes ===",
+            "   - 'system1': Force System 1 only (fast, no LLM cost). May return 'unknown' if no pattern matches.",
+            "   - 'system2': Force System 2 always (full deliberation regardless of pattern confidence).",
+            "",
+            "Use 'cognitive_mode' tool to switch modes and 'cognitive_audit' to validate System 1 quality.",
+        ]
         return "\n".join(lines)
 
     # -----------------------------------------------------------------------

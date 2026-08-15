@@ -1,18 +1,18 @@
 [build-system]
 requires = ["setuptools>=68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "btcu-harness"
-version = "0.2.0"
+version = "1.0.0"
 description = "Balanced Ternary Cognitive Unit Harness - Cognitive architecture for LLM Agents"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "BTCU Harness Contributors"}]
-keywords = ["ternary", "cognitive-architecture", "agent", "LLM", "balanced-ternary"]
+keywords = ["ternary", "cognitive-architecture", "agent", "LLM", "balanced-ternary", "cognition"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
@@ -30,8 +30,25 @@ dependencies = [
 [project.optional-dependencies]
 llm = ["openai>=1.0"]
 mongo = ["pymongo>=4.0"]
-dev = ["pytest>=7.0", "pytest-cov"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-benchmark>=4.0",
+]
+all = ["openai>=1.0", "pymongo>=4.0"]
+
+[project.scripts]
+btcu = "btcu_harness.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["btcu_harness*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+addopts = "-q"
+
+[tool.pytest-benchmark]
+min_rounds = 100
+min_time = 0.1

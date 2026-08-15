@@ -52,6 +52,9 @@ class Trit:
 
     __slots__ = ("_value",)
 
+    # Type annotation for slot (helps type checkers)
+    _value: int
+
     def __init__(self, value: TritValue) -> None:
         """
         Create a Trit from int, TritEnum, or another Trit.
@@ -144,14 +147,8 @@ class Trit:
         addition cannot push you out. Void is a stable attractor
         unless an external force (dimension change) acts.
         """
-        other = Trit(other)
-        if self._value == 0 or other._value == 0:
-            # Void is absorbing: 0 + x = x if x != 0, else 0
-            # But per axiom: 0 absorbs everything into 0
-            # Actually: 0 + 0 = 0, 0 + 1 = 1, 0 + -1 = -1
-            # Void is NOT absorbing in arithmetic, it's the identity
-            return Trit(self._value + other._value)
-        return Trit(self._value + other._value)
+        other_val: int = Trit(other)._value
+        return Trit(self._value + other_val)
 
     def __add__(self, other: TritValue) -> "Trit":
         return self.add(other)

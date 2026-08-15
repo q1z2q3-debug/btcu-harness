@@ -18,9 +18,12 @@ Cost model:
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any, Callable, Dict, Optional
 
 from ..config import settings
+
+logger = logging.getLogger("btcu_harness.llm")
 
 
 class LLMBridge:
@@ -85,33 +88,45 @@ class LLMBridge:
     def _api_call(self, prompt: str) -> str:
         """Make an actual API call to the LLM."""
         try:
-            import openai
+            import openai  # type: ignore[import-not-found]
         except ImportError:
             raise ImportError(
                 "openai package not installed. Install with: pip install openai"
             )
 
-        client = openai.OpenAI(
-            base_url=self.api_base,
-            api_key=self.api_key,
-        )
+        if not self.api_key:
+            raise ValueError(
+                "LLM API key not configured. Set BTCU_LLM_API_KEY env var "
+                "or pass api_key to LLMBridge."
+            )
 
-        response = client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a cognitive projection engine for the BTCU Harness. "
-                        "Always respond with valid JSON when asked to evaluate dimensions."
-                    ),
-                },
-                {"role": "user", "content": prompt},
-            ],
-            temperature=0.3,
-        )
+        try:
+            client = openai.OpenAI(
+                base_url=self.api_base,
+                api_key=self.api_key,
+            )
 
-        return response.choices[0].message.content or ""
+            response = client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are a cognitive projection engine for the BTCU Harness. "
+                            "Always respond with valid JSON when asked to evaluate dimensions."
+                        ),
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0.3,
+            )
+
+            result = response.choices[0].message.content or ""
+            logger.debug("LLM API call succeeded (model=%s, len=%d)", self.model, len(result))
+            return result
+        except Exception as e:
+            logger.error("LLM API call failed: %s", e)
+            raise
 
     def adapt_dimensions(self, project_description: str) -> str:
         """LLM call for dimension adaptation."""

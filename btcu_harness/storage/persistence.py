@@ -12,12 +12,15 @@ Future: MongoDB adapter for production use.
 from __future__ import annotations
 
 import json
+import logging
 import os
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
 
 from ..core.space import CognitiveSpace
 from ..memory.ecology import MemoryEcology
+
+logger = logging.getLogger("btcu_harness.storage")
 from ..memory.trajectory import CognitiveTrajectory
 from ..mapping.pattern_learner import PatternLearner
 
@@ -70,12 +73,16 @@ class PersistenceLayer:
         return self.storage_path
 
     def load(self) -> Optional[Dict[str, Any]]:
-        """Load cognitive state from disk. Returns None if file doesn't exist."""
+        """Load cognitive state from disk. Returns None if file doesn't exist or is corrupt."""
         if not os.path.exists(self.storage_path):
             return None
 
-        with open(self.storage_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(self.storage_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError) as e:
+            logger.warning("Failed to load cognitive state from %s: %s", self.storage_path, e)
+            return None
 
     def restore_ecology(self, data: Dict[str, Any]) -> MemoryEcology:
         eco = MemoryEcology()

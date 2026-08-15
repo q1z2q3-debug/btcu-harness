@@ -55,8 +55,12 @@ class DecisionPath:
 
     def summary(self) -> str:
         """Human-readable path summary."""
+        src = self.source
+        tgt = self.target
+        src_idx = src.index if src is not None else -1
+        tgt_idx = tgt.index if tgt is not None else -1
         lines = [
-            f"Decision Path: #{self.source.index} -> #{self.target.index}",
+            f"Decision Path: #{src_idx} -> #{tgt_idx}",
             f"  Length: {self.estimated_length} steps",
             f"  Through void: {self.through_void}",
         ]
@@ -135,11 +139,14 @@ class DecisionPathfinder:
 
     def _annotate_with_memory(self, path: DecisionPath) -> None:
         """Add memory-based warnings and guidance to the path."""
+        if self.ecology is None:
+            return
+        ecology = self.ecology
         for i, state in enumerate(path.states):
             idx = state.index
 
             # Check if this state has memory
-            mem = self.ecology.state_store.get_or_none(idx)
+            mem = ecology.state_store.get_or_none(idx)
             if mem is None or mem.is_empty:
                 continue
 
@@ -158,7 +165,7 @@ class DecisionPathfinder:
                 )
 
             # Check outgoing transitions for virtues/traps
-            outgoing = self.ecology.transition_store.pathways_from(idx)
+            outgoing = ecology.transition_store.pathways_from(idx)
             for tm in outgoing:
                 if i < len(path.states) - 1 and tm.to_index == path.states[i + 1].index:
                     if tm.is_trap:

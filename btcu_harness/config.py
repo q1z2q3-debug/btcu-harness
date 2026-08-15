@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     mongo_db: str = "btcu_harness"
 
     # LLM
+    llm_provider: str = "openai"  # openai / anthropic / gemini
     llm_api_base: str = "https://api.openai.com/v1"
     llm_api_key: str = ""
     llm_model: str = "gpt-4o-mini"

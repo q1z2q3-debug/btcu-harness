@@ -1,0 +1,67 @@
+site_name: BTCU Harness
+site_description: Balanced Ternary Cognitive Unit Harness - A cognitive architecture for LLM-based agents
+site_url: https://github.com/q1z2q3-debug/btcu-harness
+repo_url: https://github.com/q1z2q3-debug/btcu-harness
+repo_name: btcu-harness
+edit_uri: edit/master/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+            show_root_heading: true
+            heading_level: 2
+            docstring_style: google
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Architecture:
+    - Overview: architecture.md
+    - Philosophy: philosophy.md
+    - Cognitive Layers: cognition_layers.md
+  - API Reference:
+    - Core: api/core.md
+    - Memory: api/memory.md
+    - Decision: api/decision.md
+    - Mapping: api/mapping.md
+    - LLM: api/llm.md
+    - Storage: api/storage.md
+  - REST API: rest_api.md
+  - Paper: paper.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
+  - footnotes

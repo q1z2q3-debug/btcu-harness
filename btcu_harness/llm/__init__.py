@@ -1,5 +1,11 @@
-"""LLM bridge layer."""
+"""LLM bridge layer with multi-provider support."""
 
-from .bridge import LLMBridge
+from .bridge import LLMBridge, LLMProvider, OpenAIProvider, AnthropicProvider, GeminiProvider
 
-__all__ = ["LLMBridge"]
+__all__ = [
+    "LLMBridge",
+    "LLMProvider",
+    "OpenAIProvider",
+    "AnthropicProvider",
+    "GeminiProvider",
+]

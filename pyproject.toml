@@ -1,26 +1,33 @@
 [build-system]
-requires = ["setuptools>=68.0"]
+requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "btcu-harness"
-version = "1.0.0"
-description = "Balanced Ternary Cognitive Unit Harness - Cognitive architecture for LLM Agents"
+version = "1.1.0"
+description = "Balanced Ternary Cognitive Unit Harness - A cognitive architecture for LLM-based agents"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "BTCU Harness Contributors"}]
-keywords = ["ternary", "cognitive-architecture", "agent", "LLM", "balanced-ternary", "cognition"]
+keywords = [
+    "ternary", "cognitive-architecture", "agent", "LLM",
+    "balanced-ternary", "cognition", "ai", "memory-ecology",
+    "third-choice", "emergent-semantics",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 dependencies = [
     "pydantic>=2.0",
@@ -28,14 +35,36 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-llm = ["openai>=1.0"]
+openai = ["openai>=1.0"]
+anthropic = ["anthropic>=0.20"]
+gemini = ["google-genai>=0.5"]
+llm = ["openai>=1.0", "anthropic>=0.20", "google-genai>=0.5"]
 mongo = ["pymongo>=4.0"]
+api = ["fastapi>=0.100", "uvicorn[standard]>=0.20"]
+docs = [
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.0",
+    "mkdocstrings[python]>=0.24",
+]
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
     "pytest-benchmark>=4.0",
+    "httpx>=0.24",
 ]
-all = ["openai>=1.0", "pymongo>=4.0"]
+all = [
+    "openai>=1.0", "anthropic>=0.20", "google-genai>=0.5",
+    "pymongo>=4.0",
+    "fastapi>=0.100", "uvicorn[standard]>=0.20",
+    "mkdocs>=1.5", "mkdocs-material>=9.0", "mkdocstrings[python]>=0.24",
+]
+
+[project.urls]
+Homepage = "https://github.com/q1z2q3-debug/btcu-harness"
+Repository = "https://github.com/q1z2q3-debug/btcu-harness"
+Documentation = "https://github.com/q1z2q3-debug/btcu-harness#readme"
+Issues = "https://github.com/q1z2q3-debug/btcu-harness/issues"
+Changelog = "https://github.com/q1z2q3-debug/btcu-harness/releases"
 
 [project.scripts]
 btcu = "btcu_harness.cli:main"

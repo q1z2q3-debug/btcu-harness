@@ -197,103 +197,35 @@ class BTCUAgent:
         if self.projector is None:
             raise RuntimeError("Agent not initialized. Call init_project() first.")
 
-        # 1. Pattern match first (for internalize/graduate stages)
-        pattern_matched = False
-        pattern_confidence = 0.0
-        projection = None
-
-        if self.growth_stage != "school" and self.dimension_set is not None:
-            match = self.pattern_learner.match(input_text)
-            if match:
-                pattern, sim = match
-                state = CognitiveState.from_values(pattern.state_values)
-                projection = ProjectionResult(
-                    state=state,
-                    dimension_assessments={l: "pattern_match" for l in self.dimension_set.labels},
-                    confidence=sim,
-                    source="pattern",
-                )
-                pattern_matched = True
-                pattern_confidence = sim
-
-        # 2. If no pattern match, use LLM projection
-        if projection is None:
-            llm_cb = self.llm_bridge if self.llm_bridge else None
-            projection = self.projector.project(input_text, llm_cb)
-
+        # 1-2. Pattern match or LLM projection
+        projection, pattern_matched, pattern_confidence = self._resolve_projection(input_text)
         current_state = projection.state
 
         # 3. Recall memory
         memory_recall = self.ecology.recall(current_state)
-        suggestions = memory_recall.get("suggestions", [])
+        suggestions: List[str] = list(memory_recall.get("suggestions", []))
 
         # 4. Self alignment
-        self_alignment = self.self_layer.alignment_score(current_state)
-        if self_alignment < 0.3:
-            suggestions.append(
-                f"Low self-alignment ({self_alignment:.0%}). "
-                f"This state is far from the agent's personality center."
-            )
+        self_alignment = self._evaluate_self_alignment(current_state, suggestions)
 
-        # 5. Decision path (if target specified)
-        decision = None
-        if target_state and self.pathfinder:
-            prefer_void = current_state.distance(target_state) >= 10
-            decision = self.pathfinder.find_path(
-                current_state, target_state, prefer_void=prefer_void
-            )
+        # 5. Decision path
+        decision = self._find_decision_path(current_state, target_state)
 
-        # 6. Third choice candidates (if conflict specified)
-        third_candidates = []
-        if conflict_state:
-            third_candidates = self.third_choice_gen.generate_all(
-                current_state, conflict_state
-            )
-            if third_candidates:
-                best = third_candidates[0]
-                suggestions.append(
-                    f"Third choice: [{best.strategy}] State #{best.state.index} "
-                    f"(score: {best.total_score:.2f}, "
-                    f"void: {best.void_ratio:.0%})"
-                )
+        # 6. Third choice candidates
+        third_candidates = self._generate_third_choices(current_state, conflict_state, suggestions)
 
         # 7. LLM advice
-        llm_advice = None
-        if self.growth_stage == "school" and self.llm_bridge:
-            memory_context = self._format_memory_context(memory_recall)
-            llm_advice = self.llm_bridge.advise(input_text, context=memory_context)
-        elif self.growth_stage == "graduate" and self.llm_bridge:
-            state_mem = memory_recall.get("state")
-            if state_mem and state_mem.is_empty and not pattern_matched:
-                llm_advice = self.llm_bridge.advise(input_text)
+        llm_advice = self._get_llm_advice(input_text, memory_recall, pattern_matched)
 
-        # 8. Learn pattern (store LLM projections for future matching)
+        # 8. Learn pattern
         if not pattern_matched and projection.source == "llm":
             self.pattern_learner.learn(
                 input_text, current_state,
-                source="llm", confidence=projection.confidence
+                source="llm", confidence=projection.confidence,
             )
 
-        # 9. Record in trajectory
-        self.trajectory.record(
-            state=current_state,
-            context=input_text[:100],
-            trigger="process",
-            metadata={"source": projection.source, "pattern_matched": pattern_matched},
-        )
-
-        # 10. Record in memory ecology
-        event = CognitiveEvent(
-            state=current_state,
-            prev_state=self._prev_state,
-            context={"input": input_text, "source": projection.source},
-            metadata={"projection_confidence": projection.confidence},
-        )
-        self.ecology.remember(event)
-        self._prev_state = current_state
-
-        # 11. Climate snapshot
-        self.climate.snapshot(current_state)
+        # 9-11. Record cognition
+        self._record_cognition(input_text, current_state, projection, pattern_matched)
 
         return AgentResponse(
             input_text=input_text,
@@ -310,6 +242,117 @@ class BTCUAgent:
             pattern_matched=pattern_matched,
             pattern_confidence=pattern_confidence,
         )
+
+    def _resolve_projection(
+        self, input_text: str,
+    ) -> tuple[ProjectionResult, bool, float]:
+        """Try pattern match first, fall back to LLM projection."""
+        pattern_matched = False
+        pattern_confidence = 0.0
+        projection: Optional[ProjectionResult] = None
+
+        if self.growth_stage != "school" and self.dimension_set is not None:
+            match = self.pattern_learner.match(input_text)
+            if match:
+                pattern, sim = match
+                state = CognitiveState.from_values(pattern.state_values)
+                projection = ProjectionResult(
+                    state=state,
+                    dimension_assessments={l: "pattern_match" for l in self.dimension_set.labels},
+                    confidence=sim,
+                    source="pattern",
+                )
+                pattern_matched = True
+                pattern_confidence = sim
+
+        if projection is None:
+            assert self.projector is not None  # checked in process()
+            llm_cb = self.llm_bridge if self.llm_bridge else None
+            projection = self.projector.project(input_text, llm_cb)
+
+        return projection, pattern_matched, pattern_confidence
+
+    def _evaluate_self_alignment(
+        self, current_state: CognitiveState, suggestions: List[str],
+    ) -> float:
+        """Evaluate alignment with self layer, append warning if low."""
+        self_alignment = self.self_layer.alignment_score(current_state)
+        if self_alignment < 0.3:
+            suggestions.append(
+                f"Low self-alignment ({self_alignment:.0%}). "
+                f"This state is far from the agent's personality center."
+            )
+        return self_alignment
+
+    def _find_decision_path(
+        self, current_state: CognitiveState, target_state: Optional[CognitiveState],
+    ) -> Optional[DecisionPath]:
+        """Find decision path if a target state is specified."""
+        if target_state and self.pathfinder:
+            prefer_void = current_state.distance(target_state) >= 10
+            return self.pathfinder.find_path(
+                current_state, target_state, prefer_void=prefer_void,
+            )
+        return None
+
+    def _generate_third_choices(
+        self,
+        current_state: CognitiveState,
+        conflict_state: Optional[CognitiveState],
+        suggestions: List[str],
+    ) -> List[ThirdChoiceCandidate]:
+        """Generate third-choice candidates if a conflict state is given."""
+        if not conflict_state:
+            return []
+        candidates = self.third_choice_gen.generate_all(current_state, conflict_state)
+        if candidates:
+            best = candidates[0]
+            suggestions.append(
+                f"Third choice: [{best.strategy}] State #{best.state.index} "
+                f"(score: {best.total_score:.2f}, "
+                f"void: {best.void_ratio:.0%})"
+            )
+        return candidates
+
+    def _get_llm_advice(
+        self,
+        input_text: str,
+        memory_recall: Dict[str, Any],
+        pattern_matched: bool,
+    ) -> Optional[str]:
+        """Get LLM advice based on growth stage and memory state."""
+        if self.growth_stage == "school" and self.llm_bridge:
+            memory_context = self._format_memory_context(memory_recall)
+            return self.llm_bridge.advise(input_text, context=memory_context)
+        if self.growth_stage == "graduate" and self.llm_bridge:
+            state_mem = memory_recall.get("state")
+            if state_mem and state_mem.is_empty and not pattern_matched:
+                return self.llm_bridge.advise(input_text)
+        return None
+
+    def _record_cognition(
+        self,
+        input_text: str,
+        current_state: CognitiveState,
+        projection: ProjectionResult,
+        pattern_matched: bool,
+    ) -> None:
+        """Record state in trajectory, memory ecology, and climate."""
+        self.trajectory.record(
+            state=current_state,
+            context=input_text[:100],
+            trigger="process",
+            metadata={"source": projection.source, "pattern_matched": pattern_matched},
+        )
+        event = CognitiveEvent(
+            state=current_state,
+            prev_state=self._prev_state,
+            context={"input": input_text, "source": projection.source},
+            metadata={"projection_confidence": projection.confidence},
+        )
+        self.ecology.remember(event)
+        self._prev_state = current_state
+        self.climate.snapshot(current_state)
 
     def record_outcome(
         self,

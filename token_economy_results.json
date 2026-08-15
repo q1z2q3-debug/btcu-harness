@@ -1,0 +1,240 @@
+{
+  "total_steps": 1000,
+  "final": {
+    "llm_calls": 400,
+    "patterns": 200,
+    "reuse_rate": 0.8,
+    "unique_states": 200
+  },
+  "snapshots": [
+    {
+      "step": 50,
+      "stage": "school",
+      "llm_calls": 100,
+      "pattern_count": 50,
+      "total_lookups": 50,
+      "total_reuses": 0,
+      "reuse_rate": 0.0,
+      "unique_states": 50,
+      "llm_calls_this_batch": 100
+    },
+    {
+      "step": 100,
+      "stage": "school",
+      "llm_calls": 200,
+      "pattern_count": 100,
+      "total_lookups": 100,
+      "total_reuses": 0,
+      "reuse_rate": 0.0,
+      "unique_states": 100,
+      "llm_calls_this_batch": 100
+    },
+    {
+      "step": 150,
+      "stage": "school",
+      "llm_calls": 300,
+      "pattern_count": 150,
+      "total_lookups": 150,
+      "total_reuses": 0,
+      "reuse_rate": 0.0,
+      "unique_states": 150,
+      "llm_calls_this_batch": 100
+    },
+    {
+      "step": 200,
+      "stage": "school",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 0,
+      "reuse_rate": 0.0,
+      "unique_states": 200,
+      "llm_calls_this_batch": 100
+    },
+    {
+      "step": 250,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 50,
+      "reuse_rate": 0.2,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 300,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 100,
+      "reuse_rate": 0.3333333333333333,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 350,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 150,
+      "reuse_rate": 0.42857142857142855,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 400,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 200,
+      "reuse_rate": 0.5,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 450,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 250,
+      "reuse_rate": 0.5555555555555556,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 500,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 300,
+      "reuse_rate": 0.6,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 550,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 350,
+      "reuse_rate": 0.6363636363636364,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 600,
+      "stage": "internalize",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 400,
+      "reuse_rate": 0.6666666666666666,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 650,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 450,
+      "reuse_rate": 0.6923076923076923,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 700,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 500,
+      "reuse_rate": 0.7142857142857143,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 750,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 550,
+      "reuse_rate": 0.7333333333333333,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 800,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 600,
+      "reuse_rate": 0.75,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 850,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 650,
+      "reuse_rate": 0.7647058823529411,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 900,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 700,
+      "reuse_rate": 0.7777777777777778,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 950,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 750,
+      "reuse_rate": 0.7894736842105263,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    },
+    {
+      "step": 1000,
+      "stage": "graduate",
+      "llm_calls": 400,
+      "pattern_count": 200,
+      "total_lookups": 200,
+      "total_reuses": 800,
+      "reuse_rate": 0.8,
+      "unique_states": 200,
+      "llm_calls_this_batch": 0
+    }
+  ],
+  "metadata": {
+    "total_steps": 1000,
+    "snapshot_interval": 50,
+    "stage_splits": {
+      "school": 0.2,
+      "internalize": 0.4,
+      "graduate": 0.4
+    }
+  }
+}

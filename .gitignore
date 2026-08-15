@@ -11,3 +11,5 @@ site/
 
 benchmark_results.json
 benchmark_report.md
+token_economy_results.json
+token_economy_report.md

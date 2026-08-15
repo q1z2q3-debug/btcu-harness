@@ -7,7 +7,8 @@ Evaluates BTCU against baseline approaches across multiple dimensions:
 - Path quality (navigation through cognitive space)
 """
 
-from .runner import BenchmarkRunner
 from .report import BenchmarkReport
+from .runner import BenchmarkRunner
+from .token_economy import SimulationResult, TokenEconomySimulator
 
-__all__ = ["BenchmarkRunner", "BenchmarkReport"]
+__all__ = ["BenchmarkRunner", "BenchmarkReport", "SimulationResult", "TokenEconomySimulator"]

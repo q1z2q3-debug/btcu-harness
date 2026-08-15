@@ -46,6 +46,7 @@ nav:
     - Philosophy: philosophy.md
     - Cognitive Layers: cognition_layers.md
   - Benchmark: benchmark.md
+  - Token Economy: token_economy.md
   - API Reference:
     - Core: api/core.md
     - Memory: api/memory.md

@@ -45,6 +45,7 @@ nav:
     - Overview: architecture.md
     - Philosophy: philosophy.md
     - Cognitive Layers: cognition_layers.md
+  - Benchmark: benchmark.md
   - API Reference:
     - Core: api/core.md
     - Memory: api/memory.md

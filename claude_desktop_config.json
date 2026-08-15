@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "btcu-harness": {
+      "command": "python",
+      "args": ["-m", "btcu_harness.mcp.server"],
+      "env": {
+        "BTCU_MONGO_URI": "mongodb://localhost:27017",
+        "BTCU_MONGO_DB": "btcu_harness"
+      }
+    }
+  }
+}

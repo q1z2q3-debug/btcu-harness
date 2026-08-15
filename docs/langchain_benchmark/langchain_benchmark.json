@@ -1,0 +1,255 @@
+{
+  "summary": {
+    "btcu": {
+      "agent_type": "btcu",
+      "total_scenarios": 10,
+      "successful_scenarios": 10,
+      "total_cognitive_states": 10,
+      "unique_cognitive_states": 5,
+      "total_tool_observations": 11,
+      "scenarios_with_context": 10,
+      "avg_processing_time_ms": 0.25,
+      "state_coverage_pct": 0.0254,
+      "trajectory_length": 10,
+      "consistency_score": 0.9738
+    },
+    "standard": {
+      "agent_type": "standard",
+      "total_scenarios": 10,
+      "successful_scenarios": 10,
+      "total_cognitive_states": 0,
+      "unique_cognitive_states": 0,
+      "total_tool_observations": 0,
+      "scenarios_with_context": 0,
+      "avg_processing_time_ms": 1.06,
+      "state_coverage_pct": 0,
+      "trajectory_length": 0,
+      "consistency_score": 0.0
+    }
+  },
+  "btcu_advantages": [
+    "BTCU visited 5 unique cognitive states out of 19,683 possible (0.0254% coverage); standard agent has 0 state tracking capability.",
+    "BTCU recorded 11 tool-choice observations with full cognitive context; standard agent records 0.",
+    "BTCU injected structured cognitive context into 10/10 scenarios; standard agent injects 0.",
+    "BTCU decision consistency score: 0.9738 (measures whether similar inputs produce similar cognitive states); standard agent: N/A (no tracking).",
+    "BTCU maintained a cognitive trajectory of 10 steps; standard agent: 0.",
+    "BTCU provides 5 capabilities that are structurally impossible for standard LangChain agents: state tracking, tool-choice memory, context injection, consistency measurement, and trajectory recording."
+  ],
+  "scenario_details": [
+    {
+      "btcu": {
+        "scenario_id": "math_01",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          9868
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 9868,
+            "polarity": 1
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #9868\nPolarity: +1 (YIN=0, VOID=8, YANG=1)\nDisposition: Open/transformative — creative exploration recommended\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.344298779964447,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "math_02",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          11735
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 11735,
+            "polarity": 2
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #11735\nPolarity: +2 (YIN=2, VOID=3, YANG=4)\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.2958783879876137,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "math_03",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          11735
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 11735,
+            "polarity": 2
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #11735\nPolarity: +2 (YIN=2, VOID=3, YANG=4)\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.20307302474975586,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "search_01",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          17162
+        ],
+        "tool_choices": [
+          {
+            "tool": "search",
+            "cognitive_state": 17162,
+            "polarity": 5
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #17162\nPolarity: +5 (YIN=0, VOID=4, YANG=5)\nDisposition: High activation — action-oriented approach recommended\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.21297112107276917,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "search_02",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          17162
+        ],
+        "tool_choices": [
+          {
+            "tool": "search",
+            "cognitive_state": 17162,
+            "polarity": 5
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #17162\nPolarity: +5 (YIN=0, VOID=4, YANG=5)\nDisposition: High activation — action-oriented approach recommended\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.2582669258117676,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "multi_01",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          11735
+        ],
+        "tool_choices": [
+          {
+            "tool": "search",
+            "cognitive_state": 11735,
+            "polarity": 2
+          },
+          {
+            "tool": "calculator",
+            "cognitive_state": 11735,
+            "polarity": 2
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #11735\nPolarity: +2 (YIN=2, VOID=3, YANG=4)\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.20196009427309036,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "multi_02",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          11735
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 11735,
+            "polarity": 2
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #11735\nPolarity: +2 (YIN=2, VOID=3, YANG=4)\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.2241525799036026,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "creative_01",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          17399
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 17399,
+            "polarity": 4
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #17399\nPolarity: +4 (YIN=1, VOID=3, YANG=5)\nDisposition: High activation — action-oriented approach recommended\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.28094835579395294,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "analytical_01",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          15062
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 15062,
+            "polarity": 5
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #15062\nPolarity: +5 (YIN=1, VOID=2, YANG=6)\nDisposition: High activation — action-oriented approach recommended\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.23593567311763763,
+        "error": null
+      },
+      "standard": {}
+    },
+    {
+      "btcu": {
+        "scenario_id": "analytical_02",
+        "agent_type": "btcu",
+        "cognitive_states_visited": [
+          17399
+        ],
+        "tool_choices": [
+          {
+            "tool": "calculator",
+            "cognitive_state": 17399,
+            "polarity": 4
+          }
+        ],
+        "context_injected": true,
+        "context_snippet": "=== Cognitive Context ===\nState: #17399\nPolarity: +4 (YIN=1, VOID=3, YANG=5)\nDisposition: High activation — action-oriented approach recommended\n=== End Cognitive Context ===",
+        "processing_time_ms": 0.23812800645828247,
+        "error": null
+      },
+      "standard": {}
+    }
+  ]
+}

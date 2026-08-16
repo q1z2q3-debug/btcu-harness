@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "title": "BTCU: A Dual-System Cognitive Architecture with Emergent Soul Layer for AI Agents",
+    "upload_type": "publication",
+    "publication_type": "workingpaper",
+    "description": "We present BTCU (Balanced Ternary Cognitive Universe), a dual-system cognitive architecture for AI agents that bridges structured discrete state spaces with emergent behavioral personalities. Building upon the mathematical necessity of balanced ternary {-1, 0, +1} as the minimal integer state space for directed transitions (Ball, 2026), BTCU instantiates a 9-dimensional cognitive coordinate system yielding 19,683 distinct cognitive states. The architecture implements a Kahneman-inspired dual-process model: System 1 provides rapid pattern-matching cognition (< 5ms, 0 tokens) while System 2 performs deep reflective reasoning (200-500ms) via LLM integration. A novel 'soul layer' emerges from accumulated experience patterns, endowing agents with persistent behavioral styles, value orientations, and intrinsic wisdom drawn from classical philosophical traditions (Yin Fu Jing, Heart Sutra, Tao Te Ching). We validate the architecture through 322 automated tests achieving 100% pass rate, benchmark demonstrations showing 97% cognitive consistency scores, and a token economy simulation demonstrating 60% cost reduction through pattern reuse.",
+    "creators": [
+      {
+        "name": "BTCU Project",
+        "affiliation": "Independent Research",
+        "orcid": ""
+      }
+    ],
+    "keywords": [
+      "cognitive architecture",
+      "balanced ternary",
+      "dual-system cognition",
+      "emergent personality",
+      "AI soul layer",
+      "pattern matching",
+      "System 1/2",
+      "philosophical AI",
+      "cognitive computing",
+      "agent architecture"
+    ],
+    "license": "cc-by-4.0",
+    "access_right": "open",
+    "language": "eng",
+    "notes": "This paper is part of the BTCU (Balanced Ternary Cognitive Universe) project. The full implementation is available at https://github.com/q1z2q3-debug/btcu-harness and can be installed via pip: pip install btcu-harness. The mathematical foundation of this work builds upon Alan Ball's (2026) series on balanced ternary necessity and constants derivation (Zenodo DOIs: 10.5281/zenodo.18797375, 10.5281/zenodo.18806015, 10.5281/zenodo.18810282).",
+    "related_identifiers": [
+      {
+        "relation": "isSupplementedBy",
+        "identifier": "https://github.com/q1z2q3-debug/btcu-harness",
+        "resource_type": "software"
+      },
+      {
+        "relation": "isSupplementedBy",
+        "identifier": "https://pypi.org/project/btcu-harness/",
+        "resource_type": "other"
+      },
+      {
+        "relation": "references",
+        "identifier": "10.5281/zenodo.18810282",
+        "resource_type": "publication-article",
+        "scheme": "doi"
+      },
+      {
+        "relation": "references",
+        "identifier": "10.5281/zenodo.18806015",
+        "resource_type": "publication-article",
+        "scheme": "doi"
+      },
+      {
+        "relation": "references",
+        "identifier": "10.5281/zenodo.18797375",
+        "resource_type": "publication-article",
+        "scheme": "doi"
+      }
+    ],
+    "communities": [
+      {
+        "identifier": "ai"
+      },
+      {
+        "identifier": "cogsci"
+      }
+    ],
+    "grants": []
+  }
+}

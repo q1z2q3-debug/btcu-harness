@@ -1,0 +1,41 @@
+{
+  "state_memories": {
+    "16928": {
+      "state_index": 16928,
+      "visits": [
+        {
+          "timestamp": "2026-08-14T17:58:09.904861+00:00",
+          "context": {
+            "input": "BTCU Harness 应该往什么方向发展？",
+            "source": "llm"
+          },
+          "decision": "proceed_with_development",
+          "outcome": "architecture_validated",
+          "outcome_positive": true,
+          "metadata": {
+            "projection_confidence": 0.8
+          }
+        }
+      ],
+      "insights": [],
+      "resonance_links": {},
+      "activation": 0.3,
+      "last_visited": "2026-08-14T17:58:09.904861+00:00",
+      "first_visited": "2026-08-14T17:58:09.904861+00:00",
+      "suppressed_decisions": []
+    }
+  },
+  "transition_memories": {},
+  "trajectory": [
+    16928
+  ],
+  "resonance_discoveries": {},
+  "stats": {
+    "visited_states": 1,
+    "total_visits": 1,
+    "coverage": 5.080526342529086e-05,
+    "total_corridors": 0,
+    "virtues": 0,
+    "traps": 0
+  }
+}

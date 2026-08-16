@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "btcu-harness"
-version = "1.2.1"
+version = "1.1.0"
 description = "Balanced Ternary Cognitive Unit Harness - A cognitive architecture for LLM-based agents"
 readme = "README.md"
 requires-python = ">=3.10"

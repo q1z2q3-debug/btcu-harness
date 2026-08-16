@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "btcu-harness": {
+      "name": "BTCU Harness Cognitive Server",
+      "description": "Balanced Ternary Cognitive Unit - 9D state space projection, consistency analysis, and cognitive comparison",
+      "command": "python",
+      "args": ["-m", "btcu_harness.mcp.server"],
+      "env": {
+        "BTCU_MONGO_URI": "mongodb://localhost:27017",
+        "BTCU_MONGO_DB": "btcu_harness"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "cognitive_project",
+        "analyze_consistency",
+        "suggest_tools",
+        "cognitive_compare"
+      ]
+    }
+  }
+}

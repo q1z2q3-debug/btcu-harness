@@ -1,0 +1,29 @@
+# BTCU Harness - Docker Compose
+# One-command deployment: docker compose up
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - BTCU_LLM_PROVIDER=openai
+      - BTCU_LLM_API_KEY=${BTCU_LLM_API_KEY:-}
+      - BTCU_LLM_MODEL=${BTCU_LLM_MODEL:-gpt-4o-mini}
+    volumes:
+      - btcu-data:/app/data
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+    profiles:
+      - mongo
+
+volumes:
+  btcu-data:
+  mongo-data:

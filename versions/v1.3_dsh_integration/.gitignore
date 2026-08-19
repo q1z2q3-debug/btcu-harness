@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.env
+.coverage
+btcu_state.json
+dist/
+build/
+site/
+
+benchmark_results.json
+benchmark_report.md
+token_economy_results.json
+token_economy_report.md
+
+# local machine artifacts (added during 1.2.1 sync)
+.venv/
+.secrets/
+ace.log

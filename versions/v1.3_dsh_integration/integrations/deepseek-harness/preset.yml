@@ -1,0 +1,9 @@
+name: BTCU Cognitive Agent
+description: >-
+  完整编码 Agent 融合 BTCU v1.2.1 认知层（平衡三元，19683 状态空间 + 双系统
+  快慢思维）。6 个工具：状态解释/三元代数/空间导航/第三选择 + System 1 模式库
+  决策（btcu_decide，S2→S1 反馈学习）与毕业进度（btcu_patterns）。Fixed
+  overhead ~+1.1k tokens/request. Full coding agent fused with the BTCU v1.2.1
+  cognitive layer: 19683-state ternary space + Kahneman-style dual-system
+  (fast System 1 pattern library, deliberate System 2 = the model itself),
+  S2→S1 feedback learning, graduation meter.

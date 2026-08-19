@@ -1,4 +1,10 @@
-"""Storage layer."""
-from .persistence import PersistenceLayer
+"""
+BTCU Harness - Storage Layer
 
-__all__ = ["PersistenceLayer"]
+MongoDB is the primary store. An in-memory fallback keeps the harness
+fully operational when MongoDB is not available.
+"""
+
+from btcu_harness.storage.mongo_client import MongoStore
+
+__all__ = ["MongoStore"]

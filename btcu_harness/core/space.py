@@ -1,236 +1,211 @@
 """
-CognitiveSpace: The 19683-state cognitive space with topology operations.
+CognitiveSpace and Space19683.
 
-The space is a discrete, bounded, symmetric structure where:
-- Each state has a unique index [0, 19682]
-- States have distance, adjacency, and opposition relationships
-- The space is centered on the void state (index 9841)
-- All topology operations are O(1) or O(dimension) complexity
+CognitiveSpace operates on CognitiveState objects (object-oriented API).
+Space19683 operates on integer indices (legacy index-based API).
 
-The space itself carries NO semantics. Dimension labels are attached
-per-project and remain fixed for that project's lifetime. The 19683
-states are empty rooms waiting to be filled by emergent experience.
+Both represent the same 19683-state balanced ternary cognitive space.
 """
 
 from __future__ import annotations
 
-from typing import Dict, Iterator, List, Optional, Sequence, Tuple
+from typing import Dict, Iterator, List, Sequence
 
-from .state import CognitiveState, NUM_DIMENSIONS, SPACE_SIZE
-from .trit import Trit
+from btcu_harness.core.state import (
+    NUM_DIMENSIONS,
+    SPACE_SIZE,
+    CognitiveState,
+)
+from btcu_harness.core import encoding
+from btcu_harness.core import ternary
 
 
 class CognitiveSpace:
     """
-    The 19683-state cognitive space.
+    The nine-dimensional balanced ternary cognitive space.
 
-    This is a structural container - it defines the topology and relationships
-    between states but does NOT store any memory or semantics. Those belong
-    to the MemoryEcology layer.
-
-    A CognitiveSpace is bound to a set of dimension labels (the "九维" for
-    a specific project). Once created, the labels are fixed.
-
-    Attributes:
-        dim_labels: The 9 dimension names for this project (e.g.
-                    ["past", "present", "future", "inner", "middle",
-                     "outer", "cause", "condition", "effect"])
-        dim_descriptions: Optional per-dimension descriptions for each trit.
+    Every cognitive state is a CognitiveState. The space knows the
+    topology (adjacency, distance, shortest path) and the semantic
+    dimension labels (flexible per project).
     """
 
-    def __init__(
-        self,
-        dim_labels: Sequence[str],
-        dim_descriptions: Optional[Sequence[Dict[int, str]]] = None,
-    ) -> None:
-        """
-        Create a cognitive space with fixed dimension labels.
+    def __init__(self, dimension_labels: Sequence[str] | None = None) -> None:
+        if dimension_labels is None:
+            dimension_labels = [f"dim_{i}" for i in range(NUM_DIMENSIONS)]
 
-        Args:
-            dim_labels: Exactly 9 labels for the 9 dimensions.
-            dim_descriptions: Optional list of 9 dicts, each mapping
-                             {-1: desc, 0: desc, +1: desc} for that dimension.
-        """
-        if len(dim_labels) != NUM_DIMENSIONS:
+        self.dimension_labels: List[str] = list(dimension_labels)
+
+        if len(self.dimension_labels) != NUM_DIMENSIONS:
             raise ValueError(
-                f"Expected {NUM_DIMENSIONS} dimension labels, got {len(dim_labels)}"
+                f"CognitiveSpace requires exactly {NUM_DIMENSIONS} dimension "
+                f"labels, got {len(self.dimension_labels)}"
             )
-        self.dim_labels: Tuple[str, ...] = tuple(dim_labels)
-        self.dim_descriptions = dim_descriptions
-
-    # --- State access ---
-
-    @staticmethod
-    def state(index: int) -> CognitiveState:
-        """Get state by index [0, 19682]."""
-        return CognitiveState.from_index(index)
-
-    @staticmethod
-    def from_values(values: Sequence[int]) -> CognitiveState:
-        """Create state from raw trit values."""
-        return CognitiveState.from_values(values)
-
-    @staticmethod
-    def all_states() -> Iterator[CognitiveState]:
-        """Iterate over all 19683 states in index order."""
-        for i in range(SPACE_SIZE):
-            yield CognitiveState.from_index(i)
-
-    # --- Topology ---
-
-    @staticmethod
-    def distance(a: CognitiveState, b: CognitiveState) -> int:
-        """Cognitive distance between two states [0, 18]."""
-        return a.distance(b)
-
-    @staticmethod
-    def opposite(state: CognitiveState) -> CognitiveState:
-        """The mirror state (all dimensions flipped)."""
-        return state.opposite()
-
-    @staticmethod
-    def neighbors(state: CognitiveState) -> List[CognitiveState]:
-        """All states one micro-step away (max 18)."""
-        return state.neighbors()
-
-    @staticmethod
-    def states_within(
-        state: CognitiveState, max_distance: int
-    ) -> List[CognitiveState]:
-        """
-        All states within a given cognitive distance.
-
-        Caution: grows rapidly with distance.
-        d=0: 1 state, d=1: ~18, d=2: ~171, d=3: ~966
-        """
-        result = []
-        for s in CognitiveSpace.all_states():
-            if s.distance(state) <= max_distance:
-                result.append(s)
-        return result
-
-    # --- Path finding ---
-
-    @staticmethod
-    def path(
-        source: CognitiveState, target: CognitiveState
-    ) -> List[CognitiveState]:
-        """
-        Find the shortest cognitive path from source to target.
-
-        Uses greedy BFS. Each step changes one dimension by one trit-step.
-        The path length equals the cognitive distance between source and target.
-
-        The path represents a sequence of micro-cognitive shifts.
-        Each step is a minimal change in perspective.
-
-        Returns:
-            List of states from source (inclusive) to target (inclusive).
-        """
-        if source == target:
-            return [source]
-
-        # Greedy: at each step, change the dimension that reduces distance most
-        path = [source]
-        current = source
-
-        while current != target:
-            diff_dims = current.diff_dimensions(target)
-
-            # For each differing dimension, compute the direction to move
-            best_next = None
-            best_dist = current.distance(target)
-
-            for dim_idx in diff_dims:
-                current_val = current[dim_idx].value
-                target_val = target[dim_idx].value
-
-                # Move one step toward target
-                if current_val < target_val:
-                    step = 1
-                else:
-                    step = -1
-
-                candidate = current.with_dimension(dim_idx, current_val + step)
-                candidate_dist = candidate.distance(target)
-
-                if candidate_dist < best_dist:
-                    best_dist = candidate_dist
-                    best_next = candidate
-
-            if best_next is None:
-                # Should not happen if source != target
-                break
-
-            path.append(best_next)
-            current = best_next
-
-        return path
-
-    @staticmethod
-    def path_through_void(
-        source: CognitiveState, target: CognitiveState
-    ) -> List[CognitiveState]:
-        """
-        Find a path from source to target that passes through the void state.
-
-        This represents the philosophical principle that transformation from
-        one extreme to another must pass through void (the creative gateway).
-
-        YIN -> VOID -> YANG (not YIN -> YANG directly)
-
-        This is longer but philosophically grounded: all extreme
-        transformations require a return to creative potential (void)
-        before crystallizing into a new form.
-        """
-        void_state = CognitiveState.all_void()
-        return CognitiveSpace.path(source, void_state)[:-1] + \
-               CognitiveSpace.path(void_state, target)
-
-    # --- Space properties ---
-
-    @staticmethod
-    def void_state() -> CognitiveState:
-        """The center of the space: all dimensions VOID."""
-        return CognitiveState.all_void()
-
-    @staticmethod
-    def extreme_yin() -> CognitiveState:
-        """The extreme negative: all dimensions YIN (index 0)."""
-        return CognitiveState.all_yin()
-
-    @staticmethod
-    def extreme_yang() -> CognitiveState:
-        """The extreme positive: all dimensions YANG (index 19682)."""
-        return CognitiveState.all_yang()
-
-    # --- Dimension info ---
-
-    def describe_state(self, state: CognitiveState) -> str:
-        """
-        Human-readable description of a state using dimension labels.
-
-        The labels are from this space's project configuration.
-        The semantics of each trit are from dim_descriptions (if provided).
-        """
-        lines = []
-        lines.append(f"State #{state.index} [{state}]")
-        lines.append(
-            f"  Polarity: {state.polarity:+d} | "
-            f"YIN:{state.yin_count} VOID:{state.void_count} "
-            f"YANG:{state.yang_count}"
-        )
-        for i, (label, dim) in enumerate(zip(self.dim_labels, state.dims)):
-            desc = ""
-            if self.dim_descriptions and i < len(self.dim_descriptions):
-                desc = f" ({self.dim_descriptions[i].get(dim.value, '')})"
-            lines.append(f"  Dim{i} {label}: {dim.name}{desc}")
-        return "\n".join(lines)
-
-    def __repr__(self) -> str:
-        return (
-            f"CognitiveSpace(dim_labels={self.dim_labels})"
-        )
 
     def __len__(self) -> int:
         return SPACE_SIZE
+
+    def __iter__(self) -> Iterator[CognitiveState]:
+        for index in range(SPACE_SIZE):
+            yield CognitiveState.from_index(index)
+
+    def __contains__(self, state: object) -> bool:
+        if not isinstance(state, CognitiveState):
+            return False
+        return 0 <= state.index < SPACE_SIZE
+
+    def neighbors(self, state: CognitiveState) -> List[CognitiveState]:
+        return state.neighbors()
+
+    def distance(self, a: CognitiveState, b: CognitiveState) -> int:
+        return a.distance(b)
+
+    def path(
+        self,
+        source: CognitiveState,
+        target: CognitiveState,
+    ) -> List[CognitiveState]:
+        path: List[CognitiveState] = [source]
+        current = source
+
+        for dim in range(NUM_DIMENSIONS):
+            current_value = current[dim].value
+            target_value = target[dim].value
+
+            while current_value != target_value:
+                current_value += 1 if current_value < target_value else -1
+                current = current.with_dimension(dim, current_value)
+                path.append(current)
+
+        return path
+
+    def path_through_void(
+        self,
+        source: CognitiveState,
+        target: CognitiveState,
+    ) -> List[CognitiveState]:
+        void_state = CognitiveState.all_void()
+        first_leg = self.path(source, void_state)
+        second_leg = self.path(void_state, target)
+        return first_leg + second_leg[1:]
+
+    def describe_state(self, state: CognitiveState) -> str:
+        lines = [f"State #{state.index}"]
+
+        for label, trit in zip(self.dimension_labels, state.dims):
+            lines.append(f"  {label}: {trit.name} ({trit.value})")
+
+        lines.append(f"  polarity: {state.polarity}")
+        lines.append(f"  intensity: {state.intensity}")
+        lines.append(
+            f"  counts: {state.yin_count} YIN, "
+            f"{state.void_count} VOID, {state.yang_count} YANG"
+        )
+
+        return "\n".join(lines)
+
+    def interpret(self, state: CognitiveState) -> Dict[str, object]:
+        return {
+            "index": state.index,
+            "vector": state.values,
+            "polarity": state.polarity,
+            "intensity": state.intensity,
+            "yin_count": state.yin_count,
+            "void_count": state.void_count,
+            "yang_count": state.yang_count,
+            "is_void_dominant": state.is_void_dominant,
+            "description": self.describe_state(state),
+        }
+
+
+class Space19683:
+    """
+    Index-based API for the 19683-state cognitive space.
+
+    This class exists for backwards compatibility with earlier BTCU
+    experiments. It operates on integer indices rather than
+    CognitiveState objects.
+    """
+
+    size: int = SPACE_SIZE
+    center: int = (SPACE_SIZE - 1) // 2
+    min_index: int = 0
+    max_index: int = SPACE_SIZE - 1
+    center_index: int = center
+
+    def __init__(self, dim: int = NUM_DIMENSIONS) -> None:
+        # The index-based API only makes sense for nine dimensions.
+        if dim != NUM_DIMENSIONS:
+            raise ValueError(
+                f"Space19683 requires exactly {NUM_DIMENSIONS} dimensions"
+            )
+        self.dim = dim
+
+    def encode(self, vector: Sequence[int]) -> int:
+        return encoding.encode(vector)
+
+    def decode(self, index: int) -> list[int]:
+        return encoding.decode(index)
+
+    def mirror(self, index: int) -> int:
+        return self.max_index - index
+
+    def negate(self, index: int) -> int:
+        return self.mirror(index)
+
+    def polarity(self, index: int) -> int:
+        return sum(self.decode(index))
+
+    def empty_count(self, index: int) -> int:
+        return sum(1 for v in self.decode(index) if v == 0)
+
+    def neighbors(self, index: int) -> list[int]:
+        state = CognitiveState.from_index(index)
+        return [s.index for s in state.neighbors()]
+
+    def distance(self, a: int, b: int) -> int:
+        sa = CognitiveState.from_index(a)
+        sb = CognitiveState.from_index(b)
+        return sa.distance(sb)
+
+    def similarity(self, a: int, b: int) -> int:
+        return ternary.similarity(self.decode(a), self.decode(b))
+
+    def is_center(self, index: int) -> bool:
+        return index == self.center_index
+
+    def is_extreme(self, index: int) -> bool:
+        return index == self.min_index or index == self.max_index
+
+    def iter_all(self) -> Iterator[int]:
+        for index in range(self.size):
+            yield index
+
+    def interpret(self, index: int) -> dict[str, object]:
+        vector = self.decode(index)
+        p = sum(vector)
+
+        if index == self.min_index:
+            region = "all-yin"
+        elif index == self.max_index:
+            region = "all-yang"
+        elif index == self.center_index:
+            region = "all-empty"
+        elif p < 0:
+            region = "yin-leaning"
+        elif p > 0:
+            region = "yang-leaning"
+        else:
+            region = "balanced"
+
+        return {
+            "index": index,
+            "vector": vector,
+            "symbol": encoding.to_symbol_string(vector),
+            "polarity": p,
+            "empty_count": self.empty_count(index),
+            "balanced_value": index - self.center_index,
+            "region": region,
+        }
+
+
+__all__ = ["CognitiveSpace", "Space19683"]

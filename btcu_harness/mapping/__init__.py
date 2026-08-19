@@ -1,6 +1,10 @@
-"""Mapping layer: dimension adapter and input projector."""
+"""
+BTCU Harness - Mapping Module
 
-from .dimension_adapter import DimensionAdapter
-from .projector import InputProjector
+Projects external inputs into the nine-dimensional ternary state space.
+Dimensions are flexible templates, not fixed dogma.
+"""
 
-__all__ = ["DimensionAdapter", "InputProjector"]
+from btcu_harness.mapping.dimensions import default_dimensions, Dimension
+
+__all__ = ["default_dimensions", "Dimension"]

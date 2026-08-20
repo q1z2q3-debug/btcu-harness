@@ -77,6 +77,63 @@ once per prefix, not per turn.
   `dsh-agent-presets` roster; the dual system runs end-to-end (learn via
   feedback → System 1 exact hit → graduation stats).
 
+## Reusable assets (skills & plugins)
+
+Beyond the preset itself, the fusion ships four deliberately reusable pieces:
+
+### 1. The `btcu` skill (`skills/btcu/SKILL.md`)
+
+A model-loadable skill for ANY agent session (any preset): the ternary model,
+the six tools, the S1→S2 decision protocol, token discipline, and the reference
+locations. Install to the harness user root:
+
+```
+# copy this directory to the dsh user skills root
+cp -r skills/btcu "$HOME/.dsh/skills/btcu"
+```
+
+The harness's skill-filesystem provider scans `<dshHome>/skills` live, so the
+skill appears in the catalog immediately — no restart needed.
+
+### 2. The `btcu.mjs` plugin (reusable in any preset)
+
+`btcu.mjs` is an import-free Cordis plugin (only `node:` builtins; hard
+dependency `tools`). Mount it in ANY agent preset's composition by adding the
+file beside `agent.cordis.yml` and one row:
+
+```yaml
+- id: btcu
+  name: ./btcu.mjs
+  config:
+    dimensionLabels: [time, space, causality, value, relation, action, subject, intent, cognition]
+```
+
+It registers the six `btcu_*` tools into the host `tools` registry and provides
+nothing, so no `isolate` realm is needed.
+
+### 3. The System 1 pattern library (dual-system memory)
+
+The learned fast-path (exact hash / 9D k-NN / fuzzy cosine, Bayesian
+confidence, persisted to `$DSH_HOME/btcu/patterns.json`) is a self-contained
+module inside `btcu.mjs` (`System1PatternLibrary`). It can be lifted into any
+plugin that needs fast-path pattern memory.
+
+### 4. The MCP server (upstream)
+
+Upstream ships `btcu_harness/mcp/server.py` (v1.2: `cognitive_decide` /
+`cognitive_mode` / `cognitive_audit` tools, resources, prompts). DSH has a
+first-party MCP client (`@deepseek-ai/dsh-mcp-client`), so a deployment can
+expose the full upstream dual-system surface to any session over MCP instead
+of (or alongside) the in-process `btcu.mjs` port. The in-process port is the
+lean default; MCP is the full-surface option.
+
+### 5. Verification kit (`$DSH_HOME/profiles/verify/`)
+
+`parity-check.mjs` (JS port vs Python reference), `mount-verify-full.mjs`
+(preset mounts through the real roster; dual system end-to-end), and
+`measure-tokens.mjs` (model-facing token table) — reusable as a test kit for
+any preset author.
+
 ## Version management note
 
 Per the repository policy ("删除旧版本就是删除进化历史"), every version is

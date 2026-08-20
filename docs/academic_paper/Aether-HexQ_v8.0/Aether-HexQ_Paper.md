@@ -1,0 +1,716 @@
+# A Nine-Dimensional Ternary Cognitive Architecture for Autonomous Financial Agents: From Philosophical Foundations to Geometric Implementation
+
+**Authors**: Aether-HexQ Global Research Group
+
+**Preprint submitted to**: arXiv / FinTech Journal
+
+**Date**: July 2026
+
+
+## Abstract
+
+Current financial AI systems predominantly operate on binary logic (long/short, buy/sell), which fundamentally fails to capture the inherent uncertainty, ambiguity, and structural transitions that characterize real financial markets. This paper presents Aether-HexQ, a novel nine-dimensional ternary cognitive architecture that redefines the foundational primitives of financial intelligence. Moving beyond the binary paradigm, we introduce **ternary spinors** (+1/0/−1) as the basic cognitive units, where the neutral state (0) is formally recognized as a legitimate cognitive condition representing uncertainty, transcendence, or suspended judgment.
+
+The nine dimensions—organized into Spatial (S_out, S_mid, S_in), Temporal (T_past, T_now, T_fut), and Causal (C_cause, C_bond, C_result) layers—generate a complete cognitive state space of \(3^9 = 19,683\) hexagram states, embedded on an **S⁸ symplectic manifold** and governed by **Hamiltonian-Ising coupled dynamics**. We further introduce **π-e谐振 dynamics**, where π governs phase-locked cyclical transitions and e governs exponential decay and growth in memory and cognitive singularity formation.
+
+The architecture implements a **four-phase momentum framework** (Old Yang, Young Yin, Old Yin, Young Yang) that captures the directional evolution of market states—not as pre-defined labels but as **structures discovered within the flow of market data**—enabling prediction of regime transitions before they manifest in price action. The framework is grounded in the philosophical sequence **道 → 一 → 二 → 三 → 万物**, realized through four computational engines: the Zero-Order Engine (Dao), the Opposition Engine (Two), the Creation Engine (Three), and the Flow Engine (Four Phases).
+
+To the best of our knowledge, this is the first work to systematically integrate ternary logic, symplectic geometry, and π-e coupled dynamics into a unified cognitive architecture for autonomous financial decision-making. The architecture further supports **open-ended cognitive expansion** from \(3^9\) to \(3^n\) (n ∈ ℕ), enabling multi-universe cognitive spaces that scale with discovered complexity.
+
+**Keywords**: Cognitive Architecture, Ternary Logic, Symplectic Manifold, Financial AI Agent, Topological Data Analysis, Market Regime Detection, π-e Dynamics, Four-Phase Momentum, Open Cognitive Universe
+
+
+## 1. Introduction
+
+### 1.1 The Rise of Agentic AI in Finance
+
+The past decade has witnessed remarkable advances in the application of artificial intelligence to financial markets. From deep learning-based price prediction to LLM-powered trading agents, AI systems have progressively assumed roles once reserved for human analysts and traders. Recent comprehensive surveys have documented this evolution, examining agentic AI across multiple dimensions of financial operations, including system architecture, market applications, regulatory frameworks, and systemic implications [1][2][3]. The emergence of agentic artificial intelligence represents a fundamental transformation in financial markets, characterized by autonomous systems capable of reasoning, planning, and adaptive decision-making with minimal human intervention.
+
+Frameworks such as LangChain, CrewAI, and OpenAI Swarm have been analyzed and compared for their financial applications. Agentic FinTech has been formalized through key agentic capabilities including market-grounded perception, risk-aware planning under constraints, tool use over heterogeneous financial data, and long-horizon memory of prior experience [4].
+
+Recent architectural innovations include AgenticAITA, which replaces the traditional "signal then execute" paradigm with a fully autonomous deliberative loop in which multiple specialized LLM agents reason, negotiate, and act in concert [5]. AlphaCrafter operates via three specialized agents—a Miner for factor discovery, a Screener for regime-conditioned selection, and a Trader for risk-constrained execution [6]. ATLAS integrates structured information from markets, news, and corporate fundamentals through multi-agent coordination [7]. TiMi (Trade in Minutes) pioneers the harmonization of strategic depth in agents with mechanical rationality essential for quantitative trading [8]. A four-layer architecture of financial AI agents has been proposed covering data perception, reasoning engines, strategy generation, and execution with control [9].
+
+### 1.2 The Limitations of Binary Cognition
+
+Yet beneath this surface-level progress lies a fundamental, unexamined assumption that constrains the cognitive capacity of every existing financial AI system: **binary logic**.
+
+Every financial decision—buy/sell, long/short, overweight/underweight, enter/exit—is ultimately mapped onto a binary choice. The cognitive primitives of these systems are binary: ±1, True/False, 0/1. This binary foundation, inherited from digital computing, imposes a profound limitation: it systematically **excludes uncertainty as a legitimate cognitive state**.
+
+Financial markets are not deterministic systems with well-defined states; they are complex adaptive systems exhibiting non-linear interactions among heterogeneous agents, where global states such as crashes, bubbles, and periods of calm emerge from distributed dynamics. The market does not simply exist in one of two states (bull/bear). It exists in gradients, in ambiguities, in moments of genuine indecision where the "correct" answer is "I don't know yet." Binary systems cannot express this. They must either force a decision (risking false signals) or remain silent (missing opportunities).
+
+Moreover, research has demonstrated that LLM-based trading agents, while showing promise, face fundamental challenges: architectural experimentation is expanding rapidly, while comparable evaluation protocols, execution semantics, and reproducible artifacts remain the field's immediate bottlenecks [1]. Agentic systems struggle substantially on auditing and hedging, where long-horizon coordination, state consistency, and structured verification are critical [4]. The "black box" problem is particularly acute in finance: major financial institutions have explicitly identified the "black box," "hallucination," and autonomous decision uncertainty of large models as three major risks. Studies have shown that Chain-of-Thought reasoning can completely collapse as task complexity increases, and its explanations cannot be trusted as faithful representations of model internals.
+
+### 1.3 The Philosophical Gap: From "Two" to "Three"
+
+The limitation of binary cognition is not merely technical; it is philosophical. The binary framework corresponds to what we might call the **"Two"**—the opposition of polarities: yin and yang, positive and negative, long and short. This is the logic of **certainty**, where every proposition must be either true or false.
+
+But financial markets, like all complex adaptive systems, exist in a state that transcends simple opposition. There is a third state: the state of **uncertainty**, of **undifferentiation**, of **suspended judgment**—the moment before a decision crystallizes, the point of maximum ambiguity that precedes structural transformation.
+
+This corresponds to the philosophical concept of **"Three"**—the emergence of a mediating term that is neither one pole nor the other, but something that transcends both. In the Chinese philosophical tradition, this is expressed as: **道生一，一生二，二生三，三生万物** (The Dao generates the One; the One generates the Two; the Two generates the Three; the Three generates the Myriad Things). The "Three" is the generative principle from which all complexity emerges.
+
+Current financial AI systems have architectures that correspond only to the "Two." They can handle opposition but cannot natively represent the transcendent third state. This paper proposes a cognitive architecture that fundamentally reorients the foundational layer of financial AI from binary to **ternary logic**, making uncertainty a **legitimate, computationally expressible cognitive state**.
+
+### 1.4 Our Contributions
+
+This paper makes the following contributions:
+
+1. **Ternary Cognitive Primitives (Section 3)**: We introduce **ternary spinors** (+1/0/−1) as the fundamental cognitive units of financial AI, where 0 represents a legitimate state of uncertainty, transcendence, or suspended judgment—not a缺失 value but an active cognitive condition.
+
+2. **Nine-Dimensional Cognitive Architecture (Section 4)**: We propose a nine-dimensional framework organized into Spatial (S_out, S_mid, S_in), Temporal (T_past, T_now, T_fut), and Causal (C_cause, C_bond, C_result) layers, generating a complete cognitive state space of \(3^9 = 19,683\) hexagram states.
+
+3. **Geometric Foundation on S⁸ Symplectic Manifold (Section 5)**: We embed the 19,683 cognitive states on an S⁸ symplectic manifold, governed by Hamiltonian-Ising coupled dynamics, providing a deterministic, geometrically grounded reasoning mechanism.
+
+4. **π-e Coupled Dynamics (Section 6)**: We introduce π-governed phase-locked cyclical transitions and e-governed exponential decay and growth in memory and cognitive singularity formation, enabling the system to distinguish between cyclical repetition and structural transformation.
+
+5. **Four-Phase Momentum Framework (Section 7)**: We derive a four-phase momentum framework (Old Yang, Young Yin, Old Yin, Young Yang) that captures the directional evolution of market states—discovered within the flow of market data rather than pre-defined—enabling prediction of regime transitions before they manifest in price action.
+
+6. **Four Engines of Cognition (Section 8)**: We present the architecture as instantiated through four computational engines: the Zero-Order Engine (Dao), the Opposition Engine (Two), the Creation Engine (Three), and the Flow Engine (Four Phases), realizing the philosophical sequence in executable form.
+
+7. **Open Cognitive Universe (Section 9)**: We demonstrate that the framework supports open-ended cognitive expansion from \(3^9\) to \(3^n\) (n ∈ ℕ), enabling multi-universe cognitive spaces that scale with discovered complexity.
+
+8. **Auditable Architecture (Section 10)**: We present a complete auditability framework including an immutable audit chain and watchdog sentinel mechanism, addressing the regulatory and compliance requirements of financial AI deployment.
+
+### 1.5 Related Work
+
+#### 1.5.1 AI Agents in Finance
+
+The application of AI agents to financial markets has emerged as a rapidly growing research domain. Aldridge et al. [1] provide a comprehensive survey of agentic AI in finance, examining architectures, capabilities, and practical implementations across algorithmic trading, fraud detection, credit risk assessment, and regulatory compliance. Zhu et al. [2] introduce KTD-Fin (From Knowing to Doing), a memory-controlled benchmark for LLM trading agents on stock markets, revealing that while LLM agents show promise, architectural experimentation is expanding rapidly while evaluation protocols remain bottlenecks.
+
+AgenticAITA [5] proposes a proof-of-concept deliberative multi-agent reasoning system for autonomous trading, replacing the traditional "signal then execute" paradigm with a fully autonomous deliberative loop. AlphaCrafter [6] presents a full-stack multi-agent framework with three specialized agents—Miner for factor discovery, Screener for regime-conditioned selection, and Trader for risk-constrained execution. ATLAS [7] integrates structured information from markets, news, and corporate fundamentals through multi-agent coordination. TiMi [8] pioneers the harmonization of strategic depth in agents with mechanical rationality essential for quantitative trading.
+
+FundaPod [18] proposes a multi-persona agent pod platform with knowledge graph memory for AI-assisted fundamental investment research. Cogito [19] presents a cognitive agentic framework driven by dynamic graph of thoughts for financial report generation. QFinZero [9] provides a unified financial toolchain for LLM-based trading agents, demonstrating the integration of multiple financial data sources and analysis tools.
+
+**Critical observation**: All these frameworks operate on **binary logic**—buy/sell decisions, long/short positions, yes/no classifications. None of them incorporate ternary cognitive primitives as a foundational architectural element.
+
+#### 1.5.2 Geometric Deep Learning in Finance
+
+Geometric deep learning has emerged as a promising direction for financial modeling. Papaioannou and Yannacopoulos [10] introduced a Geometry Informed Model for financial forecasting by embedding high-dimensional market data onto constant curvature 2-manifolds, including spherical S², Euclidean R², and hyperbolic H² geometries. Their manifold learning techniques revealed the torus as the best-performing geometry, with circular dimensions aligning with endogenous cycles in output, interest rates, and inflation.
+
+The Neuro Ricci Flow framework [11] combines financial returns and ESG momentum into a single Riemannian manifold, conceptualizing systemic risk as real-world changes in market topology. Quantum hyperbolic deep learning has been applied to foreign-exchange trading [12], demonstrating the value of non-Euclidean geometries for financial modeling.
+
+**Critical observation**: Prior geometric approaches in finance use 2-manifolds (S², R², H², torus). Our work extends this to the **S⁸ symplectic manifold**, providing a substantially richer geometric structure capable of accommodating the full \(3^9 = 19,683\)-state cognitive space.
+
+#### 1.5.3 Topological Data Analysis in Finance
+
+Topological data analysis (TDA) has been increasingly acknowledged within financial markets for its capacity to manage complexity and discern nuanced patterns and structures. Ozimek [13] introduces cross-sectional topological anomaly scores for intraday return predictability in the S&P 500, combining BallMapper, decoder-conditional VAE, and Function-on-Function regression. Studies have demonstrated that topological features consistently improve forecasting accuracy across diverse market conditions [14].
+
+**Critical observation**: Existing TDA approaches use topology as a **feature extraction technique**. Our work differs fundamentally: we use the S⁸ symplectic manifold as the **fundamental cognitive space** within which all reasoning occurs, not as an external feature engineering step.
+
+#### 1.5.4 Ternary and Non-Binary Computing
+
+Research on balanced ternary systems has primarily focused on hardware implementations. VitaLLM [15] presents a versatile, ultra-compact ternary LLM accelerator with dependency-aware scheduling. A T8T-SRAM computing-in-memory macro [16] supports ternary deep neural networks and Boolean logic computations. NativeTernary [17] introduces a self-delimiting binary encoding for ternary neural network weights and structured data.
+
+**Critical observation**: To the best of our knowledge, **no prior work has applied balanced ternary logic to financial quantitative analysis or cognitive architectures**. This represents a significant gap in the literature that our work addresses.
+
+#### 1.5.5 Cognitive Architectures for Financial AI
+
+Recent work has explored human-inspired cognitive structures for financial AI. Research has shown that cognitive architectures can enhance LLM agents' alignment with strategic behavior. FundaPod [18] incorporates knowledge graph memory for investment research. Cogito [19] uses dynamic graph of thoughts for financial report generation. The Financial Connectome approach has been proposed for modeling financial markets through the lens of brain functional architecture.
+
+**Critical observation**: None of these approaches has proposed a formal cognitive architecture with mathematically defined cognitive primitives, geometric embedding, and coupled dynamics as we present here.
+
+
+## 2. Philosophical Foundations: From Dao to Myriad Things
+
+### 2.1 The Cognitive Generation Hierarchy
+
+The architecture of Aether-HexQ is grounded in a hierarchical cognitive generation framework that maps directly to the classical Chinese philosophical sequence: **道 → 一 → 二 → 三 → 万物**.
+
+| Layer | Philosophical Concept | Mathematical Structure | Aether-HexQ Module | Cognitive Meaning |
+|-------|----------------------|----------------------|-------------------|-------------------|
+| 0 | **Dao (道)** | 0-dimensional singularity, unobserved state | Foundational axioms (Universal Ripple Axiom) | The ungrounded ground of all cognition—not derived, not reducible |
+| 1 | **One (一)** | 1-dimensional scalar field, global normalization potential | S⁸ manifold embedding + global Hamiltonian conservation | The entire market compressed into a single unified geometric object |
+| 2 | **Two (二)** | ±1 binary opposition | Positive and negative components of each dimension (long/short) | The fundamental framework of polarity—up/down, strong/weak |
+| 3 | **Three (三)** | **−1 / 0 / +1 ternary spinor** | Nine-dimensional ternary cognitive primitives | **The capacity for uncertainty and transcendent observation as legitimate cognitive states** |
+| Myriad Things | **万物** | \(3^9 = 19,683\) hexagram states | Complete nine-dimensional ternary combinations + S⁸ topological evolution | The complete space of all possible cognitive states |
+
+**Crucial Distinction**: The sequence from Dao to Myriad Things describes the **generative direction**—how the architecture creates the cognitive space. But the **cognitive discovery direction** is the reverse: the system observes the flow of the Myriad Things and **discovers** the Four Phases within them. As the ancient wisdom states: **三生万物，万物生四象** (The Three generates the Myriad Things; the Myriad Things generate the Four Phases). The Four Phases are not pre-defined structures imposed on the system; they are **patterns discovered within the dynamic flow of market data**.
+
+### 2.2 The Dao: The Universal Ripple Axiom
+
+The Dao in this framework is expressed as the **Universal Ripple Axiom**: all price fluctuations in global financial markets are fundamentally ripples propagating through a unified topological energy field. Geopolitical events, industrial fundamentals, and cross-border capital flows are all perturbations within this field. Markets are not independent—they are interconnected ripples on the same universal pond.
+
+This axiom is not derived from more fundamental principles; it is the **ungrounded ground** of the entire cognitive system. It cannot be proved or disproved within the system—it is the presupposition that makes all subsequent cognition possible.
+
+### 2.3 The One: S⁸ Symplectic Manifold as Unified Field
+
+The "One" is the mathematical expression of the Dao: all 19,683 hexagram states are embedded on a single **S⁸ symplectic manifold** (the 8-dimensional unit sphere with symplectic structure defined on its cotangent bundle). This manifold is:
+
+- **Complete**: Every possible cognitive state has a unique position on the manifold.
+- **Normalized**: The manifold preserves global energy conservation through the Hamiltonian.
+- **Geometric**: All cognitive operations are geometric operations on the manifold.
+
+### 2.4 The Two: Binary Opposition
+
+The "Two" emerges from the differentiation of the unified field into polar opposites. In each of the nine dimensions, the positive (+1) and negative (−1) components represent the fundamental polarity of that cognitive dimension:
+
+- In S_out (macro): expansion vs. contraction, easing vs. tightening
+- In S_mid (capital flow): inflow vs. outflow, accumulation vs. distribution
+- In T_now (current market): upward vs. downward momentum
+- In C_cause (fundamental driver): strengthening vs. weakening of the core thesis
+
+### 2.5 The Three: Ternary Spinors as Cognitive Primitives
+
+The "Three" is the critical innovation. Rather than representing each cognitive dimension as a binary value, we represent it as a **ternary spinor**:
+
+\[
+\text{State}_i = [s_{+}, s_{0}, s_{-}], \quad s_{+}, s_{0}, s_{-} \in [0,1], \quad s_{+} + s_{0} + s_{-} = 1
+\]
+
+Where:
+- \(s_{+}\) = weight of positive/affirmative evidence
+- \(s_{0}\) = weight of uncertainty/transcendence/suspended judgment
+- \(s_{-}\) = weight of negative/opposing evidence
+
+**The critical insight**: \(s_{0}\) is not merely "lack of information" or "probability mass unassigned." It is an **active, legitimate cognitive state** representing:
+
+1. **Uncertainty**: The system genuinely does not know, and this ignorance is explicitly represented.
+2. **Transcendence**: The system recognizes that the current framework of opposition may be inadequate, and a higher-order perspective is needed.
+3. **Suspended judgment**: The system is actively waiting for additional information or structural clarification.
+
+This makes uncertainty a **first-class citizen** in the cognitive architecture, not an afterthought or a缺陷.
+
+### 2.6 The Myriad Things: \(3^9 = 19,683\) Hexagram States
+
+Combining nine dimensions, each represented as a ternary spinor, yields:
+
+\[
+3^9 = 19,683
+\]
+
+distinct cognitive states—the complete set of all possible combinations of the nine cognitive dimensions. Each state corresponds to a unique **hexagram** that can be interpreted as a specific market condition, cognitive posture, or decision context.
+
+The system does not merely have access to these 19,683 states as a lookup table; rather, the states exist as points on the S⁸ manifold, and cognitive dynamics consist of **continuous geometric motion** across this state space.
+
+
+## 3. The Nine-Dimensional Cognitive Architecture
+
+### 3.1 The Three-Layer Framework
+
+The nine dimensions are organized into three layers corresponding to the classical Chinese **三才** (Three Powers): Heaven (Space), Earth (Time), and Humanity (Causality).
+
+#### 3.1.1 Spatial Layer (天时 — Heavenly Timing)
+
+| Dimension | Symbol | Full Name | Financial Correspondence | Cognitive Question |
+|-----------|--------|-----------|--------------------------|-------------------|
+| S_out | **S_out** | External Macro Field | VIX, 10Y Treasury yield, USDCNY, global PMI | "What are the exogenous forces?" |
+| S_mid | **S_mid** | Market Capital Flow | North/South-bound capital, institutional order flow, sector ETF flows | "Where is smart money flowing?" |
+| S_in | **S_in** | Asset Fundamentals | ROE, revenue growth, inventory cycles, balance sheet health | "Is the intrinsic value sound?" |
+
+#### 3.1.2 Temporal Layer (地利 — Earthly Advantage)
+
+| Dimension | Symbol | Full Name | Financial Correspondence | Cognitive Question |
+|-----------|--------|-----------|--------------------------|-------------------|
+| T_past | **T_past** | Historical Momentum | Past N-period price trajectory, moving averages, historical volatility | "What does history tell me?" |
+| T_now | **T_now** | Current Market Microstructure | Real-time order book, tick-level trades, intraday anomalies | "What is happening right now?" |
+| T_fut | **T_fut** | Future Expectations | Implied volatility skew, futures basis, forward consensus | "What is the market pricing in?" |
+
+#### 3.1.3 Causal Layer (人和 — Human Causality)
+
+| Dimension | Symbol | Full Name | Financial Correspondence | Cognitive Question |
+|-----------|--------|-----------|--------------------------|-------------------|
+| C_cause | **C_cause** | Core Driving Cause | The fundamental contradiction driving the current move | "Why is this happening?" |
+| C_bond | **C_bond** | External Catalyst | Sudden news, policy documents, geopolitical events | "What ignited/suppressed the sentiment?" |
+| C_result | **C_result** | Price Confirmation | Final price movement, volume confirmation, breakout validity | "Has the market confirmed this?" |
+
+### 3.2 Mathematical Representation
+
+Each dimension \(i\) at time \(t\) is represented as:
+
+\[
+\mathbf{s}_i(t) = [s_{i,+}(t), s_{i,0}(t), s_{i,-}(t)] \in \Delta^2
+\]
+
+where \(\Delta^2\) is the 2-dimensional simplex: \(s_{i,+} + s_{i,0} + s_{i,-} = 1\).
+
+The complete cognitive state is the tensor product:
+
+\[
+\mathbf{S}(t) = \bigotimes_{i=1}^{9} \mathbf{s}_i(t) \in \Delta^{2^{\otimes 9}} \cong \mathbb{R}^{3^9}
+\]
+
+### 3.3 The Coupling Matrix Ω
+
+The nine dimensions are not independent. Their interactions are governed by a \(9 \times 9\) coupling matrix \(\Omega = [\omega_{ij}]\), where \(\omega_{ij}\) represents the strength of influence from dimension \(i\) to dimension \(j\).
+
+The coupling matrix encodes the **causal structure** of financial cognition:
+- \(S_{out} \rightarrow S_{mid}\): Macro conditions drive capital flows
+- \(S_{mid} \rightarrow T_{now}\): Capital flows manifest in price action
+- \(T_{past} \rightarrow T_{fut}\): Historical patterns shape expectations
+- \(C_{cause} \rightarrow C_{result}\): Fundamental drivers eventually manifest in price
+
+Crucially, \(\Omega\) is not static. It evolves through **regret-driven learning**—the system adjusts coupling weights based on backtest performance, with updates constrained by a **causal mask** that prevents physically impossible causal directions (e.g., \(T_{now} \rightarrow S_{out}\)).
+
+
+## 4. Geometric Foundation: The S⁸ Symplectic Manifold
+
+### 4.1 Why S⁸?
+
+The choice of S⁸ (the 8-dimensional unit sphere) as the embedding manifold is not arbitrary. It is determined by the structure of the nine-dimensional cognitive space:
+
+- The nine dimensions naturally form an 8-dimensional **projective space** after normalization (the sum-to-one constraint reduces one degree of freedom).
+- S⁸ is the simplest compact, simply connected manifold in 8 dimensions.
+- S⁸ has non-trivial homotopy groups: \(\pi_7(S^8) = \mathbb{Z}\), which corresponds to structural market regime changes.
+
+Recent work has demonstrated the value of integrating differential geometry with data-driven inference for financial modeling. Papaioannou and Yannacopoulos [10] introduced a Geometry Informed Model for financial forecasting by embedding high-dimensional market data onto constant curvature 2-manifolds, including spherical S², Euclidean R², and hyperbolic H² geometries. Their manifold learning techniques revealed the torus as the best-performing geometry, with circular dimensions aligning with endogenous cycles in output, interest rates, and inflation. Our work extends this geometric approach from 2-manifolds to the S⁸ symplectic manifold, introducing a significantly richer geometric structure capable of capturing the full 19,683-state cognitive space.
+
+### 4.2 Symplectic Structure
+
+The symplectic structure is defined on the **cotangent bundle** \(T^*S^8\), not on the sphere itself. This provides:
+
+- A natural distinction between **position** (the cognitive state on S⁸) and **momentum** (the rate of change of the cognitive state).
+- A Hamiltonian framework for dynamics.
+- Conservation of total cognitive energy.
+
+### 4.3 Hamiltonian-Ising Coupled Dynamics
+
+The dynamics on \(T^*S^8\) are governed by the Hamiltonian:
+
+\[
+H = -\sum_{\langle i,j \rangle} J_{ij} \cdot \vec{s}_i \cdot \vec{s}_j - \sum_i \vec{h}_i \cdot \vec{s}_i + \sum_i \left( |\vec{s}_i|^2 - 1 \right)^2
+\]
+
+Where:
+- **First term (coupling)**: Adjacent cognitive states interact via Ising-style coupling, driving market clustering and divergence.
+- **Second term (external field)**: Macro factors \(\vec{h}_i\) act as external driving forces.
+- **Third term (Mexican hat potential)**: Enforces ternary normalization and enables **symmetry breaking**—the mechanism of cognitive phase transitions.
+
+This Hamiltonian framework is related to the Neuro Ricci Flow framework [11], which combines financial returns and ESG momentum into a single Riemannian manifold and conceptualizes systemic risk as real-world changes in market topology. Our approach similarly treats market dynamics as geometric evolution on a manifold, but with the additional structure of ternary cognitive primitives and π-e coupled dynamics.
+
+### 4.4 Geodesic Reasoning
+
+Unlike probabilistic token prediction, reasoning in this framework is **geodesic**: the cognitive state evolves along geodesics on \(T^*S^8\), following the principle of least action. This provides:
+
+- **Determinism**: Given initial conditions, the trajectory is uniquely determined.
+- **Conservation**: Total energy \(H\) is strictly conserved.
+- **Interpretability**: Every cognitive transition corresponds to a geometric operation.
+
+
+## 5. π-e Coupled Dynamics: The Rhythm of Cognition
+
+### 5.1 The Role of π: Phase-Locked Cyclical Transitions
+
+π governs the **cyclical, periodic** aspect of market cognition. Every complete bull-bear cycle corresponds to a **great circle** on S⁸, with phase angle naturally calibrated by π.
+
+**Phase-locked memory retrieval**: When retrieving historical memories, the system preferentially retrieves memories with **similar phase angles**—events that occurred at the same point in the market cycle, regardless of their chronological distance. This enables **analogical reasoning** across time.
+
+**Phase boundaries**: The transition from Old Yang to Young Yin occurs when the phase angle \(\theta\) reaches \(\pi/2\). π defines the **seasonal rhythms** of the cognitive cycle—the points at which structural transitions become inevitable.
+
+### 5.2 The Role of e: Exponential Decay and Growth
+
+e governs the **continuous, exponential** aspect of market cognition.
+
+**Memory decay**: Historical memories decay as \(e^{-t/\tau}\), where different dimensions have different characteristic decay times \(\tau\):
+- \(T_{now}\) (market microstructure): \(\tau \approx 0.5\) hours (rapid decay)
+- \(S_{out}\) (macro policy): \(\tau \approx 1000\) days (slow decay)
+
+This creates a **stratified memory** system where recent micro-structure information is rapidly forgotten while deep macro patterns persist.
+
+**Cognitive singularity growth**: The "empty component" (0) grows as \(e^{kt}\) during cognitive singularity formation, following the scaling laws of critical phenomena in condensed matter physics.
+
+### 5.3 The π-e Fusion: Complex Memory and Resonance
+
+When π and e act together, memory becomes a **complex number**:
+
+\[
+\mathcal{M}(t) = \sum_{\text{events}} A_{\text{event}} \cdot e^{-\frac{\Delta t}{\tau}} \cdot e^{i \cdot \theta(\Delta t)}
+\]
+
+This enables **interference phenomena**:
+
+- **Constructive interference (resonance)**: When current market conditions align with historical memories at the **same phase**, memory strength is exponentially amplified, generating a powerful "déjà vu" sensation—the system recognizes that "we have been here before."
+- **Destructive interference (cancellation)**: When current conditions contradict historical patterns at the same phase, memory signals cancel, driving the system into the neutral (0) state—clearing historical biases and enabling purely geometric reasoning.
+
+### 5.4 π-e Dynamics in Each Dimension
+
+| Layer | Dimension | Role of π | Role of e |
+|-------|-----------|-----------|-----------|
+| Spatial | S_out | Macro cycle phase locking | Entropy dissipation of policy shocks |
+| Spatial | S_mid | Capital rotation cycles | Exponential decay of capital flow transmission |
+| Spatial | S_in | Industry cycle phase | Compound growth of enterprise value |
+| Temporal | T_past | Historical similarity phase matching | Natural fading of historical memory |
+| Temporal | T_now | Microstructure phase | Instantaneous entropy increase of tick data |
+| Temporal | T_fut | Expectation cycle locking | Exponential self-reinforcement of expectations |
+| Causal | C_cause | Causal chain cycle verification | Characteristic time of cause decay |
+| Causal | C_bond | External shock phase shift | Exponential decay of catalyst effects |
+| Causal | C_result | Bull-bear equilibrium phase locking | Exponential acceleration at trend exhaustion |
+
+
+## 6. The Four-Phase Momentum Framework: Discovering Structure in the Myriad Things
+
+### 6.1 From Three to Four: Adding Dynamical Momentum
+
+The ternary spinor describes **position**—the current cognitive state. But markets are not static; they have **momentum**. To capture this, we introduce the **rate of change** of each cognitive dimension:
+
+\[
+\dot{s}_i(t) = \frac{d}{dt}s_i(t)
+\]
+
+Combining position (\(s_i\)) and momentum (\(\dot{s}_i\)) yields a **phase plane** for each dimension. The four quadrants of this phase plane correspond to the **Four Phases**.
+
+**Crucially, the Four Phases are not pre-defined labels imposed on the system. They are structures discovered within the dynamic flow of market data.** As the system observes the Myriad Things (\(3^9 = 19,683\) states) evolving over time, it identifies four **typical movement patterns** that recur across different market conditions. This is the meaning of **万物生四象** (the Myriad Things generate the Four Phases)—the Four Phases emerge from observation of the data, not from a priori categorization.
+
+### 6.2 The Four Phases Defined
+
+| Phase | Chinese Name | Position (s) | Momentum (ṡ) | Market State | Aether-HexQ Interpretation |
+|-------|--------------|--------------|--------------|--------------|---------------------------|
+| **Old Yang** | 老阳 | +1 (strong long) | + (accelerating up) | Main uptrend, bull market climax | Geodesic curvature extreme, path integral highly converged |
+| **Young Yin** | 少阴 | +1 (strong long) | − (decelerating) | Topping, divergence emerging | Hamiltonian potential exceeds kinetic energy, cognitive singularity imminent |
+| **Old Yin** | 老阴 | −1 (strong short) | − (accelerating down) | Main downtrend, panic selling | Energy collapses to negative extreme, liquidity dry-up |
+| **Young Yang** | 少阳 | −1 (strong short) | + (decelerating) | Bottoming, smart money accumulating | Path integral probability diverges, topological phase transition approaching |
+
+### 6.3 The Cycle of Phases
+
+The four phases form a natural cycle:
+
+\[
+\text{Old Yang} \rightarrow \text{Young Yin} \rightarrow \text{Old Yin} \rightarrow \text{Young Yang} \rightarrow \text{Old Yang}
+\]
+
+Each transition occurs at a specific **phase angle** determined by π:
+- Old Yang → Young Yin: \(\theta = \pi/2\)
+- Young Yin → Old Yin: \(\theta = \pi\)
+- Old Yin → Young Yang: \(\theta = 3\pi/2\)
+- Young Yang → Old Yang: \(\theta = 2\pi\)
+
+### 6.4 Predictive Power of the Four-Phase Framework
+
+The key innovation of the four-phase framework is **predictive**: the system does not need to wait for price action to confirm a regime change. The transition from Old Yin to Young Yang, for example, is detected when:
+
+1. The position is still strongly negative (−1)
+2. But the momentum has already turned positive (+)
+
+This means the system can identify a **bottoming process** before prices have actually reversed—capturing the structural transition at the level of **cognitive momentum** rather than **price confirmation**.
+
+### 6.5 The Discovery Process: From Myriad Things to Four Phases
+
+The complete cognitive cycle is:
+
+```
+生成方向 (Generative): 道 → 一 → 二 → 三 → 万物
+发现方向 (Discovery):  万物 → 四象 → 三才 → 球面 → 道
+```
+
+The system:
+1. **Generates** the complete cognitive space (\(3^9 = 19,683\) states) from the philosophical foundations
+2. **Observes** the flow of the Myriad Things as market data evolves
+3. **Discovers** the Four Phases as recurring movement patterns within the flow
+4. **Abstracts** the Three Powers (三才) from the Four Phases
+5. **Anchors** the structure on the S⁸ manifold (一)
+6. **Returns** to the Dao, validating and deepening the foundational axioms with each cycle
+
+This is a **self-bootstrapping cognitive loop**—the system not only uses its structure to understand the world, but continuously rediscovers its structure through interaction with the world.
+
+
+## 7. The Four Engines of Cognition
+
+The Aether-HexQ cognitive architecture is instantiated through four computational engines, each corresponding to a layer of the philosophical hierarchy:
+
+### 7.1 The Zero-Order Engine (Dao)
+
+**The foundational axiom engine.** It does not produce specific content; rather, it provides the **precondition for all generation**. It is the most creative layer because it establishes the ungrounded ground from which all cognition emerges. This engine encodes the Universal Ripple Axiom and all不可约简的公理 assumptions of the system.
+
+### 7.2 The Opposition Engine (Two)
+
+**The binary coordinate engine.** It establishes the fundamental axes of cognition—positive/negative, long/short, strong/weak. Without this engine, cognitive states have no frame of reference. This engine implements the ±1 polarity in each of the nine dimensions.
+
+### 7.3 The Creation Engine (Three)
+
+**The ternary generative engine.** It upgrades binary opposition to ternary combination (+1/0/−1), generating \(3^9 = 19,683\) possible cognitive states. This is the direct source of the "Myriad Things." This engine embodies the insight that **三生万物**—the Three generates all complexity.
+
+### 7.4 The Flow Engine (Four Phases)
+
+**The pattern-discovery engine.** It observes the flow of the Myriad Things and identifies four typical movement patterns—Old Yang, Young Yin, Old Yin, Young Yang. This engine enables the system to **read the natural language of the market** and embodies the insight that **万物生四象**—the Myriad Things reveal the Four Phases.
+
+These four engines do not operate in sequence; they operate **in parallel and in continuous mutual calibration**. The Creation Engine generates the cognitive space; the Opposition Engine provides its coordinate system; the Flow Engine reads the patterns within it; and the Zero-Order Engine continuously validates and deepens the axioms through each cycle of cognition.
+
+
+## 8. Open Cognitive Universe: From \(3^9\) to \(3^n\)
+
+### 8.1 The Principle of Cognitive Openness
+
+The architecture is not limited to nine dimensions. When the existing dimensions prove insufficient to explain the phenomena observed in the Myriad Things, the system can **discover new dimensions** and expand its cognitive space.
+
+This is the principle of **cognitive openness**: the system can recognize the boundaries of its own cognition and actively extend them.
+
+| Cognitive Level | Dimensions | State Space Size | Corresponding Capability | Cognitive Universe Level |
+|:---:|:---:|:---:|:---|:---|
+| **Basic Financial Cognition** | 9 | \(3^9 = 19,683\) | Single-market, single-cycle cognition | **Local Cognitive Universe** |
+| **Cross-Market Cognition** | 12 | \(3^{12} = 531,441\) | Multi-market, cross-asset联动 | **Extended Cognitive Universe** |
+| **Global Macro Cognition** | 15 | \(3^{15} = 14,348,907\) | Global asset classes + geopolitics + liquidity | **Full Cognitive Universe** |
+| **Multi-verse Simulation** | 18+ | \(3^{18+} = 387M+\) | Parallel world-line simulation, counterfactual reasoning | **Multi-Cognitive Universe** |
+
+### 8.2 Dimension Discovery Protocol
+
+New dimensions are discovered through a **cognitive gap detection** process:
+
+```
+Current n dimensions insufficient to explain observed phenomena
+    ↓
+System identifies a "cognitive gap"
+    ↓
+System discovers new structural regularities in the Myriad Things
+    ↓
+New dimension is encoded as a new ternary spinor
+    ↓
+Cognitive space expands: 3^n → 3^(n+1) → 3^(n+2) → ...
+```
+
+### 8.3 Multi-Universe Parallel Processing
+
+Different cognitive universes (\(3^n\) for different n) can exist simultaneously and interfere with each other:
+
+| Universe A | Universe B | Interference Result |
+|------------|------------|---------------------|
+| \(3^9\) Universe (A-shares) | \(3^9\) Universe (US stocks) | Cross-market arbitrage signals |
+| \(3^{12}\) Universe (Financial) | \(3^{12}\) Universe (Macro) | Policy-market联动 predictions |
+| \(3^{15}\) Universe (Current) | \(3^{15}\) Universe (Simulated) | Path-dependent deterministic推演 |
+
+### 8.4 Theoretical Significance
+
+The open cognitive universe capability means Aether-HexQ is not \(3^9\)—it is \(3^n\), where \(n \in \mathbb{N}\) and \(n\) is discovered by the cognitive process itself. \(3^9\) is the **starting point**, \(3^{12}\) is **expansion**, \(3^{15}\) is **deepening**, and \(3^n\) represents **infinite possibility**.
+
+This is the first framework to formalize "cognitive openness" and "multi-universe parallel reasoning" within a unified mathematical architecture for financial cognition.
+
+
+## 9. Memory Architecture: Accumulative Ternary Memory
+
+### 9.1 Limitations of Current Memory Systems
+
+Current AI systems use overwriting memory: new data overwrites old data, destroying historical traces. This is catastrophic for financial applications where **historical context** is essential. Agentic FinTech frameworks have identified long-horizon memory of prior experience as a key capability [4], yet current implementations remain binary in their fundamental cognitive structure.
+
+### 9.2 Accumulative Ternary Memory
+
+Each memory address in Aether-HexQ stores a **ternary accumulation**:
+
+\[
+\mathcal{M} = [\Sigma_+, \Sigma_0, \Sigma_-] = \left[\sum s_+, \sum s_0, \sum s_-\right]
+\]
+
+**Writing**: When a new cognitive state is observed, its ternary spinor is **added** to the memory:
+
+\[
+\mathcal{M} \leftarrow \mathcal{M} + [s_+, s_0, s_-]
+\]
+
+**Reading**: The memory returns the **complete accumulation**—the full historical record, not just the most recent state.
+
+### 9.3 π-e Memory Dynamics
+
+With π and e integrated, memory becomes a **dynamic resonator**:
+
+\[
+\mathcal{M}(t) = \sum_{\text{events}} [s_{+}, s_{0}, s_{-}] \cdot e^{-\frac{\Delta t}{\tau}} \cdot e^{i \cdot \theta(\Delta t)}
+\]
+
+This provides:
+
+1. **Dimension-specific forgetting**: Different cognitive dimensions have different decay rates.
+2. **Phase-sensitive retrieval**: Memories at similar phase angles are preferentially retrieved.
+3. **Resonance amplification**: When current conditions align with historical patterns at the same phase, memory signals are amplified.
+4. **Interference cancellation**: Contradictory memories at different phases can cancel out.
+
+### 9.4 Geometric Memory Field
+
+Historical memories create a **memory field** on S⁸—a deformation of the manifold's geometry:
+
+- **Positive curvature** (attractor): Areas of high historical trading density attract future trajectories (mean reversion).
+- **Negative curvature** (repeller): Areas of unexplored territory repel future trajectories (breakout/black swan).
+
+This geometric memory field provides an **intuitive sense** of market structure—the cognitive equivalent of "market intuition."
+
+
+## 10. Auditability and Governance
+
+### 10.1 The Auditability Imperative
+
+Financial AI systems operate under strict regulatory requirements. Research has shown that agentic systems struggle substantially on auditing and hedging, where long-horizon coordination, state consistency, and structured verification are critical [1][4]. Agentic Trading surveys have foregrounded evidence ledger, reproducibility audit, and reporting checklists as main contributions [3]. The "black box" problem has been identified as a major risk by financial regulators and institutions.
+
+Aether-HexQ is designed as a **white-box** system from the ground up.
+
+### 10.2 Immutable Audit Chain
+
+Every arbitration decision is recorded in an **immutable audit database** with:
+
+| Field | Description |
+|-------|-------------|
+| timestamp | Exact time of the arbitration event |
+| conflict_source | HF-1 / HF-2 / HF-3 / HF-4 (triggering modules) |
+| input_system_state | Complete pre-decision system state |
+| arbiter_logic | Which arbitration rule was applied |
+| final_action | The最终 executed action |
+| system_fingerprint | SHA-256 hash of post-execution system state |
+
+The audit database is **write-once, never modified**, with dual backup (local + cloud).
+
+### 10.3 Watchdog Sentinel
+
+The **Watchdog Sentinel** is an independent process that serves as the "last witness" if the main system crashes:
+
+- **Heartbeat monitoring**: The arbitration module sends a heartbeat every 30 seconds.
+- **Failure detection**: If 3 heartbeats are missed (120 seconds), the sentinel triggers.
+- **Last witness recording**: The sentinel independently records:
+  - Last known system state fingerprint
+  - Trigger time and reason
+  - Preserved memory dump
+
+This ensures that even in the event of complete system failure, the last moments of cognitive activity are preserved for forensic analysis.
+
+
+## 11. Comparison with Existing Approaches
+
+| Dimension | Current LLM-Based Financial AI | Aether-HexQ |
+|-----------|-------------------------------|-------------|
+| **Cognitive Primitive** | Token (probabilistic) | Ternary spinor (+1/0/−1) |
+| **Reasoning Mechanism** | Probabilistic token prediction | Deterministic geodesic evolution |
+| **Interpretability** | Black box, CoT unreliable | White box, audit chain + hexagram readings |
+| **Memory Structure** | Stateless, resets each inference | Accumulative, preserves full history |
+| **Uncertainty** | Hidden, source of hallucination | Legitimate state, driver of cognitive singularity |
+| **Domain Adaptation** | General, requires fine-tuning | Finance-native, nine-dimensional architecture |
+| **Computational Paradigm** | Scale competition | Structure competition |
+| **Regulatory Compliance** | Challenge (black box) | Native (full auditability) |
+| **Cognitive Openness** | Fixed architecture | Open \(3^n\) expansion |
+| **Phase Discovery** | Not applicable | Four Phases discovered from data flow |
+
+Recent work on geometry-informed financial modeling has demonstrated the value of embedding high-dimensional market data onto constant curvature manifolds [10][11]. Aether-HexQ extends this approach by:
+1. Moving from 2-manifolds to the S⁸ symplectic manifold
+2. Introducing ternary cognitive primitives
+3. Adding π-e coupled dynamics
+4. Implementing four-phase momentum discovery
+5. Enabling open cognitive universe expansion
+
+
+## 12. Conclusion
+
+### 12.1 Summary of Contributions
+
+This paper has presented Aether-HexQ, a nine-dimensional ternary cognitive architecture for autonomous financial agents. The architecture represents a **paradigm shift** from:
+
+1. **Binary to Ternary**: Moving from ±1 to +1/0/−1 as the fundamental cognitive primitive, making uncertainty a legitimate cognitive state.
+
+2. **Probabilistic to Geometric**: Replacing probabilistic token prediction with deterministic geodesic evolution on an S⁸ symplectic manifold.
+
+3. **Stateless to Accumulative**: Replacing overwriting memory with accumulative ternary memory that preserves complete historical context.
+
+4. **Black Box to White Box**: Replacing uninterpretable neural networks with fully auditable geometric reasoning, supported by an immutable audit chain and watchdog sentinel.
+
+5. **Static to Dynamic**: Introducing π-e coupled dynamics that enable the system to distinguish between cyclical repetition (π) and structural transformation (e).
+
+6. **Position-Only to Momentum-Aware**: Introducing the four-phase framework (Old Yang, Young Yin, Old Yin, Young Yang) that captures both position and momentum, enabling prediction of regime transitions before they manifest in price action.
+
+7. **Fixed to Open**: Enabling cognitive expansion from \(3^9\) to \(3^n\), allowing the system to discover new dimensions as needed.
+
+### 12.2 Philosophical Grounding
+
+The architecture is grounded in the classical Chinese philosophical sequence:
+
+> **道生一，一生二，二生三，三生万物**
+>
+> *The Dao generates the One; the One generates the Two; the Two generates the Three; the Three generates the Myriad Things.*
+
+This sequence is realized in the architecture as:
+
+- **Dao**: Universal Ripple Axiom (the ungrounded ground)
+- **One**: S⁸ symplectic manifold (unified geometric field)
+- **Two**: Binary opposition (positive/negative, long/short)
+- **Three**: Ternary spinors (+1/0/−1)
+- **Myriad Things**: \(3^9 = 19,683\) hexagram states
+
+And the discovery direction:
+
+> **万物生四象**
+>
+> *The Myriad Things generate the Four Phases.*
+
+This is realized as the system observing the flow of market data and discovering the four typical movement patterns—Old Yang, Young Yin, Old Yin, Young Yang—within that flow.
+
+### 12.3 Broader Implications
+
+Beyond financial markets, the cognitive architecture presented here has implications for:
+
+- **General AI cognition**: The ternary cognitive primitive and π-e dynamics may be applicable to other domains requiring handling of uncertainty and structural transitions.
+- **Philosophy of AI**: The architecture demonstrates how philosophical frameworks (Dao, Yin-Yang, Three Powers) can be rigorously formalized and computationally implemented.
+- **Regulatory AI**: The white-box, auditable design provides a template for AI systems in regulated industries.
+- **Cross-domain application**: The framework's open cognitive universe capability makes it adaptable to domains including traditional Chinese medicine (where the nine dimensions can map to diagnostic categories), climate prediction (where the S⁸ manifold can represent atmospheric state spaces), and autonomous systems (where the four-phase framework can capture behavioral modes).
+
+### 12.4 Future Work
+
+**Immediate priorities**:
+1. **Empirical validation**: Backtest the system on historical market data (2008, 2015, 2020, 2024 crises) to validate regime detection accuracy and cognitive singularity prediction.
+2. **Domain adaptation**: Map the nine dimensions to other domains (TCM diagnostic categories, climate state variables, autonomous driving perception layers).
+
+**Medium-term directions**:
+3. **Neural implementation**: Explore integration with BitNet b1.58-style ternary neural networks for efficient deployment.
+4. **Human-AI collaboration**: Develop interfaces for human traders to interact with and override the system's cognitive states.
+
+**Long-term research**:
+5. **Optimality proof**: Establish formal proof that the S⁸ manifold + ternary spinor + π-e dynamics constitutes an optimal cognitive architecture for non-stationary complex systems.
+6. **Open-source release**: Release core modules (nine-dimensional analysis, risk dashboard) as open-source tools for the research community.
+
+### 12.5 Final Remarks
+
+Current financial AI systems operate on cognitive architectures designed for a world of **certainty**—a world where every question has a binary answer. But financial markets are not worlds of certainty; they are worlds of **ambiguity, structural transition, and emergent complexity**.
+
+Aether-HexQ offers a cognitive architecture that matches the **nature of the domain**—a system that can natively represent uncertainty, geometrically compute structural transitions, and auditably account for every decision. It is not merely an incremental improvement on existing systems; it is a **paradigm shift** in how we conceptualize and implement financial intelligence.
+
+> *"The Dao generates the One. The One generates the Two. The Two generates the Three. The Three generates the Myriad Things. The Myriad Things generate the Four Phases."*
+
+In Aether-HexQ, this ancient wisdom becomes **computable**.
+
+
+## References
+
+[1] Aldridge, I., et al. "Agentic Artificial Intelligence in Finance: A Comprehensive Survey." *arXiv:2604.21672*, 2026.
+
+[2] Zhu, T., et al. "From Knowing to Doing: A Memory-Controlled Benchmark for LLM Trading Agents on Stock Markets." *arXiv:2605.28359*, 2026.
+
+[3] "Agentic Trading: When LLM Agents Meet Financial Markets." *arXiv:2605.19337*, 2026.
+
+[4] "Agentic FinTech: A Comprehensive Survey on AI Agents in Finance in the Era of LLMs." *GitHub*, 2026.
+
+[5] Letteri, I. "AgenticAITA: A Proof-Of-Concept About Deliberative Multi-Agent Reasoning for Autonomous Trading Systems." *arXiv:2605.12532*, 2026.
+
+[6] Yuan, Y., et al. "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading." *arXiv:2605.05580*, 2026.
+
+[7] Papadakis, C., et al. "ATLAS: Adaptive Trading with LLM AgentS Through Dynamic Prompt Optimization and Multi-Agent Coordination." *arXiv:2510.15949*, 2025/2026.
+
+[8] Song, Z., et al. "Trade in Minutes! Rationality-Driven Agentic System for Quantitative Financial Trading." *arXiv:2510.04787*, 2025/2026.
+
+[9] "QFinZero: A Unified Financial Toolchain for LLM-Based Trading Agents." *ACL Anthology*, 2026.
+
+[10] Papaioannou, P.G. and Yannacopoulos, A.N. "The Shape of Markets: Machine learning modeling and Prediction Using 2-Manifold Geometries." *arXiv:2511.05030*, 2025/2026.
+
+[11] "From Topology to Geometry: A Neural Ricci Flow Framework for Predicting Flash Crashes and Contagion." *IEEE Access*, Vol. 14, pp. 26912-26934, 2026.
+
+[12] "Quantum Hyperbolic Deep Learning for Foreign-Exchange Trading: A Hybrid Reinforcement-Learning Pipeline over Attractor-Aware Magnet-Price Manifolds." *MDPI*, 2026.
+
+[13] Ozimek, K. "Cross-sectional topological anomaly scores and intraday return predictability in the S&P 500: A BallMapper, decoder-conditional VAE, and Function-on-Function regression approach." *arXiv:2606.08586*, 2026.
+
+[14] "Predicting carbon futures volatility: New evidence based on topological features of crude oil, natural gas and climate risk indicators." *ScienceDirect*, 2026.
+
+[15] Lin, Z.-W. and Chang, T.-S. "VitaLLM: A Versatile, Ultra-Compact Ternary LLM Accelerator with Dependency-Aware Scheduling." *IEEE Transactions on Circuits and Systems for Artificial Intelligence*, 2026.
+
+[16] "A T8T-SRAM Computing-in-Memory Macro for Ternary Deep Neural Networks and Boolean Logic Computations." *IEEE*, 2026.
+
+[17] "NativeTernary: A Self-Delimiting Binary Encoding with Unary Run-Length Hierarchy Markers for Ternary Neural Network Weights, Structured Data, and General Computing Infrastructure." *arXiv*, 2026.
+
+[18] Zhu, D., et al. "FundaPod: A Multi-Persona Agent Pod Platform with Knowledge Graph Memory for AI-Assisted Fundamental Investment Research." *arXiv:2605.27864*, 2026.
+
+[19] "Cogito: A Cognitive Agentic Framework Driven by Dynamic Graph of Thoughts for Financial Report Generation." *ACL Anthology*, 2026.
+
+[20] "Absorbing Complexity: An Interaction-Native Knowledge Harness for Financial LLM Agents." *arXiv*, 2026.
+
+[21] "FinSight: Towards Real-World Financial Deep Research." *ACL Anthology*, 2026.
+
+[22] "A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology." *arXiv*, 2026.
+
+[23] "MoCA-Agent: A Market-of-Claims Code Agent for Financial and Numerical Reasoning." *arXiv:2606.11537*, 2026.
+
+[24] "AgentFinVQA: A Deployable Multi-Agent Pipeline for Auditable Financial Chart QA." *arXiv*, 2026.
+
+[25] "MASCA: LLM-based Multi-Agent System for Credit Assessment." *arXiv*, 2026.
+
+[26] "FinCom: A Financial Multi-Agent Demo with Disagree-or-Commit Deliberation." *arXiv*, 2026.
+
+[27] "MimirRAG: A Multi-Agent RAG Framework for Financial Data Retrieval with Metadata Integration." *arXiv*, 2026.
+
+[28] "Analytica: Soft Propositional Reasoning for Robust and Scalable LLM-Driven Analysis." *arXiv*, 2026.

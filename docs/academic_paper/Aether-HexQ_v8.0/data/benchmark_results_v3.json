@@ -1,0 +1,279 @@
+{
+  "meta": {
+    "date": "2026-07-13 23:46",
+    "data_source": "FRED (fred.stlouisfed.org)",
+    "n_systems": 11,
+    "n_obs": 2473,
+    "date_range": "2016-07-11 to 2026-07-02"
+  },
+  "permutation_tests": {
+    "SP500": {
+      "accuracy": 0.3588,
+      "p_value": 0.004,
+      "null_mean": 0.3518,
+      "null_std": 0.0026,
+      "n_obs": 2411,
+      "pct_abstention": 97.6
+    },
+    "NASDAQCOM": {
+      "accuracy": 0.3438,
+      "p_value": 0.212,
+      "null_mean": 0.3419,
+      "null_std": 0.0021,
+      "n_obs": 2411,
+      "pct_abstention": 98.4
+    },
+    "DJIA": {
+      "accuracy": 0.3546,
+      "p_value": 0.024,
+      "null_mean": 0.3489,
+      "null_std": 0.0028,
+      "n_obs": 2411,
+      "pct_abstention": 97.1
+    },
+    "DCOILWTICO": {
+      "accuracy": 0.3426,
+      "p_value": 0.85,
+      "null_mean": 0.3455,
+      "null_std": 0.003,
+      "n_obs": 2411,
+      "pct_abstention": 97.0
+    },
+    "DEXUSEU": {
+      "accuracy": 0.3376,
+      "p_value": 0.112,
+      "null_mean": 0.3342,
+      "null_std": 0.0028,
+      "n_obs": 2411,
+      "pct_abstention": 96.7
+    },
+    "DEXJPUS": {
+      "accuracy": 0.3438,
+      "p_value": 0.964,
+      "null_mean": 0.3465,
+      "null_std": 0.0017,
+      "n_obs": 2411,
+      "pct_abstention": 98.8
+    },
+    "DGS10": {
+      "accuracy": 0.3467,
+      "p_value": 0.794,
+      "null_mean": 0.3485,
+      "null_std": 0.0023,
+      "n_obs": 2411,
+      "pct_abstention": 98.1
+    },
+    "DGS2": {
+      "accuracy": 0.37,
+      "p_value": 0.05,
+      "null_mean": 0.3658,
+      "null_std": 0.0022,
+      "n_obs": 2411,
+      "pct_abstention": 98.1
+    },
+    "DTWEXBGS": {
+      "accuracy": 0.3339,
+      "p_value": 0.556,
+      "null_mean": 0.3341,
+      "null_std": 0.003,
+      "n_obs": 2411,
+      "pct_abstention": 96.9
+    },
+    "VIXCLS": {
+      "accuracy": 0.3758,
+      "p_value": 0.028,
+      "null_mean": 0.3698,
+      "null_std": 0.0029,
+      "n_obs": 2411,
+      "pct_abstention": 97.3
+    },
+    "T10Y2Y": {
+      "accuracy": 0.3501,
+      "p_value": 0.124,
+      "null_mean": 0.3477,
+      "null_std": 0.0018,
+      "n_obs": 2411,
+      "pct_abstention": 98.9
+    }
+  },
+  "alpha_tests": {
+    "SP500": {
+      "alpha_ann_pct": -57.182,
+      "t_stat": -12.029,
+      "strat_mean_ann": -59.216,
+      "strat_vol_ann": 14.459,
+      "info_ratio": -3.955,
+      "n_obs": 2471
+    },
+    "NASDAQCOM": {
+      "alpha_ann_pct": -78.17,
+      "t_stat": -14.611,
+      "strat_mean_ann": -80.521,
+      "strat_vol_ann": 17.839,
+      "info_ratio": -4.382,
+      "n_obs": 2471
+    },
+    "DJIA": {
+      "alpha_ann_pct": -52.741,
+      "t_stat": -11.871,
+      "strat_mean_ann": -54.548,
+      "strat_vol_ann": 13.953,
+      "info_ratio": -3.78,
+      "n_obs": 2471
+    },
+    "DCOILWTICO": {
+      "alpha_ann_pct": -167.508,
+      "t_stat": -6.583,
+      "strat_mean_ann": -166.371,
+      "strat_vol_ann": 110.792,
+      "info_ratio": -1.512,
+      "n_obs": 2471
+    },
+    "DEXUSEU": {
+      "alpha_ann_pct": -27.379,
+      "t_stat": -17.143,
+      "strat_mean_ann": -27.655,
+      "strat_vol_ann": 5.814,
+      "info_ratio": -4.709,
+      "n_obs": 2471
+    },
+    "DEXJPUS": {
+      "alpha_ann_pct": -36.159,
+      "t_stat": -16.584,
+      "strat_mean_ann": -36.662,
+      "strat_vol_ann": 7.413,
+      "info_ratio": -4.878,
+      "n_obs": 2471
+    }
+  },
+  "shift_tests": {
+    "SP500": {
+      "pre_mean": 0.0896,
+      "post_mean": 0.0569,
+      "delta": 0.0327,
+      "wasserstein": 0.0327,
+      "ks_stat": 0.0187,
+      "ks_p": 0.9883,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "NASDAQCOM": {
+      "pre_mean": 0.0693,
+      "post_mean": 0.0501,
+      "delta": 0.0192,
+      "wasserstein": 0.021,
+      "ks_stat": 0.0201,
+      "ks_p": 0.9751,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DJIA": {
+      "pre_mean": 0.0681,
+      "post_mean": 0.052,
+      "delta": 0.0161,
+      "wasserstein": 0.0161,
+      "ks_stat": 0.0146,
+      "ks_p": 0.9997,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DCOILWTICO": {
+      "pre_mean": 0.0203,
+      "post_mean": 0.0266,
+      "delta": 0.0063,
+      "wasserstein": 0.0393,
+      "ks_stat": 0.0228,
+      "ks_p": 0.928,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DEXUSEU": {
+      "pre_mean": -0.0215,
+      "post_mean": -0.005,
+      "delta": 0.0166,
+      "wasserstein": 0.0166,
+      "ks_stat": 0.0136,
+      "ks_p": 0.9999,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DEXJPUS": {
+      "pre_mean": 0.0072,
+      "post_mean": 0.0031,
+      "delta": 0.0041,
+      "wasserstein": 0.0067,
+      "ks_stat": 0.0054,
+      "ks_p": 1.0,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DGS10": {
+      "pre_mean": -0.006,
+      "post_mean": -0.008,
+      "delta": 0.0021,
+      "wasserstein": 0.009,
+      "ks_stat": 0.0055,
+      "ks_p": 1.0,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DGS2": {
+      "pre_mean": 0.0251,
+      "post_mean": -0.0093,
+      "delta": 0.0344,
+      "wasserstein": 0.0344,
+      "ks_stat": 0.0231,
+      "ks_p": 0.9205,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "DTWEXBGS": {
+      "pre_mean": -0.0239,
+      "post_mean": -0.0087,
+      "delta": 0.0152,
+      "wasserstein": 0.0758,
+      "ks_stat": 0.0455,
+      "ks_p": 0.1961,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "VIXCLS": {
+      "pre_mean": -0.1063,
+      "post_mean": -0.112,
+      "delta": 0.0057,
+      "wasserstein": 0.0147,
+      "ks_stat": 0.0102,
+      "ks_p": 1.0,
+      "n_pre": 837,
+      "n_post": 1616
+    },
+    "T10Y2Y": {
+      "pre_mean": -0.0072,
+      "post_mean": -0.0161,
+      "delta": 0.0089,
+      "wasserstein": 0.0089,
+      "ks_stat": 0.0074,
+      "ks_p": 1.0,
+      "n_pre": 837,
+      "n_post": 1616
+    }
+  },
+  "ablation": {
+    "Full NDTA (baseline)": {
+      "rel_acc": 1.0,
+      "rel_sharpe": 1.0
+    },
+    "A1: Binary Only (no 0)": {
+      "rel_acc": 0.3507,
+      "note": "Removing ternary neutral state"
+    },
+    "A1: Binary Only": {
+      "rel_acc": 1.832,
+      "abs_acc": 0.6424
+    },
+    "A4: Random Classification": {
+      "rel_acc": 0.95,
+      "abs_acc": 0.3333
+    }
+  }
+}

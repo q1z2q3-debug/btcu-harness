@@ -1,0 +1,8 @@
+﻿# A Nine-Dimensional Ternary Cognitive Architecture for Autonomous Financial Agents
+
+**Authors**: Aether-HexQ Global Research Group
+**Date**: July 2026
+
+## Abstract
+
+Current financial AI systems predominantly operate on binary logic...

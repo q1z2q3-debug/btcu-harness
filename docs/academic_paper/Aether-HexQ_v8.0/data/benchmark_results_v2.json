@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "date": "2026-07-13 23:45",
+    "n_systems": 12,
+    "n_obs_total": 74,
+    "date_range": "2016-08-01 to 2025-12-01",
+    "data_source": "FRED (Federal Reserve Economic Data)"
+  },
+  "permutation_tests": {},
+  "alpha_tests": {
+    "SP500": {
+      "alpha_ann_pct": -80.293,
+      "t_stat": -0.508,
+      "n_obs": 72
+    },
+    "NASDAQCOM": {
+      "alpha_ann_pct": -209.035,
+      "t_stat": -1.252,
+      "n_obs": 72
+    },
+    "DJIA": {
+      "alpha_ann_pct": -207.924,
+      "t_stat": -2.007,
+      "n_obs": 72
+    },
+    "DCOILWTICO": {
+      "alpha_ann_pct": -1092.219,
+      "t_stat": -1.745,
+      "n_obs": 72
+    },
+    "DEXUSEU": {
+      "alpha_ann_pct": -82.334,
+      "t_stat": -1.962,
+      "n_obs": 72
+    },
+    "DEXJPUS": {
+      "alpha_ann_pct": -114.305,
+      "t_stat": -1.699,
+      "n_obs": 72
+    }
+  },
+  "shift_tests": {},
+  "regime_dist": {
+    "SP500": {
+      "yang": 17,
+      "neutral": 15,
+      "yin": 22
+    },
+    "NASDAQCOM": {
+      "yang": 17,
+      "neutral": 14,
+      "yin": 23
+    },
+    "DJIA": {
+      "yang": 16,
+      "neutral": 24,
+      "yin": 14
+    },
+    "DCOILWTICO": {
+      "yang": 14,
+      "neutral": 25,
+      "yin": 15
+    },
+    "DEXUSEU": {
+      "yang": 17,
+      "neutral": 16,
+      "yin": 21
+    },
+    "DEXJPUS": {
+      "yang": 15,
+      "neutral": 19,
+      "yin": 20
+    },
+    "DGS10": {
+      "yang": 15,
+      "neutral": 21,
+      "yin": 18
+    },
+    "DGS2": {
+      "yang": 21,
+      "neutral": 8,
+      "yin": 25
+    },
+    "DTWEXBGS": {
+      "yang": 15,
+      "neutral": 21,
+      "yin": 18
+    },
+    "VIXCLS": {
+      "yang": 14,
+      "neutral": 19,
+      "yin": 21
+    },
+    "T10Y2Y": {
+      "yang": 18,
+      "neutral": 9,
+      "yin": 27
+    },
+    "SPASTT01EZM661N": {
+      "yang": 20,
+      "neutral": 15,
+      "yin": 19
+    }
+  }
+}

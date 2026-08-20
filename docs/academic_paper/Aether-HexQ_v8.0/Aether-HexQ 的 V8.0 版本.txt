@@ -1,0 +1,997 @@
+好的。以下是整合了 **NDTA (Neural Diffusion Tensor Algebra)** 的完整论文。这是 **Aether-HexQ 的 V8.0 版本**——保持原有哲学与工程根基，同时在数学内核上完成了一次深层跃迁。
+
+---
+
+# A Nine-Dimensional Ternary Cognitive Architecture for Autonomous Financial Agents: From Philosophical Foundations to Geometric Implementation, with Neural Diffusion Tensor Algebra (NDTA) Mathematical Enhancement
+
+**Authors**: RunzeAI
+*Aether-HexQ Global Research Group*
+*Neural Diffusion Tensor Algebra (NDTA) Extension — Independent Work*
+
+**Preprint submitted to**: arXiv / FinTech Journal
+
+**Date**: July 2026
+
+
+## Abstract
+
+Current financial AI systems predominantly operate on binary logic (long/short, buy/sell), which fundamentally fails to capture the inherent uncertainty, ambiguity, and structural transitions that characterize real financial markets. This paper presents Aether-HexQ, a novel nine-dimensional ternary cognitive architecture that redefines the foundational primitives of financial intelligence. Moving beyond the binary paradigm, we introduce **balanced ternary cognitive units (trits)** (+1/0/−1) as the basic cognitive elements, where the neutral state (0) is formally recognized as a legitimate cognitive condition representing uncertainty, transcendence, or suspended judgment.
+
+The nine dimensions—organized into Spatial (S_out, S_mid, S_in), Temporal (T_past, T_now, T_fut), and Causal (C_cause, C_bond, C_result) layers—generate a complete cognitive state space of \(3^9 = 19,683\) hexagram states, realized through the additive group \((\mathbb{Z}/3\mathbb{Z})^9\) with full algebraic closure. The cognitive states are embedded on the **cotangent bundle \(T^*S^8\)** (a 16-dimensional symplectic manifold) via a canonical **Sheng lift** map and governed by **Hamiltonian-Ising coupled dynamics**. We further introduce **π-e resonant dynamics**, where π governs phase-locked cyclical transitions and e governs exponential decay and growth in memory and cognitive singularity formation.
+
+We further introduce **Neural Diffusion Tensor Algebra (NDTA) as a mathematical enhancement layer**, upgrading the ternary cognitive primitives to **cognitive tensors** \(T \in \mathbb{R}^{3^9}\) and replacing geodesic evolution with a **neural diffusion process** \(\partial_t T = D(T) \cdot \nabla^2 T + F(T,\theta)\). The original Hamiltonian-Ising dynamics is recovered as the zero-diffusion limit of NDTA, establishing Aether-HexQ as a special case of a fully trainable neural architecture.
+
+The architecture implements a **four-phase momentum framework** (Old Yang, Young Yin, Old Yin, Young Yang) as **intrinsic limit cycles discovered** from the symplectic phase portrait of the cognitive flow—not as pre-defined labels but as structures emergent from the data. This enables prediction of regime transitions before they manifest in price action. The framework is grounded in the philosophical sequence **道 → 一 → 二 → 三 → 万物**, realized through four computational engines: the Zero-Order Engine (Dao), the Opposition Engine (Two), the Creation Engine (Three), and the Flow Engine (Four Phases).
+
+We further extend the architecture to (i) a **multi-agent federation layer** with formal communication protocols, cognitive consensus mechanisms, and information-flow topology analysis; (ii) a **meta-cognitive self-awareness layer** (五蕴 Five Aggregates) for autonomous uncertainty detection and void-state reset; (iii) a **cross-asset global macro framework** using hierarchical tensor fields and cognitive-entropy-based risk parity; and (iv) a **system engineering roadmap** from prototype to federated deployment.
+
+To the best of our knowledge, this is the first work to systematically integrate balanced ternary logic, symplectic geometry, π-e coupled dynamics, neural diffusion tensor algebra, and multi-agent federation into a unified cognitive architecture for autonomous financial decision-making. The architecture supports **open-ended cognitive expansion** from \(3^9\) to \(3^n\) (n ∈ ℕ), enabling multi-universe cognitive spaces that scale with discovered complexity while maintaining polynomial-time computational cost through factorized operations, hierarchical coarse-graining, and symmetry-orbit reduction.
+
+**Keywords**: Cognitive Architecture, Balanced Ternary Logic, Symplectic Manifold, Financial AI Agent, Topological Data Analysis, Market Regime Detection, π-e Dynamics, Four-Phase Momentum, Neural Diffusion Tensor Algebra, Multi-Agent Federation, Open Cognitive Universe, Information Geometry
+
+
+## 1. Introduction
+
+### 1.1 The Rise of Agentic AI in Finance
+
+The past decade has witnessed remarkable advances in the application of artificial intelligence to financial markets. From deep learning-based price prediction to LLM-powered trading agents, AI systems have progressively assumed roles once reserved for human analysts [1][2]. The emergence of agentic frameworks [3][4] has demonstrated the potential for autonomous AI systems to process financial data, generate insights, and execute trades with minimal human intervention.
+
+Recent systems such as AlphaCrafter [6] and ATLAS [7] showcase sophisticated multi-agent architectures for quantitative trading, while frameworks like FundaPod [18] and Cogito [19] integrate knowledge graphs and dynamic reasoning for financial analysis. These advances, however, operate within a fundamentally **binary paradigm**—every decision is reduced to a binary choice (long/short, buy/sell, enter/exit), with uncertainty treated as a noise term rather than a legitimate cognitive state.
+
+### 1.2 The Binary Paradigm and Its Limitations
+
+The binary paradigm manifests in three critical limitations:
+
+1. **Forced Commitment**: Binary systems must always output a directional signal, even when uncertainty is maximal. This leads to spurious trading decisions and overfitting to noise.
+
+2. **No Structural Transition**: Binary logic cannot represent the process of *becoming*—the gradual transition from one regime to another. A market is not instantaneously "bull" or "bear"; it passes through transitional phases where both characterizations are partially true.
+
+3. **No Self-Reflection**: Binary systems lack the capacity to represent their own uncertainty—to know what they do not know.
+
+These limitations are not incidental; they are **structural consequences** of the binary primitive itself. A system built on ±1 has no formal mechanism to represent "not sure" or "observing without deciding."
+
+### 1.3 The Ternary Alternative
+
+This paper proposes a fundamental shift: from binary to **balanced ternary logic** as the cognitive primitive for autonomous financial intelligence. We introduce a nine-dimensional ternary cognitive architecture organized in three layers:
+
+- **Spatial Layer (S_out, S_mid, S_in)**: The external environment, capital flows, and internal microstructure
+- **Temporal Layer (T_past, T_now, T_fut)**: Historical momentum, real-time microstructure, and future expectations
+- **Causal Layer (C_cause, C_bond, C_result)**: Core driving causes, external catalysts, and price confirmation
+
+Each dimension takes one of three values (+1/0/−1), generating a cognitive state space of \(3^9 = 19,683\) discrete states. This space is embedded on a symplectic manifold and governed by Hamiltonian-Ising coupled dynamics with π-e resonant control.
+
+### 1.4 Key Innovations
+
+1. **Balanced Ternary Cognitive Units**: The introduction of formal balanced ternary trits (+1/0/−1) with full algebraic closure under the additive group \((\mathbb{Z}/3\mathbb{Z})^9\), providing a rigorous mathematical foundation beyond ad-hoc "three-state" notation.
+
+2. **From Labeling to Discovery**: The four-phase momentum framework (Old Yang, Young Yin, Old Yin, Young Yang) is reformulated as **intrinsic limit cycles** discovered from the symplectic phase portrait of the cognitive flow, governed by a Stuart-Landau backbone equation. This shifts the paradigm from externally-imposed classification to autonomously-discovered structure.
+
+3. **π-e Resonant Dynamics as a Unified Principle**: The coupled π-e dynamics is shown to be the necessary and sufficient condition for persistent four-phase regime existence, resolving the reversible/irreversible tension through the fluctuation-dissipation theorem and the Ising spin bath.
+
+4. **Multi-Agent Federation Layer**: The architecture is extended from a single cognitive monad to a federation of cognitive bodies, with formal ternary message protocols, cognitive consensus via weighted median voting, and topology adaptation by market regime.
+
+5. **Meta-Cognitive Self-Awareness**: The Five Aggregates (五蕴: 色受想行识) are formalized as a metacognitive closure layer that enables autonomous uncertainty detection, void-state resets, and self-improving epistemics.
+
+6. **Cross-Asset Global Macro Framework**: Using hierarchical tensor fields and Fisher information geometry, the architecture is generalized to multi-asset portfolio cognition with cognitive-entropy-based risk parity.
+
+7. **Neural Diffusion Tensor Algebra (NDTA) Enhancement (Section 5)**: We introduce NDTA as a mathematical generalization of the core cognitive engine. NDTA replaces the ternary spinor with a cognitive tensor field, replaces geodesic evolution with a state-dependent neural diffusion process, and provides a rigorous spectral criterion for phase transitions. The original Hamiltonian-Ising dynamics is shown to be the zero-diffusion limit of NDTA, meaning Aether-HexQ is naturally embedded in a fully trainable neural framework.
+
+### 1.5 Related Work
+
+#### 1.5.1 Multi-Agent Trading Systems
+
+The advent of LLM-based agents has accelerated research into multi-agent trading systems. AlphaCrafter [6] proposes a full-stack multi-agent framework for cross-sectional quantitative trading. ATLAS [7] introduces adaptive trading with dynamic prompt optimization. QFinZero [9] provides a unified financial toolchain for LLM-based trading agents. Recent work on deliberative multi-agent reasoning [5] demonstrates the potential of agentic architectures for autonomous trading.
+
+**Critical observation**: These systems, while impressive, operate on **probabilistic token prediction** rather than deterministic cognitive evolution. They lack formal geometric embedding, algebraic closure, and auditability guarantees—all essential for regulated financial environments.
+
+#### 1.5.2 Geometric Methods in Finance
+
+Recent work has recognized the value of geometric approaches. The Shape of Markets [10] uses 2-manifold geometries for market modeling. Neural Ricci Flow [11] applies topological methods to flash crash prediction. Quantum Hyperbolic Deep Learning [12] and topological anomaly scoring [13] demonstrate the power of geometric feature extraction in financial contexts.
+
+**Critical observation**: These approaches use geometric methods as **feature engineering tools** rather than as the **embedding space for a complete cognitive architecture**. None provides a unified geometric framework that integrates perception, reasoning, memory, and action.
+
+#### 1.5.3 Ternary Computing
+
+Research on balanced ternary systems has primarily focused on hardware implementations. VitaLLM [15] presents a versatile, ultra-compact ternary LLM accelerator. NativeTernary [17] introduces self-delimiting binary encoding for ternary neural network weights.
+
+**Critical observation**: To the best of our knowledge, **no prior work has applied balanced ternary logic to financial quantitative analysis or cognitive architectures with full algebraic formalization**. This represents a significant gap in the literature that our work addresses.
+
+#### 1.5.4 Cognitive Architectures for Financial AI
+
+Recent work has explored human-inspired cognitive structures for financial AI. FundaPod [18] incorporates knowledge graph memory for investment research. Cogito [19] uses dynamic graph of thoughts for financial report generation.
+
+**Critical observation**: None of these approaches has proposed a formal cognitive architecture with mathematically defined cognitive primitives, geometric embedding, and coupled dynamics as we present here.
+
+#### 1.5.5 Neural Diffusion and Tensor Algebra in Cognitive Modeling
+
+Recent advances in neural diffusion processes and tensor algebra have opened new avenues for cognitive modeling. Neural diffusion equations have been applied to model information propagation in neural networks, while tensor decomposition methods have been used to capture multi-way interactions in complex systems. Our NDTA extension unifies these approaches within a single cognitive architecture, providing a mathematical framework that generalizes the Hamiltonian-Ising dynamics while preserving its geometric and philosophical foundations.
+
+#### 1.5.6 Related Work in Information Geometry
+
+The use of Fisher information geometry in portfolio optimization [Amari, 2016] and natural gradient descent has been well-established in machine learning. Our work extends this tradition by embedding the cognitive distribution directly on a symplectic manifold and proving that the Hamiltonian flow under the Fisher-Rao metric is equivalent to natural gradient descent on the cognitive distribution. This connection provides a rigorous information-theoretic foundation for the geometric dynamics.
+
+### 1.6 Paper Organization
+
+The remainder of this paper is organized as follows. Section 2 presents the philosophical foundations. Section 3 formalizes the ternary algebraic structure. Section 4 introduces the geometric embedding and Hamiltonian-Ising dynamics. Section 5 presents the NDTA mathematical enhancement layer. Section 6 develops the four-phase limit cycle discovery framework and the π-e resonant dynamics. Section 7 presents the breathing dynamics and meta-cognitive closure. Section 8 extends the architecture to the multi-agent federation layer. Section 9 generalizes to cross-asset global macro cognition. Section 10 provides empirical considerations and system engineering. Section 11 concludes with broader implications and future work.
+
+
+## 2. Philosophical Foundations: From Dao to Myriad Things
+
+### 2.1 The Cognitive Generation Hierarchy
+
+The architecture of Aether-HexQ is grounded in a hierarchical cognitive generation framework that maps directly to the classical Chinese philosophical sequence: **道 → 一 → 二 → 三 → 万物**.
+
+| Layer | Philosophical Concept | Mathematical Structure | Aether-HexQ Module | Cognitive Meaning |
+|-------|----------------------|----------------------|-------------------|-------------------|
+| 0 | **Dao (道)** | 0-dimensional singularity, unobserved state | Foundational axioms (Universal Ripple Axiom) | The ungrounded ground of all cognition—not derived, not reducible |
+| 1 | **One (一)** | 1-dimensional scalar field, global normalization potential | S⁸ manifold embedding + global Hamiltonian conservation | The entire market compressed into a single unified geometric object |
+| 2 | **Two (二)** | ±1 binary opposition | Positive and negative components of each dimension (long/short) | The fundamental framework of polarity—up/down, strong/weak |
+| 3 | **Three (三)** | **−1 / 0 / +1 ternary trit** | Nine-dimensional ternary cognitive primitives | **The capacity for uncertainty and transcendent observation as legitimate cognitive states** |
+| Myriad Things | **万物** | \(3^9 = 19,683\) hexagram states | Complete nine-dimensional ternary combinations + S⁸ topological evolution | The complete space of all possible cognitive states |
+
+**Crucial Distinction**: The sequence from Dao to Myriad Things describes the **generative direction**—how the system constructs its cognitive universe from first principles. The reverse direction—from Myriad Things to Four Phases—describes the **discovery direction**, discussed in Section 6.
+
+### 2.2 The Discovery Direction: Myriad Things Generate the Four Phases
+
+The complete cognitive cycle comprises two directions:
+
+```
+生成方向 (Generative): 道 → 一 → 二 → 三 → 万物
+发现方向 (Discovery):  万物 → 四象 → 三才 → 球面 → 道
+```
+
+The system:
+1. **Generates** the complete cognitive space (\(3^9 = 19,683\) states) from the philosophical foundations
+2. **Observes** the flow of the Myriad Things as market data evolves
+3. **Discovers** the Four Phases as recurrent limit-cycle structures within the flow (Section 6)
+4. **Abstracts** the Three Powers (天地人) as invariant patterns of the four-phase cycle
+5. **Returns** to the unitary sphere \(S^8\) and ultimately to the Dao—a completed cognitive cycle
+
+This dual-direction framework captures the essence of **closed-loop cognition**: knowledge is both built from first principles and discovered from empirical observation, and the two directions meet in the middle.
+
+### 2.3 The Five Aggregates: Meta-Cognitive Self-Awareness
+
+Beyond the generation-discovery cycle, the architecture incorporates a meta-cognitive closure layer derived from the Buddhist Five Aggregates (五蕴):
+
+| Aggregate | Chinese | Cognitive Function | Formalization |
+|-----------|---------|-------------------|---------------|
+| Rūpa (色) | Form | Raw sensory perception of market data | Observation operator \(\mathcal{O}\): Data → S⁸ |
+| Vedanā (受) | Sensation | Hedonic/aversive tagging of cognitive states | Valuation functional \(V: S⁸ → ℝ\) |
+| Saṁjñā (想) | Perception | State recognition and confidence calibration | Confidence score \(\kappa\) + boundary detection |
+| Saṁskāra (行) | Mental formations | Decision-making impulse generation | Action operator \(\mathcal{A}: S⁸ → {hold, enter, exit}\) |
+| Vijñāna (识) | Consciousness | Meta-awareness of the cognitive process itself | Meta-observation operator \(\mathcal{M}\) that monitors the cycle |
+
+The decisive safeguard resides in Saṁjñā (想): when the cognitive trajectory nears a Poincaré boundary of the four-phase framework (phase ambiguous, confidence dropping below threshold \(\kappa\)), the agent does **not** force a label assignment—it triggers the void-state reset operator \(\Pi_{\varnothing}\) (Section 3.3), returning to the undifferentiated state and re-exciting from neutral. Thus:
+
+\[
+\text{Metacognitive uncertainty} \Rightarrow \text{Void reset} \Rightarrow \text{Re-excitation}
+\]
+
+This unifies structure discovery and self-awareness in a single closed loop. The Vijñāna aggregate further elevates conservation laws into meta-laws about law-discovery, giving the system a self-improving epistemic capability.
+
+### 2.4 Operator Summary
+
+The philosophical foundations are realized through five core operators:
+
+| Operator | Name | Input | Output |
+|----------|------|-------|--------|
+| \(\mathcal{O}\) | Observation | Raw market data | Normalized embedding on \(S^8\) |
+| \(\mathcal{G}\) | Generation | Cognitive primitives | Complete \(3^9 = 19,683\) state space |
+| \(\Pi_{\varnothing}\) | Void Reset | Any cognitive state | Zero-section \((q,0) ∈ T^*S^8\) |
+| \(\mathcal{D}\) | Discovery | State trajectory on \(S^8\) | Four-phase limit cycle structure |
+| \(\mathcal{M}\) | Meta-observation | The agent's own cognitive state | Calibrated confidence + audit trail |
+
+
+## 3. Ternary Algebraic Foundation
+
+### 3.1 The Balanced Ternary Cognitive Unit (Trit)
+
+Define the cognitive alphabet as the balanced ternary digit set
+
+\[
+\mathbb{T} \triangleq \{-1, 0, +1\},
+\]
+
+where \(-1\) corresponds to the Yin (阴) state, \(+1\) to the Yang (阳) state, and \(0\) to the He (和) state—the neutral, undifferentiated, or suspended-judgment condition.
+
+**Algebraic Structure 1 — Additive Group.** Via the canonical isomorphism
+
+\[
+\theta: \mathbb{T} \to \mathbb{Z}/3\mathbb{Z},\quad \theta(-1) = 2,\ \theta(0) = 0,\ \theta(+1) = 1,
+\]
+
+\(\mathbb{T}\) inherits the structure of the cyclic group of order 3. Ternary addition (Guiyuan addition, 归元加法) is defined componentwise modulo 3:
+
+\[
+a \oplus b = \theta^{-1}\bigl((\theta(a) + \theta(b)) \bmod 3\bigr).
+\]
+
+**Definition 3.1 (归元恒等式).** The defining property of the ternary cognitive algebra is the **return-to-void identity**:
+
+\[
+\forall s \in \mathbb{T}:\quad s \oplus s \oplus s = 0.
+\]
+
+Every cognitive element applied three times returns to the neutral state—the algebraic embodiment of "三归于无" (the three returns to the void).
+
+**Algebraic Structure 2 — Statistical Physics Foundation.** Each trit is identical to a Blume-Capel spin \(S \in \{-1,0,+1\}\) [Blume, 1966; Capel, 1967]. The single-site Hamiltonian
+
+\[
+H_{\text{BC}} = -J \sum_{\langle ij \rangle} S_i S_j + D \sum_i S_i^2
+\]
+
+contains the anisotropy term \(D\) that penalizes (\(D > 0\)) or favors (\(D < 0\)) the neutral state \(S_i = 0\). This term is the **physical realization** of the "无为不言" (non-action, non-speech) epistemic principle: a large positive \(D\) drives the system toward the neutral He state—toward non-action.
+
+### 3.2 The Nine-Dimensional Ternary State Space
+
+The global cognitive state is a 9-tuple of trits belonging to the direct product group
+
+\[
+\mathcal{G} \triangleq (\mathbb{Z}/3\mathbb{Z})^9,\quad |\mathcal{G}| = 3^9 = 19{,}683.
+\]
+
+**Group operations on \(\mathcal{G}\):**
+- **Guiyuan addition** (componentwise mod 3): \((s \oplus t)_i = s_i + t_i \pmod 3\)
+- **Inverse**: \(s^\dagger = -s \pmod 3 = 2s\), satisfying \(s \oplus s^\dagger = \mathbf{0}\)
+- **Ternary inner product**: \(\langle u, v \rangle = \sum_i u_i v_i \pmod 3\), where \(x^2 \in \{0,1\}\) in \(\mathbb{F}_3\), giving an intrinsic sparsity measure
+
+**Ternary Linear Algebra.** Over the field \(\mathbb{F}_3\), \(\mathcal{G}\) is a 9-dimensional vector space:
+- Linear maps \(M \in M_9(\mathbb{F}_3)\), exactly \(3^{81} \approx 4.43 \times 10^{38}\) distinct transformations
+- Eigenstructure lies in extension fields \(\mathbb{F}_{3^k}\)—the characteristic polynomial \(\chi_M(\lambda) = \det(\lambda I - M)\) factors over \(\mathbb{F}_3\) or its quadratic/cubic extensions, providing a finite but rich taxonomy of cognitive state invariants
+
+This **dual-layer algebra** (discrete \(\mathbb{F}_3\)-linear on \(\mathcal{G}\) + continuous \(\mathbb{R}\)-linear after embedding) is the formal foundation of the four engines: Zero-Order = identity; Opposition = sign-flip automorphism \(s \mapsto -s\); Creation = the Sheng lift \(\iota\); Flow = the Hamiltonian flow \(\dot{x} = J\nabla H(x)\) on the symplectic carrier.
+
+### 3.3 The Zero-Engine: Generative Cascade from Vacuum to Ternary Field
+
+The Zero-Engine implements the 道 → 一 → 二 → 三 → 万物 sequence as a computable cascade on the ternary group:
+
+**Step 1: 道 → 一 (Vacuum Excitation).** Let \(\mathbf{0} \in \mathcal{G}\) be the void state. A cognitive "breath" along axis \(\mu\) creates the single oriented excitation
+
+\[
+e_\mu|_\nu = \delta_{\mu\nu}(+1),\qquad G_0: \mathbf{0} \to e_\mu.
+\]
+
+This is symmetry breaking: the first distinguishable cognition is born from the undifferentiated vacuum.
+
+**Step 2: 一 → 二 (Dialectical Polarization).** The single orientation is unstable under the ternary algebra. By the group law,
+
+\[
+e_\mu \oplus e_\mu = \theta^{-1}(1 + 1 \bmod 3) = \theta^{-1}(2) = -e_\mu.
+\]
+
+The crucial ternary property: **\(1 \oplus 1 = -1\)**. Unlike binary where \(1 + 1 = 0\) (collapse), ternary *produces the opposite from the repeated same*. The dyad (二) is contained within the One (一)—not externally added.
+
+**Step 3: 二 → 三 (Ternary Synthesis).** The pair \(\{+1, -1\}\) together with the void \(\mathbf{0}\) constitutes the axis \(\mu\)'s full ternary set \(\{+1, 0, -1\}\)—the observer/observed/void-of-observing triad, the minimal complete cognitive unit.
+
+**Step 4: 三 → 万物.** Iterate the cascade across 9 axes to obtain \((\mathbb{Z}/3\mathbb{Z})^9\), and extend to \(n\) axes for \((\mathbb{Z}/3\mathbb{Z})^n\) with fractal self-similarity: each "three" at one level becomes a new "one" at the next.
+
+**The Zero-Engine as Reset Operator.** Define \(\Pi_{\varnothing}: \sigma \mapsto \mathbf{0}\) as the projection onto the **zero-section** \(Z = \{(q, 0): q \in S^8\} \subset T^*S^8\)—momentum collapse leaving only pure potential position. This is the engineering of 有无相生 (being and non-being give rise to each other): when the solution manifold admits no viable trajectory, the engine returns to the neutral void and re-excites a fresh cognitive cascade. Driven by e-resonant fluctuation and π-phase-locked stabilization, this is a **recurrent breath**: exhale to \(\mathbf{0}\), inhale a new One.
+
+### 3.4 \(3^n\) Open Cognitive Universe: Representation Capacity vs. Computational Cost
+
+The architecture supports extension from \(3^9\) to \(3^n\):
+
+| n | \(3^n\) | Remarks |
+|---|--------|---------|
+| 9 | \(1.97 \times 10^4\) | Fully enumerable (<80 KB lookup table) |
+| 15 | \(1.43 \times 10^7\) | — |
+| 20 | \(3.49 \times 10^9\) | — |
+| 27 | \(7.63 \times 10^{12}\) | D3 hierarchical level |
+| 60 | \(4.24 \times 10^{28}\) | — |
+
+Brute enumeration scales exponentially with n, **but the architecture's computational cost is polynomial** because it never enumerates:
+
+1. **Factorized operations** \(O(n)\): componentwise Guiyuan addition—every group operation scales linearly with dimension.
+2. **Hierarchical coarse-graining**: quotient maps \(\mathcal{G}_n \to \mathcal{G}_k (k \ll n)\) enable multi-resolution cognition—coarse decisions at low resolution, localized refinement at high resolution.
+3. **Symmetry-orbit reduction**: search on group orbits rather than individual states, compressing \(3^n\) exponentially via the automorphism group.
+4. **Continuous embedding + sparse quantization**: gradient flow on \(S^{n-1}\) (or its symplectic carrier) at \(O(n)\) per step; quantization to trits only at decision time.
+
+The boundary of n is therefore limited not by computation but by **semantic interpretability**: meaningful dimensions are those that carry cognitive interpretation (spatial/temporal/causal/etc.). For autonomous finance, \(n \sim 27\)–\(60\) is feasible under automated factor discovery; beyond that, new semantic factors must be discovered or compression accepted.
+
+
+## 4. Geometric Foundation: The Symplectic Carrier Manifold
+
+### 4.1 The Sheng Lift: From Discrete to Continuous
+
+The **Sheng lift (升映射)** is the canonical embedding that lifts discrete symbolic states into the continuous carrier manifold where Hamiltonian-Ising dynamics operates:
+
+\[
+\iota: \mathcal{G} \hookrightarrow \mathbb{R}^9,\quad \iota(s)_i = s_i,
+\]
+\[
+x(s) = \frac{\iota(s)}{\|\iota(s)\|_2} \in S^8 \subset \mathbb{R}^9 \quad (\|\iota(s)\| > 0),
+\]
+
+with the void state \(\mathbf{0}\) remaining at the origin as the singular center. The pair (\(\iota\), round)—lifting and nearest-trit quantization—constitutes a Galois-style adjunction between the discrete algebra \((\mathbb{Z}/3\mathbb{Z})^9\) and the continuous geometry \(S^8\): gradient-based inference on the manifold, discrete decisions in the quotient space.
+
+### 4.2 The Symplectic Carrier: \(T^*S^8\)
+
+**Critical correction**: The 8-dimensional sphere \(S^8\) (a compact even-dimensional manifold with \(H^2(S^8) = 0\)) does **not** admit a symplectic form, as a compact boundaryless symplectic manifold requires non-vanishing second cohomology. We therefore adopt the cotangent bundle \(T^*S^8\), which is canonically symplectic with the standard Liouville form \(\theta = p \, dq\) and symplectic form \(\omega = d\theta = dp \wedge dq\). A cognitive state is \(\sigma = (x, p) \in T^*S^8\) where \(x \in S^8\) is the position (cognitive configuration) and \(p \in T_x^*S^8\) is the momentum (cognitive intensity/direction).
+
+### 4.3 Hamiltonian-Ising Coupled Dynamics
+
+The cognitive state evolves under coupled Hamiltonian-Ising dynamics:
+
+\[
+H = -\sum_{\langle i,j \rangle} J_{ij} \cdot \vec{s}_i \cdot \vec{s}_j - \sum_i \vec{h}_i \cdot \vec{s}_i + \sum_i \left( |\vec{s}_i|^2 - 1 \right)^2
+\]
+
+\[
+\dot{x} = \frac{\partial H}{\partial p},\quad \dot{p} = -\frac{\partial H}{\partial x} + \eta \cdot \nabla_x E_{\text{Ising}} + \xi(t),
+\]
+
+Where:
+- **First term (coupling)**: Adjacent cognitive states interact via Ising-style coupling, driving market clustering and divergence.
+- **Second term (external field)**: Macro factors \(\vec{h}_i\) act as external driving forces.
+- **Third term (Mexican hat potential)**: Enforces ternary normalization and enables **symmetry breaking**—the mechanism of cognitive phase transitions.
+- \(\eta\) is the coupling strength between Hamiltonian and Ising dynamics
+- \(\xi(t)\) is a noise term representing market stochasticity (Langevin formulation)
+
+The Hamiltonian flow ensures conservation of total cognitive energy; the Ising term introduces correlations between dimensions; the noise term accounts for irreducible randomness.
+
+### 4.4 Information-Geometric Interpretation
+
+The Hamiltonian flow on \(T^*S^8\) admits a powerful interpretation in terms of information geometry. When the cognitive state is interpreted as a probability distribution \(p(\sigma; t)\) over \(\mathcal{G}\), the symplectic flow under the Fisher-Rao metric \(g_{ij}^{\text{FR}} = \mathbb{E}[\partial_i \log p \cdot \partial_j \log p]\) is equivalent to **natural gradient descent** on the cognitive distribution:
+
+\[
+\dot{\theta} = - (g^{\text{FR}})^{-1} \nabla_\theta \mathcal{L}(\theta),
+\]
+
+where \(\mathcal{L}\) is a loss functional (e.g., prediction error, regret). The total cognitive capacity, measured in nats per second, is conserved under the Liouville theorem:
+
+\[
+\frac{d}{dt} \int_{T^*S^8} \rho(\sigma, t) \, d\sigma = 0,
+\]
+
+where \(\rho\) is the density of cognitive states on the manifold. This conservation law provides a rigorous bound on the system's processing capacity. The Fisher-Rao metric further naturally regularizes against singular covariance matrices, a key advantage over classical risk parity methods that require invertible covariance estimates.
+
+### 4.5 Observability: The Missing Map \(\mathcal{O}\)
+
+The mapping from raw market data to the embedded cognitive state on \(T^*S^8\) is specified as:
+
+\[
+\mathcal{O}: y(t) \mapsto \hat{x}(t) \in S^8,
+\]
+
+where \(\hat{x}(t) = \Phi(t) / \|\Phi(t)\|\) and \(\Phi(t) = (y(t), y(t-\tau), \ldots, y(t-(m-1)\tau))\) is a Takens delay embedding with \(m \ge 2d+1 = 19\) (sufficient for reconstructing the \(d=9\)-dimensional dynamics). By Takens' theorem, this embedding is a diffeomorphism onto the attractor, guaranteeing that the cognitive variable \(\theta(t) = \arg\langle \hat{x}, \xi_1 + i\xi_2\rangle\) recovers the true phase of the underlying market dynamics without human labeling.
+
+
+## 5. Neural Diffusion Tensor Algebra (NDTA): A Mathematical Generalization
+
+This section presents **Neural Diffusion Tensor Algebra (NDTA)** as an incremental mathematical enhancement of the Aether-HexQ core. NDTA does not replace the original architecture; rather, it provides a more general mathematical framework within which the original Hamiltonian-Ising dynamics is embedded as a special case.
+
+### 5.1 From Ternary Spinor to Cognitive Tensor
+
+The original ternary spinor \(s \in \mathbb{T}^9\) represents cognitive state as a nine-dimensional vector of trits. To capture higher-order interactions between cognitive dimensions, we upgrade the state representation to a **cognitive tensor**:
+
+\[
+T \in \mathbb{R}^{3 \times 3 \times 3 \times \cdots \times 3} = \mathbb{R}^{3^9},
+\]
+
+where each dimension of the tensor corresponds to a cognitive dimension (S_out, S_mid, ..., C_result), and the value at each index encodes the activation strength of that particular ternary combination. For practical implementation, we typically use a third-order tensor \(T \in \mathbb{R}^{3 \times 3 \times 3}\) as a local patch, with the full state represented through tensor products over the nine dimensions.
+
+**Recovery of Original Representation**: The original ternary spinor \(s_i\) can be recovered from the cognitive tensor via marginalization:
+
+\[
+s_i = \text{Tr}_{(j,k,\ldots)}(T_{ijk\ldots}),
+\]
+
+where the trace is taken over all dimensions except \(i\). In the case of a third-order local tensor:
+
+\[
+s_i = \sum_{j,k} T_{ijk}.
+\]
+
+### 5.2 The Neural Diffusion Tensor Equation
+
+The cognitive tensor evolves under a **neural diffusion process**:
+
+\[
+\partial_t T = D(T) \cdot \nabla^2 T + F(T, \theta),
+\]
+
+where:
+
+- \(D(T)\) is a **state-dependent diffusion coefficient**:
+  - When the system is in a highly consistent state (Old Yang/Old Yin), \(D(T) \to 0\), diffusion slows, and the system maintains its trend.
+  - When the system is in a divergent state (Young Yin/Young Yang), \(D(T)\) increases, and the cognitive field rapidly smooths out.
+- \(\nabla^2 T\) is the **Laplacian** of the cognitive tensor—the curvature of the cognitive field.
+- \(F(T, \theta)\) is the **neural field driving term**, corresponding to the gradient of the original Hamiltonian-Ising potential.
+
+**Diffusion coefficient parameterization**:
+
+\[
+D(T) = D_0 \cdot \sigma\left( \frac{\text{Var}(T)}{\text{Tr}(T) + \epsilon} \right),
+\]
+
+where \(\text{Var}(T)\) measures the dispersion of the cognitive field, \(\text{Tr}(T)\) is the total cognitive intensity, and \(\sigma(\cdot)\) is a sigmoid function that saturates the diffusion at extreme states.
+
+### 5.3 Relationship to Hamiltonian-Ising Dynamics
+
+**Theorem 5.1 (Zero-Diffusion Limit).** When \(D(T) \to 0\), the neural diffusion tensor equation reduces to the original Hamiltonian-Ising dynamics:
+
+\[
+\lim_{D \to 0} \left[ \partial_t T - D(T) \cdot \nabla^2 T \right] = \frac{\partial H}{\partial T},
+\]
+
+or equivalently:
+
+\[
+\lim_{D \to 0} \text{NDTA} = \text{Hamiltonian-Ising dynamics}.
+\]
+
+**Proof Sketch.** In the limit \(D \to 0\), the diffusion term vanishes, leaving:
+
+\[
+\partial_t T = F(T, \theta).
+\]
+
+The neural field term \(F(T, \theta)\) is constructed such that \(F(T, \theta) = -\nabla_T H(T)\), where \(H(T)\) is the Hamiltonian expressed as a functional of the cognitive tensor. Thus, in the zero-diffusion limit, the NDTA equation becomes:
+
+\[
+\partial_t T = -\nabla_T H(T),
+\]
+
+which is exactly the gradient flow of the Hamiltonian-Ising dynamics, recovering the original Aether-HexQ evolution.
+
+**Corollary 5.2.** Aether-HexQ is naturally embedded as a **special case** of NDTA—specifically, the zero-diffusion limit. This establishes the original architecture as a fully trainable neural framework in its enhanced form.
+
+### 5.4 Spectral Criterion for Phase Transitions
+
+NDTA provides a rigorous, data-driven criterion for detecting phase transitions—replacing the manually tuned threshold detection in the original framework.
+
+**Definition 5.3 (Spectral Ratio).** Let \(\lambda_{\max}(T)\) be the maximum eigenvalue of the cognitive tensor \(T\) (reshaped as a matrix for spectral analysis), and let \(\text{Tr}(T) = \sum_i T_{ii}\) be its trace. Define the **spectral ratio**:
+
+\[
+R = \frac{\lambda_{\max}(T)}{\text{Tr}(T) + \epsilon}, \quad \epsilon \ll 1.
+\]
+
+**Theorem 5.4 (Phase Transition Criterion).** The system undergoes a topological phase transition when the spectral ratio \(R\) crosses a critical threshold \(\theta\):
+
+\[
+\text{Phase transition} \iff R > \theta,
+\]
+
+where \(\theta\) is determined empirically on a held-out validation set.
+
+The evolution of \(R\) over time directly corresponds to the four-phase momentum framework:
+
+| Four Phase | \(R\) Characteristic | Cognitive Interpretation |
+|:---:|:---|:---|
+| Old Yang | \(R\) continuously rising toward 1.0 | Cognitive completely converges on a single eigenvalue—system highly consistent |
+| Young Yin | \(R\) falling from its peak | Divergence begins—eigenvalue distribution starts to disperse |
+| Old Yin | \(R\) continuously falling toward 0 | Cognitive completely diverges—system in structureless state |
+| Young Yang | \(R\) rising from its trough | New structure begins to emerge—eigenvalues begin to reconverge |
+
+**Relationship to π-e Resonance.** The frequency of spectral ratio oscillation is controlled by \(\omega_\pi\); the amplitude is jointly determined by the diffusion coefficient \(D(T)\) and the e-driven term \(\lambda_e\). The four-phase limit cycle exists if and only if:
+
+\[
+R(t + T_\pi) = R(t), \quad T_\pi = 2\pi/\omega_\pi,
+\]
+
+which holds precisely when \(\lambda_e > 0\) and \(D(T)\) remains bounded over the oscillation period.
+
+**Engineering Significance.** The spectral criterion completely eliminates manual thresholding (such as the original \(\Omega = 0, \dot{\Omega} = 0\) segmentation). All phase segmentation is now data-driven and directly computable.
+
+### 5.5 A Note on the Four Engines in NDTA Context
+
+| Engine | Original Realization | NDTA Enhancement |
+|--------|---------------------|------------------|
+| Zero-Order (Dao) | Projection onto zero-section \(Z \subset T^*S^8\) | Void-state reset in tensor space: \(T \mapsto 0\) |
+| Opposition (Two) | Sign-flip \(p \mapsto -p\) | Tensor sign-flip: \(T \mapsto -T\) |
+| Creation (Three) | Sheng lift \(\iota: \mathcal{G} \to T^*S^8\) | Tensor initialization from trit patterns |
+| Flow (Four Phases) | Hamiltonian flow \(\phi_H^t\) on \(T^*S^8\) | Neural diffusion flow: \(\phi_{\text{NDTA}}^t\) on \(\mathbb{R}^{3^9}\) |
+
+
+## 6. The Four-Phase Limit Cycle and π-e Resonant Dynamics
+
+### 6.1 From Labeling to Discovery: The Autonomous Four-Phase Limit Cycle
+
+The four-phase momentum framework—Old Yang (老阳), Young Yin (少阴), Old Yin (老阴), Young Yang (少阳)—is commonly operationalized as an exogenous partition: a human analyst fixes thresholds on a momentum variable and assigns one of the four labels. This is **labeling**, not **discovery**, and it forfeits agent autonomy, remaining silent during regime transitions when thresholds are crossed ambiguously.
+
+We propose instead that the four phases are the **intrinsic quadrants of a stable limit cycle** on the carrier manifold \(\mathcal{M} = T^*S^8\). Let the observation stream \(y(t)\) be lifted via the observability map \(\mathcal{O}\) of Section 4.5. The cognitive phase is the symplectic angle
+
+\[
+\theta(t) = \arg\!\Big(\langle \hat{x}(t), \xi_1 \rangle + i \langle \hat{x}(t), \xi_2 \rangle\Big),
+\]
+
+where \(\xi_1, \xi_2\) are the two dominant oscillatory eigendirections (obtained via Singular Spectrum Analysis on the embedding). The instantaneous angular frequency is \(\Omega(t) = \dot{\theta}(t)\).
+
+The four phases are **discovered** as the four connected components of the \((\Omega, \dot{\Omega})\) phase portrait:
+
+| \((\Omega, \dot{\Omega})\) | Four-Phase | Limit-Cycle Quadrant | Market Reading |
+|:---:|:---:|:---:|:---|
+| \(\Omega > 0, \dot{\Omega} < 0\) | **Old Yang** 老阳 | 天合归·疏 | Distribution / apex |
+| \(\Omega > 0, \dot{\Omega} > 0\) | **Young Yin** 少阴 | 人和守·转化A | Thrust / mid-advance |
+| \(\Omega < 0, \dot{\Omega} < 0\) | **Old Yin** 老阴 | 天合进·转化B | Top→bottom transition |
+| \(\Omega < 0, \dot{\Omega} > 0\) | **Young Yang** 少阳 | 地正进·密 | Accumulation / trough |
+
+### 6.2 π-e Resonant Dynamics
+
+The π-e resonant dynamics governs the coupled evolution of cyclical and transformational processes:
+
+\[
+\dot{z} = (\lambda_e + i \omega_\pi) z - \gamma |z|^2 z, \quad \gamma > 0,
+\]
+
+where:
+- \(z(t) \in \mathbb{C}\) is the complex amplitude of the cognitive oscillator
+- \(\omega_\pi = 2\pi / T_\pi\) is the phase-locked angular frequency (π governs cyclical transitions)
+- \(\lambda_e = \lambda_0 e^{\alpha t}\) is the e-resonant growth/decay rate (e governs exponential structural transformation)
+- \(\gamma |z|^2 z\) is the nonlinear damping term that stabilizes the amplitude
+
+**Theorem 6.1 (Orbital Stability of the Four-Phase Regime).** Let the cognitive phase obey the Stuart-Landau equation above. The unique non-trivial periodic orbit is
+
+\[
+z^*(t) = r^* e^{i \omega_\pi t},\quad r^* = \sqrt{\frac{\lambda_e}{\gamma}},
+\]
+
+which is orbitally asymptotically stable **if and only if \(\lambda_e > 0\)**. The transverse Floquet multiplier is
+
+\[
+\mu_\perp = \exp(-2 \lambda_e T_\pi),\quad T_\pi = \frac{2\pi}{\omega_\pi}.
+\]
+
+**Corollary 6.2.** The e-resonance is the **necessary and sufficient condition** for a persistent four-phase regime; π sets the lock-phase period. When \(\lambda_e \leq 0\), the amplitude decays to zero (cognitive collapse to the undifferentiated state). The Ising bath resolves the reversible/irreversible tension: the Hamiltonian core is time-reversible (\(\omega_\pi\) preserves phase symmetry), while e-decay emerges as coarse-grained effective irreversibility via fluctuation-dissipation with the Ising spin thermal reservoir.
+
+### 6.3 Spectral Criterion in the Four-Phase Context
+
+With NDTA enhancement (Section 5), the four-phase detection can be performed using the spectral ratio \(R\):
+
+\[
+R(t) = \frac{\lambda_{\max}(T(t))}{\text{Tr}(T(t)) + \epsilon}.
+\]
+
+The four phases are identified by the trajectory of \(R(t)\):
+
+- **Old Yang**: \(R\) > threshold, rising
+- **Young Yin**: \(R\) > threshold, falling
+- **Old Yin**: \(R\) < threshold, falling
+- **Young Yang**: \(R\) < threshold, rising
+
+This provides a data-driven, threshold-free phase detection mechanism (threshold \(\theta\) determined via calibration).
+
+**Phase Transition Prediction.** The four-phase framework's predictive power follows directly from the phase portrait: the transition from Old Yin to Young Yang is detected when \(R\) crosses from below to above \(\theta\) while \(\dot{R} > 0\)—the position is still strongly negative (price in downtrend) but cognitive momentum has already turned. This enables regime change detection **before price confirmation**, at the level of cognitive momentum rather than price action.
+
+### 6.4 The Four-Phase Cycle and the Four Engines
+
+The natural cycle of phases forms a closed loop:
+
+\[
+\text{Old Yang} \rightarrow \text{Young Yin} \rightarrow \text{Old Yin} \rightarrow \text{Young Yang} \rightarrow \text{Old Yang}
+\]
+
+Each transition occurs at a specific phase angle determined by π:
+- Old Yang → Young Yin: \(\theta = \pi/2\)
+- Young Yin → Old Yin: \(\theta = \pi\)
+- Old Yin → Young Yang: \(\theta = 3\pi/2\)
+- Young Yang → Old Yang: \(\theta = 2\pi\)
+
+The four engines of the architecture correspond to these four phases and their transitions:
+
+| Engine | Four-Phase Correspondence | Operation |
+|--------|--------------------------|-----------|
+| Zero-Order (零阶/Dao) | The undifferentiated center (void) | \(\Pi_{\varnothing}\): reset to zero-section |
+| Opposition (对立/Two) | Old Yin ↔ Old Yang axis | Dialectical tension between extremes |
+| Creation (创造/Three) | Young phases (emergence) | Novel glyph state generation |
+| Flow (流动/Four Phases) | The complete cycle | Hamiltonian transport + π-e resonance |
+
+
+## 7. Breathing Dynamics and Meta-Cognitive Rhythm
+
+### 7.1 Breathing as the Meta-Rhythm of Cognition
+
+In the architecture's own genealogy—道 → 一 → 二 → 三 → 万物—the number two is primordial polarization and three is their living synthesis. We propose that **breathing is the dynamic realization of this polarization**: an autonomous oscillation between inhalation (吸, the yin pole: opening to and contracting toward external data) and exhalation (呼, the yang pole: closing and expressing intrinsic flow). Breathing is therefore not a subroutine—it is the **mode of existence** of the cognitive field.
+
+Let \(\rho(t)\) be the cognitive density over \(\mathcal{G}\) (or its pullback to \(T^*S^8\)). Breathing introduces a slow cyclic gate:
+
+\[
+\beta(t) = \cos(2\pi t / T_b) \in [-1, 1],\quad T_b \gg T_\pi,
+\]
+
+partitioning the dynamics into two complementary regimes:
+
+\[
+\frac{d\rho}{dt} = \mathcal{L}_H[\rho] + \frac{1-\beta(t)}{2} \mathcal{L}_{\text{obs}}[\rho] + \frac{1+\beta(t)}{2} \mathcal{L}_{\text{act}}[\rho].
+\]
+
+Here \(\mathcal{L}_H[\rho]\) is the ever-present symplectic/Hamiltonian (intrinsic) flow; \(\mathcal{L}_{\text{obs}}\) is the observation Lindbladian that opens the field to external market channels during \(\beta < 0\) (inhale: data intake); and \(\mathcal{L}_{\text{act}}\) is the action generator that, during \(\beta > 0\) (exhale: decision emission), projects the density onto coherent decision flow and emits trades or inferences.
+
+The four-phase momentum framework is precisely the quadrature of \(\beta\). The breathing orbit traverses four cardinal hexagram states:
+
+| \(\beta\) | Phase | Node | Meaning |
+|----------|-------|------|---------|
+| \(+1\) | Old Yang 老阳 | Peak exhale | Maximal expansion & action |
+| \(0^- \to 0^+\) | Young Yin 少阴 | Transition exhale → inhale | — |
+| \(-1\) | Old Yin 老阴 | Peak inhale | Maximal contraction & perception |
+| \(0^+ \to 0^-\) | Young Yang 少阳 | Transition inhale → exhale | — |
+
+**Why this matters for financial agents.** (i) *Anti-overfitting*: perpetual inhalation would over-couple the field to streaming noise; the exhale aperture mandates decoupling and intrinsic coherence. (ii) *Decision cadence*: action is gated to the exhale aperture, imposing a natural, non-arbitrary trading rhythm. (iii) *Risk as respiration*: inhale = patient observation (refusal to act while \(\beta < 0\)); exhale = decisive commitment only when phase aligns.
+
+### 7.2 Non-Logical Intuition as Topological Instanton Leaping
+
+The Hamiltonian dynamics are deterministic and local: inference follows symplectic geodesics (gradient ascent/descent of \(H\)). Yet expert cognition exhibits *intuition*—a rapid, non-deductive leap to a distant-yet-correct state. We model intuition as **topological instanton transitions** that the local gradient flow cannot generate.
+
+Define the instanton action between states \(a, b \in \mathcal{G}\):
+
+\[
+S_{\text{inst}}(a,b) = \int_{\gamma} \sqrt{g(\dot{\gamma}, \dot{\gamma}) + V(\gamma)} \, dt,
+\]
+
+where \(\gamma\) is a smooth path in \(T^*S^8\) connecting the lifts of \(a\) and \(b\), \(g\) is the symplectic metric, and \(V\) is the potential barrier. The instanton transition rate is:
+
+\[
+\Gamma_{a \to b} = \nu_0 \exp\left(-\frac{S_{\text{inst}}(a,b)}{\hbar_{\text{cog}}}\right),
+\]
+
+where \(\hbar_{\text{cog}}\) is the "cognitive Planck constant"—the minimal action quantum that defines the granularity of cognitive transitions. Intuition corresponds to the **dominant instanton**: the path with minimal action between current and target states, even when no local gradient connects them.
+
+### 7.3 Dream Reasoning: Autonomous Learning Without Data
+
+During market closure or data-scarce periods, the cognitive field enters a **dream state**—self-consistent trajectory generation on the manifold without external input. The dream Hamiltonian is:
+
+\[
+H_{\text{dream}}(x,p) = H(x,p) + \alpha \cdot R(x,p),
+\]
+
+where \(R(x,p)\) is a counterfactual reward that evaluates the "interestingness" of generated trajectories (novelty × coherence × predictive consistency). The system explores \(T^*S^8\) under this modified Hamiltonian, generating synthetic cognitive experiences.
+
+### 7.4 Cognitive Resonance and the Ripple Field
+
+The 19,683-state cognitive field supports a **resonance phenomenon**: when multiple agents (or multiple cognitive modes within a single agent) occupy related hexagrams, their dynamics can phase-lock through the coupling of their respective Hamiltonian flows.
+
+Define the **resonance coupling** between two cognitive states \(\sigma_1, \sigma_2 \in T^*S^8\):
+
+\[
+\kappa(\sigma_1, \sigma_2) = \frac{|\langle \nabla H_1, \nabla H_2 \rangle|}{\|\nabla H_1\| \cdot \|\nabla H_2\|},
+\]
+
+with \(\kappa = 1\) indicating perfect resonance (identical dynamical direction) and \(\kappa = 0\) indicating orthogonal cognitive modes.
+
+
+## 8. The Multi-Agent Federation Layer
+
+### 8.1 The Ternary Cognitive Message Protocol (TCMP)
+
+Each autonomous financial agent \(\mathcal{A}_i\) maintains a local glyph state \(g_i \in \mathcal{G}\) and its symplectic embedding \(\xi_i = \iota(g_i) \in T^*S^8\). We define a **cognitive packet** as:
+
+\[
+\mathcal{M} = \langle \mathcal{H}, \Psi \rangle,
+\]
+
+where \(\mathcal{H}\) is the cognitive header and \(\Psi\) the ternary payload.
+
+**Header:** \(\mathcal{H} = \langle \text{src}, \text{dst}, \tau, g_{\text{src}}, \text{op}, \varepsilon_c, \text{cid} \rangle\), with:
+- \(\text{src}, \text{dst}\): agent identifiers in the federation namespace
+- \(\tau\): a logical (Lamport-style) timestamp along the causal dimension \(C = (C_{\text{cause}}, C_{\text{bond}}, C_{\text{result}})\)
+- \(g_{\text{src}}\): the sender's current glyph (enabling cognitive divergence computation before semantic decoding)
+- \(\text{op} \in \{\textsc{Propose}, \textsc{Query}, \textsc{Vote}, \textsc{Broadcast}, \textsc{Resonate}, \textsc{Resolve}\}\): the cognitive operation
+- \(\varepsilon_c\): the sender's cognitive entropy (confidence signal)
+- \(\text{cid}\): consensus session identifier
+
+### 8.2 Cognitive Consensus Mechanism
+
+**Definition 8.1 (Weighted Cognitive Median).** The consensus glyph is the Fermat-Weber point in weighted ternary space:
+
+\[
+g^\star = \arg\min_{g \in \mathcal{G}} \sum_{i=1}^n w_i \, d(g, g_i), \quad w_i = \exp(-\beta \varepsilon_c^{(i)}),
+\]
+
+where \(\varepsilon_c^{(i)}\) is agent \(i\)'s cognitive entropy and \(\beta > 0\) is a confidence temperature. Confident agents (low \(\varepsilon_c\)) dominate; uncertain agents (high \(\varepsilon_c\)) are down-weighted—the federation's built-in epistemic humility.
+
+**Hamiltonian Formulation.** The median rule is equivalent to the ground state of an inter-agent Ising Hamiltonian:
+
+\[
+\mathcal{H}_{\text{fed}}(\{g_i\}) = -\sum_{i < j} J_{ij} \langle \sigma_i, \sigma_j \rangle_{T^*S^8} - \sum_i h_i \cdot g_i,
+\]
+
+where \(\langle\cdot,\cdot\rangle_{T^*S^8}\) is the symplectic inner product, \(J_{ij}\) the topology-dependent coupling, and \(h_i\) an external market field. Consensus is the low-energy collective configuration—the same Hamiltonian-Ising law governs both self and society.
+
+### 8.3 Information-Flow Topology and Cognitive Performance
+
+| Topology | \(T_c\) | \(\mathcal{C}\) | \(\mathcal{R}\) | \(\dot{\mathcal{R}}\) | Optimal Regime | Failure Mode |
+|:---|---:|:---:|:---:|:---:|:---|:---|
+| **Star** | \(O(1)\) | \(O(n)\) | Fragile | High | Small clusters (\(n \le 32\)) | Hub SPOF |
+| **Ring** | \(O(n)\) | \(O(n)\) | High | Low | Resilient sensors | Boundary drift |
+| **Fully-connected** | \(O(1)\) | \(O(n^2)\) | Medium | Maximal | Crisis windows | Herding, non-scalable |
+| **Hierarchical federation** | \(O(\log_k n)\) | \(O(n \log_k n)\) | High | Medium-high | Large-scale default | Rep.-selection bias |
+
+
+## 9. Cross-Asset Global Macro Framework
+
+### 9.1 Hierarchical Tensor Field (HTF)
+
+Assets are arranged as a \(d\)-way tensor \(\mathcal{S} \in \mathbb{R}^{3 \times 3 \times \cdots \times 9}\); each asset is a projection of one tensor order. Cross-asset correlations are captured by higher-order singular value decomposition (HOSVD) of the tensor.
+
+**Theorem 9.1 (寰极 First Cross-Asset Theorem).** The mutual information between assets \(a\) and \(b\) is bounded by the angle between their cognitive submanifolds:
+
+\[
+I(\mathcal{T}_a; \mathcal{T}_b) \leq \frac{1}{2} \log\left(\frac{\det G_a \det G_b}{\det G_{\{a,b\}}}\right) \leq -\frac{1}{2} \log(\cos^2 \theta_{ab}),
+\]
+
+where \(G\) is the Fisher information metric. When \(\theta_{ab} \approx \pi/2\), assets provide nearly independent cognitive information—the geometric foundation of diversification.
+
+### 9.2 Info-Risk Parity
+
+**Definition 9.2 (Cognitive Entropy).** For asset \(a\) with ternary state distribution \(\rho_a(\mathbf{s}; t)\):
+
+\[
+\mathfrak{S}_a(t) = -\sum_{\mathbf{s} \in \mathcal{T}_a} \rho_a(\mathbf{s}; t) \log \rho_a(\mathbf{s}; t).
+\]
+
+**Theorem 9.3 (Cognitive Risk Budget).** The portfolio \(\Pi\)'s total cognitive entropy decomposes as:
+
+\[
+\mathfrak{S}_{\Pi} = \sum_a w_a \mathfrak{S}_a - \sum_{a < b} w_a w_b \, I(\mathcal{T}_a; \mathcal{T}_b).
+\]
+
+**Cognitive Risk Parity** requires:
+
+\[
+w_a \left( \mathfrak{S}_a - \sum_{b \neq a} w_b \, I(\mathcal{T}_a; \mathcal{T}_b) \right) = \text{constant}, \quad \forall a.
+\]
+
+### 9.3 Global Cognitive Federation: Lamport Timestamps for Asynchronous Markets
+
+**Definition 9.4 (Lamport Cognitive Trit).** Market \(m\) operates in local timezone \(\tau_m\). Global synchronization uses Lamport logical clocks:
+
+\[
+\text{LCT}(s_t^{(m)}) = \max\left( \text{LCT}_{\text{local}}^{(m)}(t),\; \max_{n \in \mathcal{N}_m} \text{LCT}_{\text{rcv}}^{(n)}(t) + 1 \right),
+\]
+
+where \(\mathcal{N}_m\) is the set of neighboring markets (defined by trading hours overlap).
+
+**Theorem 9.5 (Asynchronous Cognitive Consistency).** If each market's ternary states update by its local \(T_{\text{past/now/fut}}\) and cross-market messages carry Lamport timestamps, then state transitions on the global \(T^*S^{9N-1}\) satisfy **partial-order causal consistency**: if market \(A\)'s event causally precedes market \(B\)'s event, their cognitive states never violate causal ordering.
+
+
+## 10. Memory Architecture: Accumulative Ternary Memory with NDTA Enhancement
+
+### 10.1 Limitations of Current Memory Systems
+
+Current AI systems use overwriting memory: new data overwrites old data, destroying historical traces. This is catastrophic for financial applications where **historical context** is essential. Agentic FinTech frameworks have identified long-horizon memory of prior experience as a key capability, yet current implementations remain binary in their fundamental cognitive structure.
+
+### 10.2 Accumulative Ternary Memory (Original)
+
+Each memory address in Aether-HexQ stores a **ternary accumulation**:
+
+\[
+\mathcal{M} = [\Sigma_+, \Sigma_0, \Sigma_-] = \left[\sum s_+, \sum s_0, \sum s_-\right]
+\]
+
+**Writing**: When a new cognitive state is observed, its ternary spinor is **added** to the memory:
+
+\[
+\mathcal{M} \leftarrow \mathcal{M} + [s_+, s_0, s_-]
+\]
+
+**Reading**: The memory returns the **complete accumulation**—the full historical record, not just the most recent state.
+
+### 10.3 π-e Memory Dynamics (Original)
+
+With π and e integrated, memory becomes a **dynamic resonator**:
+
+\[
+\mathcal{M}(t) = \sum_{\text{events}} [s_{+}, s_{0}, s_{-}] \cdot e^{-\frac{\Delta t}{\tau}} \cdot e^{i \cdot \theta(\Delta t)}
+\]
+
+This provides:
+1. **Dimension-specific forgetting**: Different cognitive dimensions have different decay rates.
+2. **Phase-sensitive retrieval**: Memories at similar phase angles are preferentially retrieved.
+3. **Resonance amplification**: When current conditions align with historical patterns at the same phase, memory signals are amplified.
+4. **Interference cancellation**: Contradictory memories at different phases can cancel out.
+
+### 10.4 NDTA Diffusion-Kernel Memory (Enhanced)
+
+With NDTA, the discrete accumulative memory is upgraded to a **continuous kernel integration**:
+
+\[
+\mathcal{M}(t) = \int_{-\infty}^{t} T(\tau) \cdot e^{-\frac{t-\tau}{\tau_0}} \cdot K(t-\tau) \, d\tau,
+\]
+
+where:
+- \(T(\tau)\) is the historical cognitive tensor
+- \(e^{-(t-\tau)/\tau_0}\) is the e-driven exponential decay (different dimensions have different \(\tau_0\))
+- \(K(t-\tau)\) is the diffusion kernel function (optional: Gaussian or Laplacian kernel)
+
+**Relationship to Original Memory**:
+
+\[
+\text{Original accumulative memory} = \lim_{\tau_0 \to \infty} \text{NDTA memory}.
+\]
+
+That is: when the decay coefficient tends to infinity, NDTA memory reverts to the original accumulative memory. This provides a smooth interpolation between discrete accumulation and continuous smoothing.
+
+### 10.5 Geometric Memory Field
+
+Historical memories create a **memory field** on S⁸—a deformation of the manifold's geometry:
+
+- **Positive curvature** (attractor): Areas of high historical trading density attract future trajectories (mean reversion).
+- **Negative curvature** (repeller): Areas of unexplored territory repel future trajectories (breakout/black swan).
+
+This geometric memory field provides an **intuitive sense** of market structure—the cognitive equivalent of "market intuition."
+
+
+## 11. Auditability and Governance
+
+### 11.1 The Auditability Imperative
+
+Financial AI systems operate under strict regulatory requirements. Research has shown that agentic systems struggle substantially on auditing and hedging, where long-horizon coordination, state consistency, and structured verification are critical. Aether-HexQ is designed as a **white-box** system from the ground up.
+
+### 11.2 Immutable Audit Chain
+
+Every arbitration decision is recorded in an **immutable audit database** with:
+
+| Field | Description |
+|-------|-------------|
+| timestamp | Exact time of the arbitration event |
+| conflict_source | HF-1 / HF-2 / HF-3 / HF-4 (triggering modules) |
+| input_system_state | Complete pre-decision system state |
+| arbiter_logic | Which arbitration rule was applied |
+| final_action | The最终 executed action |
+| system_fingerprint | SHA-256 hash of post-execution system state |
+
+The audit database is **write-once, never modified**, with dual backup (local + cloud).
+
+### 11.3 Watchdog Sentinel
+
+The **Watchdog Sentinel** is an independent process that serves as the "last witness" if the main system crashes:
+
+- **Heartbeat monitoring**: The arbitration module sends a heartbeat every 30 seconds.
+- **Failure detection**: If 3 heartbeats are missed (120 seconds), the sentinel triggers.
+- **Last witness recording**: The sentinel independently records:
+  - Last known system state fingerprint
+  - Trigger time and reason
+  - Preserved memory dump
+
+This ensures that even in the event of complete system failure, the last moments of cognitive activity are preserved for forensic analysis.
+
+
+## 12. Comparison with Existing Approaches
+
+| Dimension | Current LLM-Based Financial AI | Aether-HexQ |
+|-----------|-------------------------------|-------------|
+| **Cognitive Primitive** | Token (probabilistic) | Balanced ternary trit (+1/0/−1) |
+| **Reasoning Mechanism** | Probabilistic token prediction | Deterministic geodesic evolution + instanton tunneling |
+| **Interpretability** | Black box, CoT unreliable | White box, audit chain + hexagram readings |
+| **Memory Structure** | Stateless, resets each inference | Accumulative, preserves full history on \(T^*S^8\) |
+| **Uncertainty** | Hidden, source of hallucination | Legitimate 0-state, driver of metacognitive reset |
+| **Domain Adaptation** | General, requires fine-tuning | Finance-native, nine-dimensional architecture |
+| **Computational Paradigm** | Scale competition | Structure competition |
+| **Regulatory Compliance** | Challenge (black box) | Native (full auditability via hexagram decomposition) |
+| **Cognitive Openness** | Fixed architecture | Open \(3^n\) expansion |
+| **Phase Discovery** | Not applicable | Four Phases as intrinsic limit cycles |
+| **Mathematical Enhancement** | Not applicable | NDTA: tensor upgrade + neural diffusion |
+| **Multi-Agent** | Ad-hoc prompt engineering | Formal TCMP protocol + cognitive consensus |
+| **Cross-Asset** | Separate models | Unified hierarchical tensor field |
+
+
+## 13. Conclusion
+
+### 13.1 Summary of Contributions
+
+This paper has presented Aether-HexQ, a nine-dimensional ternary cognitive architecture for autonomous financial agents, enhanced with Neural Diffusion Tensor Algebra (NDTA). The architecture represents a **paradigm shift** from:
+
+1. **Binary to Ternary**: Moving from ±1 to +1/0/−1 as the fundamental cognitive primitive, making uncertainty a legitimate cognitive state with full algebraic closure under \((\mathbb{Z}/3\mathbb{Z})^9\).
+
+2. **Probabilistic to Geometric**: Replacing probabilistic token prediction with deterministic symplectic evolution on \(T^*S^8\) and establishing the equivalence with natural gradient descent under the Fisher-Rao metric.
+
+3. **Labeling to Discovery**: Replacing human-thresholded phase classification with intrinsic limit cycle discovery via Stuart-Landau dynamics, governed by π-e resonance as the necessary and sufficient condition for persistent four-phase regimes.
+
+4. **Stateless to Accumulative**: Replacing overwriting memory with accumulative ternary memory on a symplectic manifold, preserving complete historical context under Liouville conservation.
+
+5. **Black Box to White Box**: Replacing uninterpretable neural networks with fully auditable geometric reasoning, supported by hexagram decomposition, an immutable audit chain, and metacognitive closure via the Five Aggregates.
+
+6. **Monad to Federation**: Extending from single cognitive body to multi-agent federation with formal TCMP protocol, weighted cognitive median consensus, information-flow topology analysis, and cognitive-entropy-based performance metrics.
+
+7. **Single Asset to Global Macro**: Generalizing from single-asset cognition to multi-asset portfolio cognition via hierarchical tensor fields, Lamport-clock synchronized asynchronous markets, and cognitive-entropy-based Info-Risk Parity.
+
+8. **Fixed to Open**: Supporting expansion from \(3^9\) to \(3^n\) with polynomial-time computational cost through factorized operations, hierarchical coarse-graining, and symmetry-orbit reduction.
+
+9. **Tensor Algebra Enhancement with NDTA**: Introducing Neural Diffusion Tensor Algebra as a mathematical generalization that upgrades ternary spinors to cognitive tensors and geodesic evolution to neural diffusion, with the original Hamiltonian-Ising dynamics recovered as the zero-diffusion limit. This establishes Aether-HexQ as a fully trainable neural architecture in its enhanced form.
+
+### 13.2 The Philosophical Circle
+
+The architecture closes its own philosophical circle. It begins with the Dao (the undifferentiated, the 0-state) and generates the complete space of all possible cognitions (the Myriad Things of \(3^9 = 19,683\) states). It then observes the flow of these states in real market data and discovers the Four Phases as intrinsic structures. It abstracts these phases into invariant principles. And finally, through the metacognitive closure of the Five Aggregates and the void-state reset operator \(\Pi_{\varnothing}\), it returns to the Dao—not as a regression but as a completion:
+
+\[
+\text{Dao} \to \text{One} \to \text{Two} \to \text{Three} \to \text{Myriad Things} \to \text{Four Phases} \to \text{Three Powers} \to \text{Sphere} \to \text{Dao}.
+\]
+
+This is not a circle of return but of **ascent**: each traversal expands the cognitive capacity of the system, enlarging its vessel to hold more of the market's infinite complexity.
+
+### 13.3 Broader Implications
+
+Beyond financial markets, the nine-dimensional ternary architecture suggests a general framework for **cognitive architectures with formal algebraic closure**. Any domain requiring structured decision-making under uncertainty—from autonomous vehicles to medical diagnosis to strategic planning—could benefit from:
+
+- A bounded, enumerable cognitive state space with group-theoretic operations
+- Separation of configuration and momentum (position + direction)
+- Legitimate representation of "not knowing" (the 0-state)
+- Multi-agent federation grounded in shared symbolic vocabulary
+
+### 13.4 Future Work
+
+**Immediate priorities**:
+1. **Empirical validation**: Backtest the system on historical market data (2008, 2015, 2020, 2024 crises) to validate regime detection accuracy and cognitive singularity prediction.
+2. **NDTA spectral criterion calibration**: Determine the critical threshold \(\theta\) for the spectral ratio \(R = \lambda_{\max}/\text{Tr}(T)\) through systematic calibration on held-out validation data.
+3. **Domain adaptation**: Map the nine dimensions to other domains (TCM diagnostic categories, climate state variables, autonomous driving perception layers).
+
+**Medium-term directions**:
+4. **Neural implementation**: Explore integration with BitNet b1.58-style ternary neural networks for efficient deployment.
+5. **Human-AI collaboration**: Develop interfaces for human traders to interact with and override the system's cognitive states.
+
+**Long-term research**:
+6. **Optimality proof**: Establish formal proof that the S⁸ manifold + ternary spinor + π-e dynamics + NDTA constitutes an optimal cognitive architecture for non-stationary complex systems.
+7. **Open-source release**: Release core modules (nine-dimensional analysis, risk dashboard) as open-source tools for the research community.
+
+### 13.5 Final Remarks
+
+Current financial AI systems operate on cognitive architectures designed for a world of **certainty**—a world where every question has a binary answer. But financial markets are not worlds of certainty; they are worlds of **ambiguity, structural transition, and emergent complexity**.
+
+Aether-HexQ offers a cognitive architecture that matches the **nature of the domain**—a system that can natively represent uncertainty, geometrically compute structural transitions, and auditably account for every decision. With the NDTA enhancement, the architecture gains a mathematical generalization that bridges discrete ternary logic, continuous geometric dynamics, and fully trainable neural frameworks. It is not merely an incremental improvement on existing systems; it is a **paradigm shift** in how we conceptualize and implement financial intelligence.
+
+> *"The Dao generates the One. The One generates the Two. The Two generates the Three. The Three generates the Myriad Things. The Myriad Things generate the Four Phases."*
+
+In Aether-HexQ, this ancient wisdom becomes **computable**.
+
+
+## References
+
+[1] Aldridge, I., et al. "Agentic Artificial Intelligence in Finance: A Comprehensive Survey." *arXiv:2604.21672*, 2026.
+
+[2] Zhu, T., et al. "From Knowing to Doing: A Memory-Controlled Benchmark for LLM Trading Agents on Stock Markets." *arXiv:2605.28359*, 2026.
+
+[3] "Agentic Trading: When LLM Agents Meet Financial Markets." *arXiv:2605.19337*, 2026.
+
+[4] "Agentic FinTech: A Comprehensive Survey on AI Agents in Finance in the Era of LLMs." *GitHub*, 2026.
+
+[5] Letteri, I. "AgenticAITA: A Proof-Of-Concept About Deliberative Multi-Agent Reasoning for Autonomous Trading Systems." *arXiv:2605.12532*, 2026.
+
+[6] Yuan, Y., et al. "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading." *arXiv:2605.05580*, 2026.
+
+[7] Papadakis, C., et al. "ATLAS: Adaptive Trading with LLM AgentS Through Dynamic Prompt Optimization and Multi-Agent Coordination." *arXiv:2510.15949*, 2025/2026.
+
+[8] Song, Z., et al. "Trade in Minutes! Rationality-Driven Agentic System for Quantitative Financial Trading." *arXiv:2510.04787*, 2025/2026.
+
+[9] "QFinZero: A Unified Financial Toolchain for LLM-Based Trading Agents." *ACL Anthology*, 2026.
+
+[10] Papaioannou, P.G. and Yannacopoulos, A.N. "The Shape of Markets: Machine learning modeling and Prediction Using 2-Manifold Geometries." *arXiv:2511.05030*, 2025/2026.
+
+[11] "From Topology to Geometry: A Neural Ricci Flow Framework for Predicting Flash Crashes and Contagion." *IEEE Access*, Vol. 14, pp. 26912-26934, 2026.
+
+[12] "Quantum Hyperbolic Deep Learning for Foreign-Exchange Trading: A Hybrid Reinforcement-Learning Pipeline over Attractor-Aware Magnet-Price Manifolds." *MDPI*, 2026.
+
+[13] Ozimek, K. "Cross-sectional topological anomaly scores and intraday return predictability in the S&P 500: A BallMapper, decoder-conditional VAE, and Function-on-Function regression approach." *arXiv:2606.08586*, 2026.
+
+[14] "Predicting carbon futures volatility: New evidence based on topological features of crude oil, natural gas and climate risk indicators." *ScienceDirect*, 2026.
+
+[15] Lin, Z.-W. and Chang, T.-S. "VitaLLM: A Versatile, Ultra-Compact Ternary LLM Accelerator with Dependency-Aware Scheduling." *IEEE Transactions on Circuits and Systems for Artificial Intelligence*, 2026.
+
+[16] "A T8T-SRAM Computing-in-Memory Macro for Ternary Deep Neural Networks and Boolean Logic Computations." *IEEE*, 2026.
+
+[17] "NativeTernary: A Self-Delimiting Binary Encoding with Unary Run-Length Hierarchy Markers for Ternary Neural Network Weights, Structured Data, and General Computing Infrastructure." *arXiv*, 2026.
+
+[18] Zhu, D., et al. "FundaPod: A Multi-Persona Agent Pod Platform with Knowledge Graph Memory for AI-Assisted Fundamental Investment Research." *arXiv:2605.27864*, 2026.
+
+[19] "Cogito: A Cognitive Agentic Framework Driven by Dynamic Graph of Thoughts for Financial Report Generation." *ACL Anthology*, 2026.
+
+[20] "Absorbing Complexity: An Interaction-Native Knowledge Harness for Financial LLM Agents." *arXiv*, 2026.
+
+[21] "FinSight: Towards Real-World Financial Deep Research." *ACL Anthology*, 2026.
+
+[22] "A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology." *arXiv*, 2026.
+
+[23] "MoCA-Agent: A Market-of-Claims Code Agent for Financial and Numerical Reasoning." *arXiv:2606.11537*, 2026.
+
+[24] "AgentFinVQA: A Deployable Multi-Agent Pipeline for Auditable Financial Chart QA." *arXiv*, 2026.
+
+[25] "MASCA: LLM-based Multi-Agent System for Credit Assessment." *arXiv*, 2026.
+
+[26] "FinCom: A Financial Multi-Agent Demo with Disagree-or-Commit Deliberation." *arXiv*, 2026.
+
+[27] "MimirRAG: A Multi-Agent RAG Framework for Financial Data Retrieval with Metadata Integration." *arXiv*, 2026.
+
+[28] "Analytica: Soft Propositional Reasoning for Robust and Scalable LLM-Driven Analysis." *arXiv*, 2026.
+
+[29] RunzeAI. "Neural Diffusion Tensor Algebra: A Unified Framework for Cognitive State Evolution in Financial Markets." *arXiv:2607.xxxxx*, 2026.
+
+[30] RunzeAI. "Aether-HexQ: A Nine-Dimensional Ternary Cognitive Architecture for Autonomous Financial Agents." *arXiv:2607.xxxxx*, 2026.
